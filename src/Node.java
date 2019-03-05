@@ -48,7 +48,7 @@ public class Node<V> {
 	/**
 	 * Depth of node
 	 */
-	int depth = 0;
+	private int depth = 0;
 	
 	/**
 	 * @param x of type Value
@@ -56,6 +56,14 @@ public class Node<V> {
 	public void setValue(V x)
 	{
 		value = x;
+	}
+	
+	/**
+	 * @param x of type integer
+	 */
+	public void setDepth(int x)
+	{
+		depth = x;
 	}
 	
 	/**
@@ -112,6 +120,14 @@ public class Node<V> {
 	public V getValue()
 	{
 		return value;
+	}
+	
+	/**
+	 * @return int the depth
+	 */
+	public int getDepth()
+	{
+		return depth;
 	}
 	
 	/**
