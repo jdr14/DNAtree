@@ -30,6 +30,36 @@ class DNAType
 	private String sequence;
 	
 	/**
+	 * This will be the percentage (up to 2 decimal places) of the amount of
+	 * As in the sequence
+	 */
+	private Double percentA = 0.0;
+	
+	/**
+	 * This will be the percentage (up to 2 decimal places) of the amount of
+	 * Cs in the sequence
+	 */
+	private Double percentC = 0.0;
+	
+	/**
+	 * This will be the percentage (up to 2 decimal places) of the amount of
+	 * Gs in the sequence
+	 */
+	private Double percentG = 0.0;
+	
+	/**
+	 * This will be the percentage (up to 2 decimal places) of the amount of
+	 * Ts in the sequence
+	 */
+	private Double percentT = 0.0;
+	
+	/**
+	 * This is the boolean switch which will be set to true if a '$' is found
+	 * in the given sequence
+	 */
+	private boolean containsSeparator = false;
+	
+	/**
 	 * Provide a default constructor
 	 * Sets string values to null and type to empty by default
 	 */
@@ -46,6 +76,7 @@ class DNAType
 	 */
 	public DNAType(String cmd)
 	{
+		this.type = Types.DNATYPE;
 		this.command = cmd;
 		this.sequence = null;
 	}
@@ -57,8 +88,15 @@ class DNAType
 	 */
 	public DNAType(String cmd, String seq)
 	{
+		this.type = Types.DNATYPE;
 		this.command = cmd;
 		this.sequence = seq;
+		
+		if (cmd != "print") 
+		{
+		    calculatePercentages(seq);	
+		}
+		
 	}
 	
 	/**
@@ -73,15 +111,11 @@ class DNAType
 		this.type = type;
 		this.command = cmd;
 		this.sequence = seq;
-	}
-	
-	/**
-	 * Accessor method to return the type 
-	 * @return returns the data type (meant for the node)
-	 */
-	public Types getType()
-	{
-		return this.type;
+		
+		if (cmd != "print")
+		{
+			calculatePercentages(seq);
+		}
 	}
 	
 	/**
@@ -92,6 +126,33 @@ class DNAType
 	public void setType(Types type)
 	{
 		this.type = type;
+	}
+	
+	/**
+	 * Method to inform user if node is empty
+	 * @return returns boolean value based on if node is empty or not
+	 */
+	public boolean isEmpty()
+	{
+		return (this.type == Types.EMPTY);
+	}
+	
+	/**
+	 * Method to inform user if node is internal
+	 * @return returns boolean value based on if node is internal or not
+	 */
+	public boolean isInternal()
+	{
+		return (this.type == Types.INTERNAL);
+	}
+	
+	/**
+	 * Method to inform user if node is of DNA type 
+	 * @return returns boolean value based on if node is DNA type or not
+	 */
+	public boolean isDNA()
+	{
+		return (this.type == Types.DNATYPE);
 	}
 	
 	/**
@@ -128,8 +189,96 @@ class DNAType
 	public void setSequence(String seq)
 	{
 		this.sequence = seq;
+		
+        calculatePercentages(seq);
 	}
-}
+	
+	/**
+	 * Accessor method to return the percentage of As with respect to its
+	 * containing sequence
+	 * @return percentA (Double)
+	 */
+	public Double getPercentA()
+	{
+		return percentA;
+	}
+	
+	/**
+	 * Accessor method to return the percentage of Cs with respect to its
+	 * containing sequence
+	 * @return percentC (Double)
+	 */
+	public Double getPercentC()
+	{
+		return percentC;
+	}
+	
+	/**
+	 * Accessor method to return the percentage of Gs with respect to its
+	 * containing sequence
+	 * @return percentG (Double)
+	 */
+	public Double getPercentG()
+	{
+		return percentG;
+	}
+	
+	/**
+	 * Accessor method to return the percentage of Ts with respect to its
+	 * containing sequence
+	 * @return percentT (Double)
+	 */
+	public Double getPercentT()
+	{
+		return percentT;
+	}
+
+	/**
+	 * Private helper method to handle the calculation of percentages of
+	 * each character in relation to its containing sequence
+	 * @param seq (String)
+	 */
+	private void calculatePercentages(String seq)
+	{
+		// Temp variables to keep track of the character count in the sequence
+		Double countA = 0.0;
+		Double countC = 0.0;
+		Double countG = 0.0;
+		Double countT = 0.0;
+		
+		// Iterate through the sequence and obtain counts for each character
+		for (int i = 0; i < seq.length(); i++)
+		{
+			if (seq.charAt(i) == 'A')
+			{
+				countA++;
+			}
+			else if (seq.charAt(i) == 'C')
+			{
+				countC++;
+			}
+			else if (seq.charAt(i) == 'G')
+			{
+				countG++;
+			}
+			else if (seq.charAt(i) == 'T')
+			{
+				countT++;
+			}
+			else if (seq.charAt(i) == '$')
+			{
+				containsSeparator = true;
+			}
+		}  // End for
+		
+		// Calculate the final percentages
+		percentA = (countA / seq.length()) * 100.00;
+		percentC = (countA / seq.length()) * 100.00;
+		percentG = (countA / seq.length()) * 100.00;
+		percentT = (countA / seq.length()) * 100.00;
+	}
+
+}  // End DNAType
 
 
 
