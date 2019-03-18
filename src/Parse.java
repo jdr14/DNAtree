@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -52,6 +53,16 @@ public abstract class Parse
 	public boolean lineIsEmpty(String line)
 	{
 		return (line.trim().length() <= 0);
+	}
+	
+	/**
+	 * Separate the line into an array based on whitespace
+	 * @param line (the current line passed in as a String)
+	 * @return the line separated by whitespace as an array
+	 */
+	public List<String> lineAsList(String line)
+	{
+	    return new ArrayList(Arrays.asList(line.split("\\s+")));
 	}
 	
 	/**

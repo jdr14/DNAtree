@@ -32,9 +32,6 @@ public class DNAParse extends Parse
 		
 		List<DNAType> parsedList = new ArrayList<>();
 		
-		// Create a container variable to store the data read in
-		DNAType dnaContainer = new DNAType();
-		
 		// Try/Catch block to account for case if file is not found
 		try
 		{
@@ -43,12 +40,24 @@ public class DNAParse extends Parse
 			// Iterate through the entire file
 			while (inFileStream.hasNextLine())
 			{
+				// currentLine is defined to be the next line of the file
 				String currentLine = inFileStream.nextLine();
 				if (!lineIsEmpty(currentLine))
 				{
+					List<String> listedLine = lineAsList(currentLine);
 					
+					// Create a container variable to store the data read in
+					DNAType dnaContainer = setDNA(listedLine);
+					
+					// Ensure new DNA type actually contains DNA information
+					if(!dnaContainer.isEmpty() && !dnaContainer.isInternal())
+					{
+						parsedList.add(dnaContainer);
+					}
 				}
 			}
+			
+			return parsedList;
 		}
 		catch (FileNotFoundException err)
 		{
@@ -58,5 +67,51 @@ public class DNAParse extends Parse
 		}
 		
 		return parsedList;
+	}
+	
+	/**
+	 * Set up a new DNA type to prepare it for being saved as a node 
+	 * in the tree
+	 * @param lineAsList (Single line as String containing command and 
+	 * possible sequence)
+	 * @return a new DNAType with the internal data fields populated
+	 */
+	private DNAType setDNA(List<String> lineAsList)
+	{
+		// Initially, create an empty DNA
+		DNAType newDNA;
+		
+		if (lineAsList.size() == 1 && lineAsList.get(0) == "print")
+		{
+			newDNA = new DNAType("print");
+		}
+		else if (lineAsList.size() == 2 && lineAsList.get(0) == "print")
+		{
+			newDNA = new DNAType("print", lineAsList.get(1));
+		}
+		else if (lineAsList.size() == 2 && commandValid(lineAsList.get(0)))
+		{
+			newDNA = new DNAType(lineAsList.get(0), lineAsList.get(1));
+		}
+		else
+		{
+			// Set to an empty DNAType (type = empty) which will 
+		    // translate to an empty node
+			newDNA = new DNAType();
+		}
+		
+		return newDNA;
+	}
+	
+	/**
+	 * Determine if the command specified as parameter is valid or not
+	 * @param cmd
+	 * @return boolean value based on if the command is valid or not within
+	 * the confines of the project description
+	 */
+	private boolean commandValid(String cmd)
+	{
+		return (cmd == "search" || cmd == "insert" || 
+				cmd == "remove" || cmd == "print");
 	}
 }
