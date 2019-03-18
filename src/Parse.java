@@ -62,7 +62,7 @@ public abstract class Parse
 	 */
 	public List<String> lineAsList(String line)
 	{
-	    return new ArrayList(Arrays.asList(line.split("\\s+")));
+	    return new ArrayList<String>(Arrays.asList(line.split("\\s+")));
 	}
 	
 	/**
