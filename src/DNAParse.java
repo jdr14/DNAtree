@@ -41,7 +41,7 @@ public class DNAParse extends Parse
 			while (inFileStream.hasNextLine())
 			{
 				// currentLine is defined to be the next line of the file
-				String currentLine = inFileStream.nextLine();
+				String currentLine = inFileStream.nextLine().trim();
 				if (!lineIsEmpty(currentLine))
 				{
 					List<String> listedLine = lineAsList(currentLine);
@@ -89,7 +89,7 @@ public class DNAParse extends Parse
 		{
 			newDNA = new DNAType("print", lineAsList.get(1));
 		}
-		else if (lineAsList.size() == 2 && commandValid(lineAsList.get(0)))
+		else if ((lineAsList.size() == 2) && (commandValid(lineAsList.get(0))))
 		{
 			newDNA = new DNAType(lineAsList.get(0), lineAsList.get(1));
 		}
@@ -111,7 +111,7 @@ public class DNAParse extends Parse
 	 */
 	private boolean commandValid(String cmd)
 	{
-		return (cmd == "search" || cmd == "insert" || 
-				cmd == "remove" || cmd == "print");
+		return (cmd.equalsIgnoreCase("search") || cmd.equalsIgnoreCase("insert") || 
+				cmd.equalsIgnoreCase("remove") || cmd.equalsIgnoreCase("print"));
 	}
 }

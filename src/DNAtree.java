@@ -29,14 +29,16 @@ public class DNAtree {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		if (args.length != 2)
+		boolean isQuiet = true;
+		
+		if (args.length != 1)
 		{
 			System.out.println("Failed because of an incorrect "
 					+ "amount of arguments");
 			System.exit(0);
 		}
 		
-        DNAParse p = new DNAParse(args[1]);  // create a new parser object
+        DNAParse p = new DNAParse(args[0]);  // create a new parser object
         
         List<DNAType> structuredInput = p.parseMain();
         
@@ -44,9 +46,9 @@ public class DNAtree {
         {
         	DNAType temp = structuredInput.get(i);
         	
-        	print("Line: " + i, true);
-        	print(temp.getCommand(), true);
-        	print(temp.getSequence(), true);
+        	print("Line: " + i, isQuiet);
+        	print(temp.getCommand(), isQuiet);
+        	print(temp.getSequence(), isQuiet);
         }
 	}
     
