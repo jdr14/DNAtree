@@ -16,11 +16,6 @@ public class Node<V> {
 	private V value;
 	
 	/**
-	 * Root node
-	 */
-	private Node<V> root;
-	
-	/**
 	 * Node for branch A
 	 */
 	private Node<V> aChild;
@@ -50,6 +45,34 @@ public class Node<V> {
 	 */
 	private int depth = 0;
 	
+    /**
+     * Provides a default constructor that sets everything to null
+     */
+	public Node<V>()
+	{
+		value = null;
+		aChild = null;
+		cChild = null;
+		gChild = null;
+		tChild = null;
+		$Child = null;
+	}
+	
+	/**
+	 * Provide an overload constructor that sets the value
+	 * Everything else is set to null
+	 * @param newValue of type V
+	 */
+	public Node<V>(V newValue)
+	{
+		value = newValue;
+		aChild = null;
+		cChild = null;
+		gChild = null;
+		tChild = null;
+		$Child = null;
+	}
+	
 	/**
 	 * @param x of type Value
 	 */
@@ -64,14 +87,6 @@ public class Node<V> {
 	public void setDepth(int x)
 	{
 		depth = x;
-	}
-	
-	/**
-	 * @param rt Node<V> for the root
-	 */
-	public void setRoot(Node<V> rt)
-	{
-		root = rt;
 	}
 	
 	/**
@@ -128,14 +143,6 @@ public class Node<V> {
 	public int getDepth()
 	{
 		return depth;
-	}
-	
-	/**
-	 * @return Node<V> for the root
-	 */
-	public Node<V> root()
-	{
-		return root;
 	}
 	
 	/**

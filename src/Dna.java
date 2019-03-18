@@ -15,13 +15,13 @@ public class Dna{
 	 * The root node for the initial DNA tree is
 	 * of type empty
 	 */
-	private DNAType root = new DNAType(Types.INTERNAL, null, null);
+	private Node root;
 	
 	/**
 	 * 
 	 * @return the root of the DNA tree
 	 */
-	public DNAType getRoot()
+	public Node getRoot()
 	{
 		return root;
 	}
@@ -45,14 +45,14 @@ public class Dna{
 	 */
 	public Dna()
 	{
-		
+		root = Node();
 	}
 	
 	/**
 	 * 
 	 * @param node of type DNAType
 	 */
-	public void insert(DNAType node)
+	public void insert(Node node)
 	{
 		if(node.isDNA())
 		{
@@ -75,7 +75,7 @@ public class Dna{
 	 * 
 	 * @param node of type DNAType
 	 */
-	public void remove(DNAType node)
+	public void remove(Node node)
 	{
 		
 	}
@@ -85,7 +85,7 @@ public class Dna{
      * @param node of type DNAType
      * @return
      */
-	public DNAType search (DNAType node)
+	public DNAType search (Node node)
 	{
 		return null;
 		
@@ -97,7 +97,7 @@ public class Dna{
 	 * @param nodeTwo of type DNAType
 	 * @return string that contains the comparison results
 	 */
-	private String compareSeq(DNAType nodeOne, DNAType nodeTwo)
+	private String compareSeq(Node nodeOne, Node nodeTwo)
 	{
 		String result = null;
 		char[] listOne = nodeOne.getSequence().toCharArray();

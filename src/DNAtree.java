@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-
 /**
  * Main/Central class containing the main loop
  * @author Joey Rogders jdr14
@@ -17,6 +16,17 @@ public class DNAtree {
 			System.out.println(msg);
 		}
 	}
+	
+    private List<String> runInstructions(List<DNAType> dnaList)
+    {
+    	Dna tree = new Dna();
+    	for (int i = 0; i < dnaList.size(); i++)
+    	{
+    		Node<DNAType> temp = new Node<DNAType>();
+    	}
+    	
+    	return new ArrayList<String>();
+    }
 	
     /**
      * Main loop for the DNA Node Tree project (i.e. project 2)
@@ -50,6 +60,8 @@ public class DNAtree {
         	print(temp.getCommand(), isQuiet);
         	print(temp.getSequence(), isQuiet);
         }
-	}
-    
+        
+        List<String> results = new ArrayList<String>();
+        
+	}  // End main
 } 
