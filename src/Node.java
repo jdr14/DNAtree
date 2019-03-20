@@ -48,14 +48,14 @@ public class Node<V> {
     /**
      * Provides a default constructor that sets everything to null
      */
-	public Node<V>()
+	public Node()
 	{
-		value = null;
-		aChild = null;
-		cChild = null;
-		gChild = null;
-		tChild = null;
-		$Child = null;
+		this.value = null;
+		this.aChild = null;
+		this.cChild = null;
+		this.gChild = null;
+		this.tChild = null;
+		this.$Child = null;
 	}
 	
 	/**
@@ -63,14 +63,14 @@ public class Node<V> {
 	 * Everything else is set to null
 	 * @param newValue of type V
 	 */
-	public Node<V>(V newValue)
+	public Node(V newValue)
 	{
-		value = newValue;
-		aChild = null;
-		cChild = null;
-		gChild = null;
-		tChild = null;
-		$Child = null;
+		this.value = newValue;
+		this.aChild = null;
+		this.cChild = null;
+		this.gChild = null;
+		this.tChild = null;
+		this.$Child = null;
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class Node<V> {
 	 */
 	public void setValue(V x)
 	{
-		value = x;
+		this.value = x;
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class Node<V> {
 	 */
 	public void setDepth(int x)
 	{
-		depth = x;
+		this.depth = x;
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public class Node<V> {
 	 */
 	public void setAChild(Node<V> rt)
 	{
-		aChild = rt;
+		this.aChild = rt;
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class Node<V> {
 	 */
 	public void setCChild(Node<V> rt)
 	{
-		cChild = rt;
+		this.cChild = rt;
 	}
 	
 	/**
@@ -110,7 +110,7 @@ public class Node<V> {
 	 */
 	public void setGChild(Node<V> rt)
 	{
-		gChild = rt;
+		this.gChild = rt;
 	}
 	
 	/**
@@ -118,7 +118,7 @@ public class Node<V> {
 	 */
 	public void setTChild(Node<V> rt)
 	{
-		tChild = rt;
+		this.tChild = rt;
 	}
 	
 	/**
@@ -126,7 +126,7 @@ public class Node<V> {
 	 */
 	public void set$Child(Node<V> rt)
 	{
-		$Child = rt;
+		this.$Child = rt;
 	}
 	
 	/**
@@ -134,7 +134,7 @@ public class Node<V> {
 	 */
 	public V getValue()
 	{
-		return value;
+		return this.value;
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public class Node<V> {
 	 */
 	public int getDepth()
 	{
-		return depth;
+		return this.depth;
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class Node<V> {
 	 */
 	public Node<V> aChild()
 	{
-		return aChild;
+		return this.aChild;
 	}
 	
 	/**
@@ -158,7 +158,7 @@ public class Node<V> {
 	 */
 	public Node<V> cChild()
 	{
-		return cChild;
+		return this.cChild;
 	}
 	
 	/**
@@ -166,7 +166,7 @@ public class Node<V> {
 	 */
 	public Node<V> gChild()
 	{
-		return gChild;
+		return this.gChild;
 	}
 	
 	/**
@@ -174,7 +174,7 @@ public class Node<V> {
 	 */
 	public Node<V> tChild()
 	{
-		return tChild;
+		return this.tChild;
 	}
 	
 	/**
@@ -182,6 +182,6 @@ public class Node<V> {
 	 */
 	public Node<V> $Child()
 	{
-		return $Child;
+		return this.$Child;
 	}
 }

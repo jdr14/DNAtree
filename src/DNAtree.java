@@ -17,12 +17,41 @@ public class DNAtree {
 		}
 	}
 	
-    private List<String> runInstructions(List<DNAType> dnaList)
+    private static List<String> runInstructions(List<DNAType> dnaList)
     {
+    	
     	Dna tree = new Dna();
     	for (int i = 0; i < dnaList.size(); i++)
     	{
-    		Node<DNAType> temp = new Node<DNAType>();
+    		Node<DNAType> temp = new Node<DNAType>(dnaList.get(i));
+    		if(temp.getValue().getCommand().equalsIgnoreCase("insert"))
+    		{
+    			tree.insert(temp);    // call insert method
+    		}
+    		else if(temp.getValue().getCommand().equalsIgnoreCase("remove"))
+    		{
+    			tree.remove(temp);    // call remove function
+    		}
+    		else if(temp.getValue().getCommand().equalsIgnoreCase("print"))
+    		{
+    			if(temp.getValue().getSequence().equalsIgnoreCase("lengths"))
+    			{
+    				// print lengths of tree
+    			}
+    			else if(temp.getValue().getSequence().equalsIgnoreCase("stats"))
+    			{
+    				// print stats of tree
+    			}
+    			else
+    			{
+    				// print entire tree
+    			}
+    		}
+    		else if(temp.getValue().getCommand().equalsIgnoreCase("search"))
+    		{
+    			tree.search(temp);    // call search function
+    		}
+    		
     	}
     	
     	return new ArrayList<String>();
@@ -61,7 +90,7 @@ public class DNAtree {
         	print(temp.getSequence(), isQuiet);
         }
         
-        List<String> results = new ArrayList<String>();
+        List<String> results = runInstructions(structuredInput);
         
 	}  // End main
 } 

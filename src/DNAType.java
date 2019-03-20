@@ -112,7 +112,7 @@ class DNAType
 		this.command = cmd;
 		this.sequence = seq;
 		
-		if (cmd != "print")
+		if ((cmd != "print") && (seq != null))
 		{
 			calculatePercentages(seq);
 		}
@@ -273,9 +273,9 @@ class DNAType
 		
 		// Calculate the final percentages
 		percentA = (countA / seq.length()) * 100.00;
-		percentC = (countA / seq.length()) * 100.00;
-		percentG = (countA / seq.length()) * 100.00;
-		percentT = (countA / seq.length()) * 100.00;
+		percentC = (countC / seq.length()) * 100.00;
+		percentG = (countG / seq.length()) * 100.00;
+		percentT = (countT / seq.length()) * 100.00;
 	}
 
 }  // End DNAType
