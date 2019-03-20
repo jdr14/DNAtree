@@ -49,7 +49,7 @@ public class DNAtree {
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("search"))
     		{
-    			tree.search(temp);    // call search function
+    			tree.search(temp);  // call search function
     		}
     		
     	}

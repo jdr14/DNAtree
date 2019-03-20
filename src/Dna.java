@@ -243,9 +243,28 @@ public class Dna{
 			Character temp = comPair.charAt(i);
 			if (temp.equals('A'))
 			{
-				if(!rt.aChild().getValue().isInternal())
+				if(!rt.getValue().isInternal())
 				{
-					Node<DNAType> exTend = rt;
+					Node<DNAType> exTend = new Node<DNAType>(rt);
+					rt = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
+					setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(i+1));
+					setChildSelect(rt, node, node.getValue().getSequence().charAt(i+1));
+					break;
+				}
+				else  // rt is internal
+				{
+					if (rt.aChild() == null)
+					{
+						rt.setAChild(new Node<DNAType>(new DNAType(Types.INTERNAL, null, null)));
+					}
+					rt = rt.aChild();
+				}
+			}
+			else if(temp.equals('C'))
+			{
+				if(!rt.getValue().isInternal())
+				{
+					Node<DNAType> exTend = new Node<DNAType>(rt);
 					rt = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
 					setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(i+1));
 					setChildSelect(rt, node, node.getValue().getSequence().charAt(i+1));
@@ -253,48 +272,48 @@ public class Dna{
 				}
 				else
 				{
-					rt = rt.aChild();
-				}
-			}
-			else if(temp.equals('C'))
-			{
-				if (rt.cChild().getValue().isDNA())
-				{
-					Node<DNAType> exTend = rt;
-					rt = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
-					setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(i+2));
-					break;
-				}
-				else
-				{
+					if (rt.cChild() == null)
+					{
+						rt.setCChild(new Node<DNAType>(new DNAType(Types.INTERNAL, null, null)));
+					}
 					rt = rt.cChild();
 				}
 			}
 			else if(temp.equals('G'))
 			{
-				if (rt.gChild().getValue().isDNA())
+				if(!rt.getValue().isInternal())
 				{
-					Node<DNAType> exTend = rt;
+					Node<DNAType> exTend = new Node<DNAType>(rt);
 					rt = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
-					setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(i+2));
+					setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(i+1));
+					setChildSelect(rt, node, node.getValue().getSequence().charAt(i+1));
 					break;
 				}
 				else
 				{
+					if (rt.gChild() == null)
+					{
+						rt.setGChild(new Node<DNAType>(new DNAType(Types.INTERNAL, null, null)));
+					}
 					rt = rt.gChild();
 				}
 			}
 			else if(temp.equals('T'))
 			{
-				if (rt.tChild().getValue().isDNA())
+				if(!rt.getValue().isInternal())
 				{
-					Node<DNAType> exTend = rt;
+					Node<DNAType> exTend = new Node<DNAType>(rt);
 					rt = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
-					setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(i+2));
+					setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(i+1));
+					setChildSelect(rt, node, node.getValue().getSequence().charAt(i+1));
 					break;
 				}
 				else
 				{
+					if (rt.tChild() == null)
+					{
+						rt.setTChild(new Node<DNAType>(new DNAType(Types.INTERNAL, null, null)));
+					}
 					rt = rt.tChild();
 				}
 			}

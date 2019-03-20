@@ -74,6 +74,20 @@ public class Node<V> {
 	}
 	
 	/**
+	 * 
+	 * @param n
+	 */
+	public Node(Node<V> n)
+	{
+		this.value = n.getValue();
+		this.aChild = n.aChild();
+		this.cChild = n.cChild();
+		this.gChild = n.gChild();
+		this.tChild = n.tChild();
+		this.$Child = n.$Child();
+	}
+	
+	/**
 	 * @param x of type Value
 	 */
 	public void setValue(V x)
