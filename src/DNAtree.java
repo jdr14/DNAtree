@@ -7,6 +7,7 @@ import java.util.*;
  * @author Jovany Cabrera jovanyc4
  * @version 1.0.0
  */
+@SuppressWarnings("unused")
 public class DNAtree {
     
 	public static void print(String msg, boolean quiet)
