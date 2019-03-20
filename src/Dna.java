@@ -103,6 +103,16 @@ public class Dna{
 	 */
 	public void remove(Node<DNAType> node)
 	{
+		removeHelp(node);
+		count--;
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
+	private void removeHelp(Node<DNAType> node)
+	{
 		if(node.getValue().isDNA())
 		{
 			
@@ -114,14 +124,54 @@ public class Dna{
      * @param node of type DNAType
      * @return
      */
-	public DNAType search (Node<DNAType> node)
+	public Node<DNAType> search (Node<DNAType> node)
 	{
+		Node<DNAType> result = searchHelp(node);
+		return result;
+		
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 */
+	private Node<DNAType> searchHelp(Node<DNAType> node)
+	{
+		int count = 0;
+		String comPair = node.getValue().getSequence();
+		Node<DNAType> moveThis = new Node<DNAType>(root);
 		if(node.getValue().isDNA())
 		{
+			for(int i = 0; i < comPair.length(); i++)
+			{
+				Character temp = comPair.charAt(i);
+				if(temp.equals('A'))
+				{
+					moveThis = moveThis.aChild();
+				}
+				else if(temp.equals('C'))
+				{
+					moveThis = moveThis.cChild();
+				}
+				else if(temp.equals('G'))
+				{
+					moveThis = moveThis.gChild();
+				}
+				else if(temp.equals('T'))
+				{
+					moveThis = moveThis.tChild();
+				}
+				count++;
+			}
+			if(moveThis.getValue().isInternal())
+			{
+				moveThis = moveThis.$Child();
+				count++;
+			}
 			
 		}
-		return null;
-		
+		return moveThis;
 	}
 	
 	/**
