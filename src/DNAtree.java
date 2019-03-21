@@ -51,7 +51,7 @@ public class DNAtree {
     		else if(temp.getValue().getCommand().equalsIgnoreCase("search"))
     		{
     			Node<DNAType> result = new Node<DNAType>();
-    			result = tree.search(temp);  // call search function
+    			//result = tree.search(temp);  // call search function
     		}
     		
     	}
