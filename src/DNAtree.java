@@ -25,6 +25,7 @@ public class DNAtree {
     	for (int i = 0; i < dnaList.size(); i++)
     	{
     		Node<DNAType> temp = new Node<DNAType>(dnaList.get(i));
+    		setChildrenEmpty(temp);
     		if(temp.getValue().getCommand().equalsIgnoreCase("insert"))
     		{
     			tree.insert(temp);    // call insert method
@@ -50,14 +51,33 @@ public class DNAtree {
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("search"))
     		{
-    			Node<DNAType> result = new Node<DNAType>();
-    			result = tree.search(temp);  // call search function
+    			if(tree.getCount() > 0)
+    			{
+        			Node<DNAType> result = new Node<DNAType>();
+//        			result = tree.search(temp);  // call search function
+        			setChildrenEmpty(result);
+    			}
     		}
     		
     	}
     	
     	return new ArrayList<String>();
     }
+    
+    /**
+	 * 
+	 * @param node
+	 */
+	private static void setChildrenEmpty(Node<DNAType> node)
+	{
+		DNAType innerEmplaceThis = new DNAType(Types.EMPTY, null, null);
+		Node<DNAType> emplaceThis = new Node<DNAType>(innerEmplaceThis);
+		node.setAChild(emplaceThis);
+		node.setCChild(emplaceThis);
+		node.setGChild(emplaceThis);
+		node.setTChild(emplaceThis);
+		node.set$Child(emplaceThis);
+	}
 	
     /**
      * Main loop for the DNA Node Tree project (i.e. project 2)
