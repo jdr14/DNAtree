@@ -233,7 +233,6 @@ public class Dna{
 		}
 		
 		return result;
-		
 	}
 	
 	/**
@@ -320,7 +319,9 @@ public class Dna{
 	 */
 	private void findInternal(Node<DNAType> rt, Node<DNAType> node)
 	{
+		
 		String comPair = node.getValue().getSequence();
+
 		for(int i = 0; i < comPair.length(); i++)
 		{
 			Character temp = comPair.charAt(i);
@@ -366,12 +367,19 @@ public class Dna{
 			}
 			else if(!rt.getValue().isInternal())
 			{
-				Node<DNAType> exTend = new Node<DNAType>();
-				exTend.setValue(rt.getValue());
-				rt.getValue().setType(Types.INTERNAL);
-//				rt.getValue().setSequence("");
-//				rt.getValue().setCommand("");
-				setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(i+1));
+				DNAType t = new DNAType(rt.getValue());
+				DNAType extend = new DNAType(t);
+				Node<DNAType> extNode = new Node<DNAType>(extend);
+				
+				DNAType newDNA = new DNAType(Types.INTERNAL, "", "");
+				//Node<DNAType> newRoot = new Node<DNAType>(newDNA);
+				rt.setValue(newDNA);
+				//rt = newRoot;
+				System.out.println(comPair + "    " + comPair.length());
+				System.out.println(rt.getValue().getSequence());
+				System.out.println(rt.getValue().isInternal());
+				System.out.println(i+1);
+				setChildSelect(rt, extNode, extend.getSequence().charAt(i+1));
 				setChildSelect(rt, node, node.getValue().getSequence().charAt(i+1));
 				return;
 			}
