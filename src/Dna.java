@@ -164,11 +164,11 @@ public class Dna{
 				}
 				count++;
 			}
-			if(moveThis.getValue().isInternal())
-			{
-				moveThis = moveThis.$Child();
-				count++;
-			}
+//			if(moveThis.getValue().isInternal())
+//			{
+//				moveThis = moveThis.$Child();
+//				count++;
+//			}
 			
 		}
 		return moveThis;
