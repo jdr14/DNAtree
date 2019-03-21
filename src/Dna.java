@@ -124,9 +124,22 @@ public class Dna{
      * @param node of type DNAType
      * @return
      */
-	public Node<DNAType> search (Node<DNAType> node)
+	public ArrayList<Node<DNAType>> search (Node<DNAType> node)
 	{
-		Node<DNAType> result = searchHelp(node);
+		ArrayList<Node<DNAType>> result = new ArrayList<Node<DNAType>>();
+		int nodeCount = 0;
+		if(node.getValue().getSequence().contains("$"))
+		{
+			// call search help 2
+			nodeCount = searchCounter(node);
+			ArrayList<Node<DNAType>> list = new ArrayList<Node<DNAType>>(nodeCount);
+			
+		}
+		else
+		{
+			result.add(searchHelp(node));
+			
+		}
 		return result;
 		
 	}
@@ -172,6 +185,11 @@ public class Dna{
 			
 		}
 		return moveThis;
+	}
+	
+	private int searchCounter(Node<DNAType> node)
+	{
+		return 0;
 	}
 	
 	/**
