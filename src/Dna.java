@@ -325,7 +325,6 @@ public class Dna{
 			
 		}
 		return result;
-		
 	}
 	
 	/**
@@ -741,6 +740,69 @@ public class Dna{
 	}
 	
 	/**
+	 * Returns all the Nodes beginning with the prefix specified along with
+	 * the number of nodes visited
+	 * @param sequence
+	 * @return
+	 */
+	public Pair<Integer, List<DNAType>> searchByPrefix(String sequence)
+	{
+		Node<DNAType> tempRoot = new Node<DNAType>();
+		tempRoot = root;
+		
+		int nodesVisited = 0;
+		
+		for (int i = 0; i < sequence.length(); i++)
+		{
+		    if (tempRoot == null)
+		    {
+		    	break;
+		    }
+		    
+		    Character c = sequence.charAt(i);
+		    
+		    if (c.equals('A'))
+		    {
+		    	tempRoot = tempRoot.aChild();
+		    	nodesVisited += 1;
+		    }
+		    else if (c.equals('C'))
+		    {
+		    	tempRoot = tempRoot.cChild();
+		    	nodesVisited += 1;
+		    }
+		    else if (c.equals('G'))
+		    {
+		    	tempRoot = tempRoot.gChild();
+		    	nodesVisited += 1;
+		    }
+		    else if (c.equals('T'))
+		    {
+		    	tempRoot = tempRoot.tChild();
+		    	nodesVisited += 1;
+		    }
+		}
+		
+		// Find all of the DNA info in the subtree of the tempRoot
+        List<Pair<Integer, DNAType>> preorderList = 
+        		new ArrayList<Pair<Integer, DNAType>>();
+        preorderHelp(tempRoot, preorderList);
+		
+        // Update the number of nodes visited
+        nodesVisited += preorderList.size();
+        
+        // Populate the subtree nodes
+		List<DNAType> nodesInSubtree = new ArrayList<DNAType>();
+		for (int i = 0; i < preorderList.size(); i++)
+		{
+			nodesInSubtree.add(preorderList.get(i).getValue());
+		}
+		
+		// Create the return pair
+		return new Pair<Integer, List<DNAType>>(nodesVisited, nodesInSubtree);
+	}
+	
+	/**
 	 * Return a list of all the DNATypes in a preorder fashion
 	 * @return preorderList (tree nodes)
 	 */
@@ -782,7 +844,6 @@ public class Dna{
 				Pair<Integer, DNAType>(rt.getDepth(), rt.getValue());
 		
 		retList.add(p);
-	    
 		preorderHelp(rt.aChild(), retList);
 		preorderHelp(rt.cChild(), retList);
 		preorderHelp(rt.gChild(), retList);

@@ -37,37 +37,68 @@ public class DNAtree {
     	{
     		Node<DNAType> temp = new Node<DNAType>(dnaList.get(i));
     		setChildrenEmpty(temp);
-    		if(temp.getValue().getCommand().equalsIgnoreCase("insert"))
+    		if (temp.getValue().getCommand().equalsIgnoreCase("insert"))
     		{
     			tree.insert(temp);    // call insert method
     		}
-    		else if(temp.getValue().getCommand().equalsIgnoreCase("remove"))
+    		else if (temp.getValue().getCommand().equalsIgnoreCase("remove"))
     		{
     			tree.remove(temp);    // call remove function
     		}
-    		else if(temp.getValue().getCommand().equalsIgnoreCase("print"))
+    		else if (temp.getValue().getCommand().equalsIgnoreCase("print"))
     		{
     			// Case: singular print command passed in
     			if (temp.getValue().getSequence() == null)
     			{
     				tree.print(PrintOptions.DEFAULT);
     			}
-    			else if(temp.getValue().getSequence().equalsIgnoreCase("lengths"))
+    			else if (temp.getValue().getSequence().equalsIgnoreCase("lengths"))
     			{
     				tree.print(PrintOptions.LENGTHS);
     			}
-    			else if(temp.getValue().getSequence().equalsIgnoreCase("stats"))
+    			else if (temp.getValue().getSequence().equalsIgnoreCase("stats"))
     			{
     				tree.print(PrintOptions.STATS);
     			}
     		}
-    		else if(temp.getValue().getCommand().equalsIgnoreCase("search"))
+    		else if (temp.getValue().getCommand().equalsIgnoreCase("search"))
     		{
-    			if(tree.getCount() > 0)
+    			if (tree.getCount() > 0)
+    			{ 
+    				String s = temp.getValue().getSequence();
+    				if (s.endsWith("$"))
+    				{
+            			Node<DNAType> result = new Node<DNAType>();
+            			tree.search(temp);  // call search function
+            			setChildrenEmpty(result);
+    				}
+    				else
+    				{
+    				    Pair<Integer, List<DNAType>> prefixResults = 
+    				    		tree.searchByPrefix(s);
+    				    
+    				    // Finally, print the results
+    				    System.out.println("# of nodes visited: " + 
+    				    		prefixResults.getKey());
+    				    
+    				    if (prefixResults.getValue().isEmpty())
+    				    {
+    				    	System.out.println("no sequence found");
+    				    }
+    				    else
+    				    {
+    				    	for (int j = 0; 
+    				    			j < prefixResults.getValue().size(); j++)
+    				    	{
+    				    		System.out.println("sequence: " + 
+    				    	prefixResults.getValue().get(j).getSequence());
+    				    	}
+    				    }
+    				}
+    			}
+    			else
     			{
-        			Node<DNAType> result = new Node<DNAType>();
-        			tree.search(temp);  // call search function
-        			setChildrenEmpty(result);
+    				System.out.println("Tree is empty");
     			}
     		}
     		
