@@ -84,8 +84,8 @@ public class Dna{
 					{
 						addChildren(root, rootTemp);
 						addChildren(root, node);
-						rootTemp.setDepth(1);
-						node.setDepth(1);
+						rootTemp.setDepth(2);
+						node.setDepth(2);
 					}
 					else if(compareResult.length() > 0)
 					{
@@ -237,7 +237,7 @@ public class Dna{
 			node.getValue().setType(Types.DNATYPE);
 			node.getValue().setSequence(seqTemp);
 			node.getValue().setCommand(comTemp);
-			node.setDepth(node.getDepth()-1);
+			node.setDepth(node.getDepth());
 			setChildrenNull(node);
 		}
 	}
