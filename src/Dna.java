@@ -84,8 +84,8 @@ public class Dna{
 					{
 						addChildren(root, rootTemp);
 						addChildren(root, node);
-						rootTemp.setDepth(2);
-						node.setDepth(2);
+						rootTemp.setDepth(1);
+						node.setDepth(1);
 					}
 					else if(compareResult.length() > 0)
 					{
@@ -206,51 +206,49 @@ public class Dna{
 		int whatKid = hasChildrenHelper(node);
 		if(node.getValue().isInternal() && (onlyOneChild(node)) && (whatKid > 1))
 		{
-			if(whatKid == 2)
+			String seqTemp = "";
+			String comTemp = "";
+			if(whatKid == 2)    // case where node only has aChild
 			{
-				String seqTemp = node.aChild().getValue().getSequence();
-				String comTemp = node.aChild().getValue().getCommand();
-				node.getValue().setType(Types.DNATYPE);
-				node.getValue().setSequence(seqTemp);
-				node.getValue().setCommand(comTemp);
-				node.aChild().getValue().setType(Types.EMPTY);
-				node.aChild().getValue().setSequence("");
-				node.aChild().getValue().setCommand("");
+				seqTemp = node.aChild().getValue().getSequence();
+				comTemp = node.aChild().getValue().getCommand();
+				
 			}
-			else if(whatKid == 3)
+			else if(whatKid == 3)    // case where node only has cChild
 			{
-				String seqTemp = node.cChild().getValue().getSequence();
-				String comTemp = node.cChild().getValue().getCommand();
-				node.getValue().setType(Types.DNATYPE);
-				node.getValue().setSequence(seqTemp);
-				node.getValue().setCommand(comTemp);
-				node.cChild().getValue().setType(Types.EMPTY);
-				node.cChild().getValue().setSequence("");
-				node.cChild().getValue().setCommand("");
+				seqTemp = node.cChild().getValue().getSequence();
+				comTemp = node.cChild().getValue().getCommand();
 			}
-			else if(whatKid == 4)
+			else if(whatKid == 4)    // case where node only has gChild
 			{
-				String seqTemp = node.gChild().getValue().getSequence();
-				String comTemp = node.gChild().getValue().getCommand();
-				node.getValue().setType(Types.DNATYPE);
-				node.getValue().setSequence(seqTemp);
-				node.getValue().setCommand(comTemp);
-				node.gChild().getValue().setType(Types.EMPTY);
-				node.gChild().getValue().setSequence("");
-				node.gChild().getValue().setCommand("");
+				seqTemp = node.gChild().getValue().getSequence();
+				comTemp = node.gChild().getValue().getCommand();
 			}
-			else if(whatKid == 5)
+			else if(whatKid == 5)    // case where node only has tChild
 			{
-				String seqTemp = node.tChild().getValue().getSequence();
-				String comTemp = node.tChild().getValue().getCommand();
-				node.getValue().setType(Types.DNATYPE);
-				node.getValue().setSequence(seqTemp);
-				node.getValue().setCommand(comTemp);
-				node.tChild().getValue().setType(Types.EMPTY);
-				node.tChild().getValue().setSequence("");
-				node.tChild().getValue().setCommand("");
+				seqTemp = node.tChild().getValue().getSequence();
+				comTemp = node.tChild().getValue().getCommand();
 			}
+			else if(whatKid == 6)    // case where node only has $child
+			{
+				seqTemp = node.$Child().getValue().getSequence();
+				comTemp = node.$Child().getValue().getCommand();
+			}
+			node.getValue().setType(Types.DNATYPE);
+			node.getValue().setSequence(seqTemp);
+			node.getValue().setCommand(comTemp);
+			node.setDepth(node.getDepth()-1);
+			setChildrenNull(node);
 		}
+	}
+	
+	private void setChildrenNull(Node<DNAType> node)
+	{
+		node.setAChild(null);
+		node.setCChild(null);
+		node.setGChild(null);
+		node.setTChild(null);
+		node.set$Child(null);
 	}
 	
 	/**
@@ -276,6 +274,10 @@ public class Dna{
 		if (!node.tChild().getValue().isEmpty())
 		{
 			result = 5;
+		}
+		if (!node.$Child().getValue().isEmpty())
+		{
+			result = 6;
 		}
 		return result;
 	}
@@ -315,6 +317,7 @@ public class Dna{
 		if(node.getValue().getSequence().contains("$"))
 		{
 			result.add(searchHelp(root, node));
+			searchPrint(result.get(0));
 			
 		}
 		else
@@ -325,6 +328,19 @@ public class Dna{
 			
 		}
 		return result;
+	}
+	
+	private void searchPrint(Pair<Integer, Node<DNAType>> printThis)
+	{
+		System.out.println("# of nodes visited: " + printThis.getKey());
+		if(printThis.getValue().getValue().getSequence() == null)
+		{
+			System.out.println("no sequence found");
+		}
+		else
+		{
+			System.out.println("sequence: " + printThis.getValue().getValue().getSequence());
+		}
 	}
 	
 	/**
@@ -344,63 +360,65 @@ public class Dna{
 			for(int i = 0; i < comPair.length(); i++)
 			{
 				Character temp = comPair.charAt(i);
-				if(temp.equals('A'))
+				if(!rt.getValue().isDNA())
 				{
-					if(rt.aChild().getValue().isEmpty())
+					if(temp.equals('A'))
 					{
-						result.setKey(count);
-						result.setValue(stopNow);
-						break;
+						if(rt.aChild().getValue().isEmpty())
+						{
+							result.setKey(count);
+							result.setValue(stopNow);
+							break;
+						}
+						else
+						{
+							rt = rt.aChild();
+							count++;
+						}
 					}
-					else
+					else if(temp.equals('C'))
 					{
-						rt = rt.aChild();
-						count++;
+						if(rt.cChild().getValue().isEmpty())
+						{
+							result.setKey(count);
+							result.setValue(stopNow);
+							break;
+						}
+						else
+						{
+							rt = rt.cChild();
+							count++;
+						}
+					}
+					else if(temp.equals('G'))
+					{
+						if(rt.gChild().getValue().isEmpty())
+						{
+							result.setKey(count);
+							result.setValue(stopNow);
+							break;
+						}
+						else
+						{
+							rt = rt.gChild();
+							count++;
+						}
+					}
+					else if(temp.equals('T'))
+					{
+						if(rt.tChild().getValue().isEmpty())
+						{
+							result.setKey(count);
+							result.setValue(stopNow);
+							break;
+						}
+						else
+						{
+							rt = rt.tChild();
+							count++;
+						}
 					}
 				}
-				else if(temp.equals('C'))
-				{
-					if(rt.cChild().getValue().isEmpty())
-					{
-						result.setKey(count);
-						result.setValue(stopNow);
-						break;
-					}
-					else
-					{
-						rt = rt.cChild();
-						count++;
-					}
-				}
-				else if(temp.equals('G'))
-				{
-					if(rt.gChild().getValue().isEmpty())
-					{
-						result.setKey(count);
-						result.setValue(stopNow);
-						break;
-					}
-					else
-					{
-						rt = rt.gChild();
-						count++;
-					}
-				}
-				else if(temp.equals('T'))
-				{
-					if(rt.tChild().getValue().isEmpty())
-					{
-						result.setKey(count);
-						result.setValue(stopNow);
-						break;
-					}
-					else
-					{
-						rt = rt.tChild();
-						count++;
-					}
-				}
-//				count++;
 			}
 			if(rt.getValue().isInternal())
 			{
@@ -558,7 +576,6 @@ public class Dna{
 		{
 			Character temp = compared.charAt(0);
 			Node<DNAType> newInternal = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
-			setChildrenEmpty(newInternal);
 			if(temp.equals('A'))
 			{
 				rt.setAChild(newInternal);
@@ -583,14 +600,13 @@ public class Dna{
 			{
 				compared = compared.substring(1);
 			}
+			setChildrenEmpty(newInternal);
 			extendTree(newInternal, nodeInsert, nodeInsert2, compared);
 		}
 		else
 		{
 			setChildSelect(rt, nodeInsert, nodeInsert.getValue().getSequence().charAt(compared.length()+1));
 			setChildSelect(rt, nodeInsert2, nodeInsert2.getValue().getSequence().charAt(compared.length()+1));
-//			addChildren(rt, nodeInsert);    // chage to setChildSelect with char as length+1
-//			addChildren(rt, nodeInsert2);
 		}
 	}
 	
@@ -733,10 +749,15 @@ public class Dna{
 		DNAType innerEmplaceThis = new DNAType(Types.EMPTY, null, null);
 		Node<DNAType> emplaceThis = new Node<DNAType>(innerEmplaceThis);
 		node.setAChild(emplaceThis);
+		node.aChild().setDepth(node.getDepth()+1);
 		node.setCChild(emplaceThis);
+		node.cChild().setDepth(node.getDepth()+1);
 		node.setGChild(emplaceThis);
+		node.gChild().setDepth(node.getDepth()+1);
 		node.setTChild(emplaceThis);
+		node.tChild().setDepth(node.getDepth()+1);
 		node.set$Child(emplaceThis);
+		node.$Child().setDepth(node.getDepth()+1);
 	}
 	
 	/**

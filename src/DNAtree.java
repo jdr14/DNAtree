@@ -10,7 +10,7 @@ import java.util.*;
 @SuppressWarnings("unused")
 public class DNAtree {
 	
-	private static boolean isQuiet = false;
+	private static boolean isQuiet = true;
     
 	/**
 	 * 
@@ -36,14 +36,17 @@ public class DNAtree {
     	for (int i = 0; i < dnaList.size(); i++)
     	{
     		Node<DNAType> temp = new Node<DNAType>(dnaList.get(i));
-    		setChildrenEmpty(temp);
-    		if (temp.getValue().getCommand().equalsIgnoreCase("insert"))
+//    		setChildrenEmpty(temp);
+    		if(temp.getValue().getCommand().equalsIgnoreCase("insert"))
     		{
     			tree.insert(temp);    // call insert method
     		}
     		else if (temp.getValue().getCommand().equalsIgnoreCase("remove"))
     		{
-    			tree.remove(temp);    // call remove function
+    			if(tree.getCount() > 0)
+    			{
+    				tree.remove(temp);    // call remove function
+    			}
     		}
     		else if (temp.getValue().getCommand().equalsIgnoreCase("print"))
     		{
@@ -81,17 +84,22 @@ public class DNAtree {
     				    System.out.println("# of nodes visited: " + 
     				    		prefixResults.getKey());
     				    
-    				    if (prefixResults.getValue().isEmpty())
+    				    List<DNAType> dt = prefixResults.getValue();
+    				    
+    				    if (dt.isEmpty())
     				    {
     				    	System.out.println("no sequence found");
     				    }
     				    else
     				    {
-    				    	for (int j = 0; 
-    				    			j < prefixResults.getValue().size(); j++)
+    				    	for (int j = 0; j < dt.size(); j++)
     				    	{
-    				    		System.out.println("sequence: " + 
-    				    	prefixResults.getValue().get(j).getSequence());
+    				    		if (dt.get(j).getSequence() != null &&
+    				    				!dt.get(j).getSequence().isEmpty())
+    				    		{
+        				    		System.out.println("sequence: " + 
+            				    	        dt.get(j).getSequence());
+    				    		}
     				    	}
     				    }
     				}
@@ -116,10 +124,15 @@ public class DNAtree {
 		DNAType innerEmplaceThis = new DNAType(Types.EMPTY, null, null);
 		Node<DNAType> emplaceThis = new Node<DNAType>(innerEmplaceThis);
 		node.setAChild(emplaceThis);
+		node.aChild().setDepth(node.getDepth()+1);
 		node.setCChild(emplaceThis);
+		node.cChild().setDepth(node.getDepth()+1);
 		node.setGChild(emplaceThis);
+		node.gChild().setDepth(node.getDepth()+1);
 		node.setTChild(emplaceThis);
+		node.tChild().setDepth(node.getDepth()+1);
 		node.set$Child(emplaceThis);
+		node.$Child().setDepth(node.getDepth()+1);
 	}
 	
     /**
@@ -133,7 +146,7 @@ public class DNAtree {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		//boolean isQuiet = false;
+//		boolean isQuiet = false;
 		
 		if (args.length != 1)
 		{
