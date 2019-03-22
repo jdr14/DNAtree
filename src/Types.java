@@ -8,6 +8,7 @@ public enum Types
 {
     INTERNAL,
     EMPTY,
-    DNATYPE;
+    DNATYPE,
+    NONETYPE;
 }
 

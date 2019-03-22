@@ -65,7 +65,7 @@ class DNAType
 	 */
 	public DNAType()
 	{
-		this.type = Types.EMPTY;
+		this.type = Types.NONETYPE;
 		this.command = null;
 		this.sequence = null;
 	}
@@ -165,6 +165,23 @@ class DNAType
 	public boolean isDNA()
 	{
 		return (this.type == Types.DNATYPE);
+	}
+	
+	/**
+	 * Method to inform user if node is of None type 
+	 * @return
+	 */
+	public boolean isNone()
+	{
+		return (this.type == Types.NONETYPE);
+	}
+	
+	/**
+	 * Determine if an instruction has been set or not for parsing purposes
+	 */
+	public boolean containsInstruction()
+	{
+		return (this.command != null);
 	}
 	
 	/**

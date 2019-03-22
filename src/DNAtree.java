@@ -9,6 +9,8 @@ import java.util.*;
  */
 @SuppressWarnings("unused")
 public class DNAtree {
+	
+	private static boolean isQuiet = false;
     
 	public static void print(String msg, boolean quiet)
 	{
@@ -19,8 +21,7 @@ public class DNAtree {
 	}
 	
     private static List<String> runInstructions(List<DNAType> dnaList)
-    {
-    	
+    {	
     	Dna tree = new Dna();
     	for (int i = 0; i < dnaList.size(); i++)
     	{
@@ -36,6 +37,8 @@ public class DNAtree {
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("print"))
     		{
+    			//print("Print called!!!!!", isQuiet);
+    			//tree.print();
     			if(temp.getValue().getSequence().equalsIgnoreCase("lengths"))
     			{
     				// print lengths of tree
@@ -46,7 +49,8 @@ public class DNAtree {
     			}
     			else
     			{
-    				// print entire tree
+    				tree.print();
+    				
     			}
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("search"))
@@ -90,7 +94,7 @@ public class DNAtree {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		boolean isQuiet = true;
+		//boolean isQuiet = false;
 		
 		if (args.length != 1)
 		{

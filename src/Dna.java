@@ -569,9 +569,10 @@ public class Dna{
 	 * Return a list of all the DNATypes in a preorder fashion
 	 * @return preorderList (tree nodes)
 	 */
-	public List<Pair> preorder()
+	private List<Pair<Integer, DNAType>> preorder()
 	{
-		List<Pair> preorderList = new ArrayList<Pair>();
+		List<Pair<Integer, DNAType>> preorderList = new 
+				ArrayList<Pair<Integer, DNAType>>();
 		preorderHelp(root, preorderList);
 		return preorderList;
 	}
@@ -583,7 +584,8 @@ public class Dna{
 	 * @param retList
 	 * @return
 	 */
-	private void preorderHelp(Node<DNAType> rt, List<Pair> retList)
+	private void preorderHelp(Node<DNAType> rt, 
+			List<Pair<Integer, DNAType>> retList)
 	{
 		if (rt == null)
 		{
@@ -600,5 +602,38 @@ public class Dna{
 		preorderHelp(rt.gChild(), retList);
 		preorderHelp(rt.tChild(), retList);
 		preorderHelp(rt.$Child(), retList);
+	}
+	
+	/**
+	 * Method print called with no arguments which will then print out
+	 * the tree in a preorder order
+	 */
+	public void print()
+	{
+		List<Pair<Integer, DNAType>> nodeInfo = preorder();
+		
+		for (int i = 0; i < nodeInfo.size(); i++)
+		{
+			Integer depth = nodeInfo.get(i).getKey();
+			DNAType dna = nodeInfo.get(i).getValue();
+			
+			String spaces = new String(new char[depth]).replace("\0", "  ");
+			String out;
+			if (dna.isDNA())
+			{
+				out = spaces + dna.getSequence();
+				System.out.println(out);
+			}
+			else if (dna.isEmpty())
+			{
+				out = spaces + "E";
+				System.out.println(out);
+			}
+			else if (dna.isInternal())
+			{
+				out = spaces + "I";
+				System.out.println(out);
+			}
+		}
 	}
 }

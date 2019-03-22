@@ -50,7 +50,7 @@ public class DNAParse extends Parse
 					DNAType dnaContainer = setDNA(listedLine);
 					
 					// Ensure new DNA type actually contains DNA information
-					if(!dnaContainer.isEmpty() && !dnaContainer.isInternal())
+					if(dnaContainer.containsInstruction())
 					{
 						parsedList.add(dnaContainer);
 					}
@@ -81,11 +81,19 @@ public class DNAParse extends Parse
 		// Initially, create an empty DNA
 		DNAType newDNA;
 		
-		if (lineAsList.size() == 1 && lineAsList.get(0) == "print")
+		/*
+		for (int i = 0; i < lineAsList.size(); i++)
+		{
+			System.out.print(lineAsList.get(i) + "  " + i);
+		}
+		System.out.println("");
+		*/
+		
+		if (lineAsList.size() == 1 && lineAsList.get(0).equals("print"))
 		{
 			newDNA = new DNAType("print");
 		}
-		else if (lineAsList.size() == 2 && lineAsList.get(0) == "print")
+		else if (lineAsList.size() == 2 && lineAsList.get(0).equals("print"))
 		{
 			newDNA = new DNAType("print", lineAsList.get(1));
 		}
