@@ -43,7 +43,10 @@ public class DNAtree {
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("remove"))
     		{
-    			tree.remove(temp);    // call remove function
+    			if(tree.getCount() > 0)
+    			{
+    				tree.remove(temp);    // call remove function
+    			}
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("print"))
     		{

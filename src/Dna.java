@@ -206,51 +206,49 @@ public class Dna{
 		int whatKid = hasChildrenHelper(node);
 		if(node.getValue().isInternal() && (onlyOneChild(node)) && (whatKid > 1))
 		{
-			if(whatKid == 2)
+			String seqTemp = "";
+			String comTemp = "";
+			if(whatKid == 2)    // case where node only has aChild
 			{
-				String seqTemp = node.aChild().getValue().getSequence();
-				String comTemp = node.aChild().getValue().getCommand();
-				node.getValue().setType(Types.DNATYPE);
-				node.getValue().setSequence(seqTemp);
-				node.getValue().setCommand(comTemp);
-				node.aChild().getValue().setType(Types.EMPTY);
-				node.aChild().getValue().setSequence("");
-				node.aChild().getValue().setCommand("");
+				seqTemp = node.aChild().getValue().getSequence();
+				comTemp = node.aChild().getValue().getCommand();
+				
 			}
-			else if(whatKid == 3)
+			else if(whatKid == 3)    // case where node only has cChild
 			{
-				String seqTemp = node.cChild().getValue().getSequence();
-				String comTemp = node.cChild().getValue().getCommand();
-				node.getValue().setType(Types.DNATYPE);
-				node.getValue().setSequence(seqTemp);
-				node.getValue().setCommand(comTemp);
-				node.cChild().getValue().setType(Types.EMPTY);
-				node.cChild().getValue().setSequence("");
-				node.cChild().getValue().setCommand("");
+				seqTemp = node.cChild().getValue().getSequence();
+				comTemp = node.cChild().getValue().getCommand();
 			}
-			else if(whatKid == 4)
+			else if(whatKid == 4)    // case where node only has gChild
 			{
-				String seqTemp = node.gChild().getValue().getSequence();
-				String comTemp = node.gChild().getValue().getCommand();
-				node.getValue().setType(Types.DNATYPE);
-				node.getValue().setSequence(seqTemp);
-				node.getValue().setCommand(comTemp);
-				node.gChild().getValue().setType(Types.EMPTY);
-				node.gChild().getValue().setSequence("");
-				node.gChild().getValue().setCommand("");
+				seqTemp = node.gChild().getValue().getSequence();
+				comTemp = node.gChild().getValue().getCommand();
 			}
-			else if(whatKid == 5)
+			else if(whatKid == 5)    // case where node only has tChild
 			{
-				String seqTemp = node.tChild().getValue().getSequence();
-				String comTemp = node.tChild().getValue().getCommand();
-				node.getValue().setType(Types.DNATYPE);
-				node.getValue().setSequence(seqTemp);
-				node.getValue().setCommand(comTemp);
-				node.tChild().getValue().setType(Types.EMPTY);
-				node.tChild().getValue().setSequence("");
-				node.tChild().getValue().setCommand("");
+				seqTemp = node.tChild().getValue().getSequence();
+				comTemp = node.tChild().getValue().getCommand();
 			}
+			else if(whatKid == 6)    // case where node only has $child
+			{
+				seqTemp = node.$Child().getValue().getSequence();
+				comTemp = node.$Child().getValue().getCommand();
+			}
+			node.getValue().setType(Types.DNATYPE);
+			node.getValue().setSequence(seqTemp);
+			node.getValue().setCommand(comTemp);
+			node.setDepth(node.getDepth()-1);
+			setChildrenNull(node);
 		}
+	}
+	
+	private void setChildrenNull(Node<DNAType> node)
+	{
+		node.setAChild(null);
+		node.setCChild(null);
+		node.setGChild(null);
+		node.setTChild(null);
+		node.set$Child(null);
 	}
 	
 	/**
@@ -276,6 +274,10 @@ public class Dna{
 		if (!node.tChild().getValue().isEmpty())
 		{
 			result = 5;
+		}
+		if (!node.$Child().getValue().isEmpty())
+		{
+			result = 6;
 		}
 		return result;
 	}
