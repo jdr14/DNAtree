@@ -175,9 +175,10 @@ public class Dna{
      * @param node of type DNAType
      * @return
      */
-	public ArrayList<Node<DNAType>> search (Node<DNAType> node)
+	public ArrayList<Pair<Integer, Node<DNAType>>> search (Node<DNAType> node)
 	{
-		ArrayList<Node<DNAType>> result = new ArrayList<Node<DNAType>>();
+		ArrayList<Pair<Integer, Node<DNAType>>> result = 
+				new ArrayList<Pair<Integer, Node<DNAType>>>();
 		int nodeCount = 0;
 		if(node.getValue().getSequence().contains("$"))
 		{
@@ -200,9 +201,12 @@ public class Dna{
 	 * @param node
 	 * @return
 	 */
-	private Node<DNAType> searchHelp(Node<DNAType> rt, Node<DNAType> node)
+	private Pair<Integer, Node<DNAType>> searchHelp(Node<DNAType> rt, Node<DNAType> node)
 	{
-		int count = 0;
+		Node<DNAType> stopNow = new Node<DNAType>(new DNAType(Types.EMPTY, null, "no sequence found"));
+		
+		Pair<Integer, Node<DNAType>> result = new Pair<Integer, Node<DNAType>>();
+		int count = 1;
 		String comPair = node.getValue().getSequence();
 		if(node.getValue().isDNA())
 		{
@@ -211,30 +215,71 @@ public class Dna{
 				Character temp = comPair.charAt(i);
 				if(temp.equals('A'))
 				{
-					rt = rt.aChild();
+					if(rt.aChild().getValue().isEmpty())
+					{
+						result.setKey(count);
+						result.setValue(stopNow);
+						break;
+					}
+					else
+					{
+						rt = rt.aChild();
+						count++;
+					}
 				}
 				else if(temp.equals('C'))
 				{
-					rt = rt.cChild();
+					if(rt.cChild().getValue().isEmpty())
+					{
+						result.setKey(count);
+						result.setValue(stopNow);
+						break;
+					}
+					else
+					{
+						rt = rt.cChild();
+						count++;
+					}
 				}
 				else if(temp.equals('G'))
 				{
-					rt = rt.gChild();
+					if(rt.gChild().getValue().isEmpty())
+					{
+						result.setKey(count);
+						result.setValue(stopNow);
+						break;
+					}
+					else
+					{
+						rt = rt.gChild();
+						count++;
+					}
 				}
 				else if(temp.equals('T'))
 				{
-					rt = rt.tChild();
+					if(rt.tChild().getValue().isEmpty())
+					{
+						result.setKey(count);
+						result.setValue(stopNow);
+						break;
+					}
+					else
+					{
+						rt = rt.tChild();
+						count++;
+					}
 				}
+//				count++;
+			}
+			if(rt.getValue().isInternal())
+			{
+				rt = rt.$Child();
 				count++;
 			}
-//			if(moveThis.getValue().isInternal())
-//			{
-//				moveThis = moveThis.$Child();
-//				count++;
-//			}
-			
+			result.setKey(count);
+			result.setValue(rt);
 		}
-		return rt;
+		return result;
 	}
 	
 	/**
