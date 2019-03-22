@@ -84,8 +84,8 @@ public class Dna{
 					{
 						addChildren(root, rootTemp);
 						addChildren(root, node);
-						rootTemp.setDepth(2);
-						node.setDepth(2);
+						rootTemp.setDepth(1);
+						node.setDepth(1);
 					}
 					else if(compareResult.length() > 0)
 					{
