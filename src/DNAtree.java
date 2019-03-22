@@ -37,20 +37,18 @@ public class DNAtree {
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("print"))
     		{
-    			//print("Print called!!!!!", isQuiet);
-    			//tree.print();
-    			if(temp.getValue().getSequence().equalsIgnoreCase("lengths"))
+    			// Case: singular print command passed in
+    			if (temp.getValue().getSequence() == null)
+    			{
+    				tree.print();
+    			}
+    			else if(temp.getValue().getSequence().equalsIgnoreCase("lengths"))
     			{
     				// print lengths of tree
     			}
     			else if(temp.getValue().getSequence().equalsIgnoreCase("stats"))
     			{
     				// print stats of tree
-    			}
-    			else
-    			{
-    				tree.print();
-    				
     			}
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("search"))
