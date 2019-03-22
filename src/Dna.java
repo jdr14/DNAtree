@@ -78,14 +78,14 @@ public class Dna{
 				{
 					String compareResult = compareSeq(root, node);
 					Node<DNAType> rootTemp = root;
-					rootTemp.setDepth(2);
-					node.setDepth(2);
 					root = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
 					setChildrenEmpty(root);
 					if (compareResult.equals(""))    // sequences have nothing in common
 					{
 						addChildren(root, rootTemp);
 						addChildren(root, node);
+						rootTemp.setDepth(2);
+						node.setDepth(2);
 					}
 					else if(compareResult.length() > 0)
 					{
@@ -389,18 +389,22 @@ public class Dna{
 			if(temp.equals('A'))
 			{
 				rt.setAChild(newInternal);
+				newInternal.setDepth(newInternal.getDepth()+1);
 			}
 			else if (temp.equals('C'))
 			{
 				rt.setCChild(newInternal);
+				newInternal.setDepth(newInternal.getDepth()+1);
 			}
 			else if(temp.equals('G'))
 			{
 				rt.setGChild(newInternal);
+				newInternal.setDepth(newInternal.getDepth()+1);
 			}
 			else if(temp.equals('T'))
 			{
 				rt.setTChild(newInternal);
+				newInternal.setDepth(newInternal.getDepth()+1);
 			}
 			if(compared.length() >= 1)
 			{
@@ -438,6 +442,7 @@ public class Dna{
 					if(rt.aChild().getValue().isEmpty())
 					{
 						rt.setAChild(node);
+						node.setDepth(rt.getDepth()+1);
 						return;
 					}
 					rt = rt.aChild();
@@ -448,6 +453,7 @@ public class Dna{
 					if(rt.cChild().getValue().isEmpty())
 					{
 						rt.setCChild(node);
+						node.setDepth(rt.getDepth()+1);
 						return;
 					}
 					rt = rt.cChild();
@@ -458,6 +464,7 @@ public class Dna{
 					if(rt.gChild().getValue().isEmpty())
 					{
 						rt.setGChild(node);
+						node.setDepth(rt.getDepth()+1);
 						return;
 					}
 					rt = rt.gChild();
@@ -468,6 +475,7 @@ public class Dna{
 					if(rt.tChild().getValue().isEmpty())
 					{
 						rt.setTChild(node);
+						node.setDepth(rt.getDepth()+1);
 						return;
 					}
 					rt = rt.tChild();
@@ -507,9 +515,8 @@ public class Dna{
 			Node<DNAType> exTend = new Node<DNAType>(new DNAType(Types.DNATYPE, comTemp, seqTemp));
 			setChildrenEmpty(exTend);
 			rt.set$Child(node);
-			node.setDepth(node.getDepth()+1);
+			node.setDepth(rt.getDepth()+1);
 			setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(comPair.length()+1));
-			exTend.setDepth(node.getDepth());
 			
 		}
 		return;
@@ -539,7 +546,7 @@ public class Dna{
 		{
 			rt.setTChild(node);
 		}
-		node.setDepth(node.getDepth()+1);
+		node.setDepth(rt.getDepth()+1);
 	}
 	
 	/**
