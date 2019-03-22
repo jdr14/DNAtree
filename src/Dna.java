@@ -317,6 +317,7 @@ public class Dna{
 		if(node.getValue().getSequence().contains("$"))
 		{
 			result.add(searchHelp(root, node));
+			searchPrint(result.get(0));
 			
 		}
 		else
@@ -328,6 +329,19 @@ public class Dna{
 		}
 		return result;
 		
+	}
+	
+	private void searchPrint(Pair<Integer, Node<DNAType>> printThis)
+	{
+		System.out.println("# of nodes visited: " + printThis.getKey());
+		if(printThis.getValue().getValue().getSequence() == null)
+		{
+			System.out.println("no sequence found");
+		}
+		else
+		{
+			System.out.println("sequence: " + printThis.getValue().getValue().getSequence());
+		}
 	}
 	
 	/**
@@ -347,63 +361,65 @@ public class Dna{
 			for(int i = 0; i < comPair.length(); i++)
 			{
 				Character temp = comPair.charAt(i);
-				if(temp.equals('A'))
+				if(!rt.getValue().isDNA())
 				{
-					if(rt.aChild().getValue().isEmpty())
+					if(temp.equals('A'))
 					{
-						result.setKey(count);
-						result.setValue(stopNow);
-						break;
+						if(rt.aChild().getValue().isEmpty())
+						{
+							result.setKey(count);
+							result.setValue(stopNow);
+							break;
+						}
+						else
+						{
+							rt = rt.aChild();
+							count++;
+						}
 					}
-					else
+					else if(temp.equals('C'))
 					{
-						rt = rt.aChild();
-						count++;
+						if(rt.cChild().getValue().isEmpty())
+						{
+							result.setKey(count);
+							result.setValue(stopNow);
+							break;
+						}
+						else
+						{
+							rt = rt.cChild();
+							count++;
+						}
+					}
+					else if(temp.equals('G'))
+					{
+						if(rt.gChild().getValue().isEmpty())
+						{
+							result.setKey(count);
+							result.setValue(stopNow);
+							break;
+						}
+						else
+						{
+							rt = rt.gChild();
+							count++;
+						}
+					}
+					else if(temp.equals('T'))
+					{
+						if(rt.tChild().getValue().isEmpty())
+						{
+							result.setKey(count);
+							result.setValue(stopNow);
+							break;
+						}
+						else
+						{
+							rt = rt.tChild();
+							count++;
+						}
 					}
 				}
-				else if(temp.equals('C'))
-				{
-					if(rt.cChild().getValue().isEmpty())
-					{
-						result.setKey(count);
-						result.setValue(stopNow);
-						break;
-					}
-					else
-					{
-						rt = rt.cChild();
-						count++;
-					}
-				}
-				else if(temp.equals('G'))
-				{
-					if(rt.gChild().getValue().isEmpty())
-					{
-						result.setKey(count);
-						result.setValue(stopNow);
-						break;
-					}
-					else
-					{
-						rt = rt.gChild();
-						count++;
-					}
-				}
-				else if(temp.equals('T'))
-				{
-					if(rt.tChild().getValue().isEmpty())
-					{
-						result.setKey(count);
-						result.setValue(stopNow);
-						break;
-					}
-					else
-					{
-						rt = rt.tChild();
-						count++;
-					}
-				}
-//				count++;
 			}
 			if(rt.getValue().isInternal())
 			{
