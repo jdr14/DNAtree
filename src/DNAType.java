@@ -118,6 +118,18 @@ class DNAType
 		}
 	}
 	
+	public DNAType(DNAType dna)
+	{
+		this.type = dna.type;
+		this.command = dna.command;
+		this.sequence = dna.sequence;
+		this.percentA = dna.percentA;
+		this.percentC = dna.percentC;
+		this.percentG = dna.percentG;
+		this.percentT = dna.percentT;
+		this.containsSeparator = dna.containsSeparator;
+	}
+	
 	/**
 	 * Mutator method to set the type as one of the custom types
 	 * defined in the enum contained in 'Types.java'

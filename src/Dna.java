@@ -336,7 +336,6 @@ public class Dna{
 		}
 		
 		return result;
-		
 	}
 	
 	/**
@@ -428,7 +427,9 @@ public class Dna{
 	 */
 	private void findInternal(Node<DNAType> rt, Node<DNAType> node)
 	{
+		
 		String comPair = node.getValue().getSequence();
+
 		for(int i = 0; i < comPair.length(); i++)
 		{
 			Character temp = comPair.charAt(i);
@@ -562,4 +563,40 @@ public class Dna{
 		node.set$Child(emplaceThis);
 	}
 	
+	/**
+	 * Return a list of all the DNATypes in a preorder fashion
+	 * @return preorderList (tree nodes)
+	 */
+	public List<Pair> preorder()
+	{
+		List<Pair> preorderList = new ArrayList<Pair>();
+		preorderHelp(root, preorderList);
+		return preorderList;
+	}
+	
+	/**
+	 * Return a list of the DNATypes in the DNATree in a preorder order.
+	 * preorder = root, childA, childC, childG, childT, child$
+	 * @param rt
+	 * @param retList
+	 * @return
+	 */
+	private void preorderHelp(Node<DNAType> rt, List<Pair> retList)
+	{
+		if (rt == null)
+		{
+			return;
+		}
+		
+		Pair<Integer, DNAType> p = new 
+				Pair<Integer, DNAType>(rt.getDepth(), rt.getValue());
+		
+		retList.add(p);
+	    
+		preorderHelp(rt.aChild(), retList);
+		preorderHelp(rt.cChild(), retList);
+		preorderHelp(rt.gChild(), retList);
+		preorderHelp(rt.tChild(), retList);
+		preorderHelp(rt.$Child(), retList);
+	}
 }
