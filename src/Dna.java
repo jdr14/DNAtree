@@ -734,10 +734,15 @@ public class Dna{
 		DNAType innerEmplaceThis = new DNAType(Types.EMPTY, null, null);
 		Node<DNAType> emplaceThis = new Node<DNAType>(innerEmplaceThis);
 		node.setAChild(emplaceThis);
+		node.aChild().setDepth(node.getDepth()+1);
 		node.setCChild(emplaceThis);
+		node.cChild().setDepth(node.getDepth()+1);
 		node.setGChild(emplaceThis);
+		node.gChild().setDepth(node.getDepth()+1);
 		node.setTChild(emplaceThis);
+		node.tChild().setDepth(node.getDepth()+1);
 		node.set$Child(emplaceThis);
+		node.$Child().setDepth(node.getDepth()+1);
 	}
 	
 	/**
