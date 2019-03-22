@@ -372,13 +372,8 @@ public class Dna{
 				Node<DNAType> extNode = new Node<DNAType>(extend);
 				
 				DNAType newDNA = new DNAType(Types.INTERNAL, "", "");
-				//Node<DNAType> newRoot = new Node<DNAType>(newDNA);
 				rt.setValue(newDNA);
-				//rt = newRoot;
-				System.out.println(comPair + "    " + comPair.length());
-				System.out.println(rt.getValue().getSequence());
-				System.out.println(rt.getValue().isInternal());
-				System.out.println(i+1);
+
 				setChildSelect(rt, extNode, extend.getSequence().charAt(i+1));
 				setChildSelect(rt, node, node.getValue().getSequence().charAt(i+1));
 				return;
@@ -413,4 +408,40 @@ public class Dna{
 		}
 	}
 	
+	/**
+	 * Return a list of all the DNATypes in a preorder fashion
+	 * @return preorderList (tree nodes)
+	 */
+	public List<Pair> preorder()
+	{
+		List<Pair> preorderList = new ArrayList<Pair>();
+		preorderHelp(root, preorderList);
+		return preorderList;
+	}
+	
+	/**
+	 * Return a list of the DNATypes in the DNATree in a preorder order.
+	 * preorder = root, childA, childC, childG, childT, child$
+	 * @param rt
+	 * @param retList
+	 * @return
+	 */
+	private void preorderHelp(Node<DNAType> rt, List<Pair> retList)
+	{
+		if (rt == null)
+		{
+			return;
+		}
+		
+		Pair<Integer, DNAType> p = new 
+				Pair<Integer, DNAType>(rt.getDepth(), rt.getValue());
+		
+		retList.add(p);
+	    
+		preorderHelp(rt.aChild(), retList);
+		preorderHelp(rt.cChild(), retList);
+		preorderHelp(rt.gChild(), retList);
+		preorderHelp(rt.tChild(), retList);
+		preorderHelp(rt.$Child(), retList);
+	}
 }
