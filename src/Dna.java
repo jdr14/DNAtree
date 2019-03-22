@@ -592,6 +592,17 @@ public class Dna{
 			return;
 		}
 		
+		/*
+		if (rt.aChild().getValue().isEmpty() && 
+				rt.cChild().getValue().isEmpty() &&
+				rt.gChild().getValue().isEmpty() &&
+				rt.tChild().getValue().isEmpty() &&
+				rt.$Child().getValue().isEmpty())
+		{
+			return;
+		}
+		*/
+		
 		Pair<Integer, DNAType> p = new 
 				Pair<Integer, DNAType>(rt.getDepth(), rt.getValue());
 		
