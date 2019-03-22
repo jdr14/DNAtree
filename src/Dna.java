@@ -577,7 +577,6 @@ public class Dna{
 		{
 			Character temp = compared.charAt(0);
 			Node<DNAType> newInternal = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
-			setChildrenEmpty(newInternal);
 			if(temp.equals('A'))
 			{
 				rt.setAChild(newInternal);
@@ -602,14 +601,13 @@ public class Dna{
 			{
 				compared = compared.substring(1);
 			}
+			setChildrenEmpty(newInternal);
 			extendTree(newInternal, nodeInsert, nodeInsert2, compared);
 		}
 		else
 		{
 			setChildSelect(rt, nodeInsert, nodeInsert.getValue().getSequence().charAt(compared.length()+1));
 			setChildSelect(rt, nodeInsert2, nodeInsert2.getValue().getSequence().charAt(compared.length()+1));
-//			addChildren(rt, nodeInsert);    // chage to setChildSelect with char as length+1
-//			addChildren(rt, nodeInsert2);
 		}
 	}
 	
