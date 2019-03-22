@@ -181,14 +181,14 @@ public class Dna{
 		int nodeCount = 0;
 		if(node.getValue().getSequence().contains("$"))
 		{
-			// call search help 2
-			nodeCount = searchCounter(root, node);
-			ArrayList<Node<DNAType>> list = searchHelpList(node, nodeCount);
+			result.add(searchHelp(root, node));
 			
 		}
 		else
 		{
-			result.add(searchHelp(node));
+			// call search help 2
+			nodeCount = searchCounter(root, node);
+			ArrayList<Node<DNAType>> list = searchHelpList(node, nodeCount);
 			
 		}
 		return result;
@@ -200,12 +200,10 @@ public class Dna{
 	 * @param node
 	 * @return
 	 */
-	private Node<DNAType> searchHelp(Node<DNAType> node)
+	private Node<DNAType> searchHelp(Node<DNAType> rt, Node<DNAType> node)
 	{
 		int count = 0;
 		String comPair = node.getValue().getSequence();
-		Node<DNAType> moveThis = new Node<DNAType>(root);
-		setChildrenEmpty(moveThis);
 		if(node.getValue().isDNA())
 		{
 			for(int i = 0; i < comPair.length(); i++)
@@ -213,19 +211,19 @@ public class Dna{
 				Character temp = comPair.charAt(i);
 				if(temp.equals('A'))
 				{
-					moveThis = moveThis.aChild();
+					rt = rt.aChild();
 				}
 				else if(temp.equals('C'))
 				{
-					moveThis = moveThis.cChild();
+					rt = rt.cChild();
 				}
 				else if(temp.equals('G'))
 				{
-					moveThis = moveThis.gChild();
+					rt = rt.gChild();
 				}
 				else if(temp.equals('T'))
 				{
-					moveThis = moveThis.tChild();
+					rt = rt.tChild();
 				}
 				count++;
 			}
@@ -236,7 +234,7 @@ public class Dna{
 //			}
 			
 		}
-		return moveThis;
+		return rt;
 	}
 	
 	/**

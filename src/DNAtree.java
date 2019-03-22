@@ -10,6 +10,11 @@ import java.util.*;
 @SuppressWarnings("unused")
 public class DNAtree {
     
+	/**
+	 * 
+	 * @param msg
+	 * @param quiet
+	 */
 	public static void print(String msg, boolean quiet)
 	{
 		if(!quiet)
@@ -18,6 +23,11 @@ public class DNAtree {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param dnaList
+	 * @return
+	 */
     private static List<String> runInstructions(List<DNAType> dnaList)
     {
     	
@@ -54,7 +64,7 @@ public class DNAtree {
     			if(tree.getCount() > 0)
     			{
         			Node<DNAType> result = new Node<DNAType>();
-//        			result = tree.search(temp);  // call search function
+        			tree.search(temp);  // call search function
         			setChildrenEmpty(result);
     			}
     		}
