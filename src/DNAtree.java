@@ -40,15 +40,15 @@ public class DNAtree {
     			// Case: singular print command passed in
     			if (temp.getValue().getSequence() == null)
     			{
-    				tree.print();
+    				tree.print(PrintOptions.DEFAULT);
     			}
     			else if(temp.getValue().getSequence().equalsIgnoreCase("lengths"))
     			{
-    				// print lengths of tree
+    				tree.print(PrintOptions.LENGTHS);
     			}
     			else if(temp.getValue().getSequence().equalsIgnoreCase("stats"))
     			{
-    				// print stats of tree
+    				tree.print(PrintOptions.STATS);
     			}
     		}
     		else if(temp.getValue().getCommand().equalsIgnoreCase("search"))

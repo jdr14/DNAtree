@@ -608,7 +608,7 @@ public class Dna{
 	 * Method print called with no arguments which will then print out
 	 * the tree in a preorder order
 	 */
-	public void print()
+	public void print(PrintOptions option)
 	{
 		List<Pair<Integer, DNAType>> nodeInfo = preorder();
 		
@@ -618,22 +618,42 @@ public class Dna{
 			DNAType dna = nodeInfo.get(i).getValue();
 			
 			String spaces = new String(new char[depth]).replace("\0", "  ");
-			String out;
+			String out = "";
+			
 			if (dna.isDNA())
 			{
 				out = spaces + dna.getSequence();
-				System.out.println(out);
+				
+			    switch (option)
+				{
+				case DEFAULT:
+					break;
+				case LENGTHS:
+					out += (": length: " + dna.getSequence().length());
+					break;
+				case STATS:
+					String pa = String.format("%.2f", dna.getPercentA());
+					String pc = String.format("%.2f", dna.getPercentC());
+					String pg = String.format("%.2f", dna.getPercentG());
+					String pt = String.format("%.2f", dna.getPercentT());
+					out += (": A(" + pa + "),");
+					out += (" C(" + pc + "),");
+					out += (" G(" + pg + "),");
+					out += (" T(" + pt + ")");
+					break;
+				}
 			}
 			else if (dna.isEmpty())
 			{
 				out = spaces + "E";
-				System.out.println(out);
 			}
 			else if (dna.isInternal())
 			{
 				out = spaces + "I";
-				System.out.println(out);
 			}
+			
+			// Finally, print the output to console
+			System.out.println(out);
 		}
 	}
 }
