@@ -84,17 +84,22 @@ public class DNAtree {
     				    System.out.println("# of nodes visited: " + 
     				    		prefixResults.getKey());
     				    
-    				    if (prefixResults.getValue().isEmpty())
+    				    List<DNAType> dt = prefixResults.getValue();
+    				    
+    				    if (dt.isEmpty())
     				    {
     				    	System.out.println("no sequence found");
     				    }
     				    else
     				    {
-    				    	for (int j = 0; 
-    				    			j < prefixResults.getValue().size(); j++)
+    				    	for (int j = 0; j < dt.size(); j++)
     				    	{
-    				    		System.out.println("sequence: " + 
-    				    	prefixResults.getValue().get(j).getSequence());
+    				    		if (dt.get(j).getSequence() != null &&
+    				    				!dt.get(j).getSequence().isEmpty())
+    				    		{
+        				    		System.out.println("sequence: " + 
+            				    	        dt.get(j).getSequence());
+    				    		}
     				    	}
     				    }
     				}
