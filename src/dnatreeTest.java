@@ -8,7 +8,7 @@ public class dnatreeTest extends TestCase
 {
     private Dna testTree1;
     
-    private DNAType dnaType;
+    private DNAType dnaType, dnaType2;
     
     private Node<DNAType> testNode;
 
@@ -37,6 +37,7 @@ public class dnatreeTest extends TestCase
         testTree1 = new Dna();
         
         dnaType = new DNAType();
+        dnaType2 = new DNAType();
         
         testNode = new Node<DNAType>();
     }
@@ -45,6 +46,7 @@ public class dnatreeTest extends TestCase
     {
     	// Tests for the default constructor
     	assertEquals(dnaType.isNone(), true);
+        assertEquals(dnaType.containsInstruction(), false);
     	assertEquals(dnaType.getCommand(), null);
     	assertEquals(dnaType.getSequence(), null);
     	
@@ -69,9 +71,33 @@ public class dnatreeTest extends TestCase
         // Test the set command method
         dnaType.setCommand("remove");
         assertEquals(dnaType.getCommand(), "remove");
+        assertEquals(dnaType.containsInstruction(), true);
+        
+        // Test the constructor with type, command, and sequence passed in
+        dnaType = new DNAType(Types.INTERNAL, "insert", "ACGT$");
+        assertEquals(dnaType.isInternal(), true);
+        assertEquals(dnaType.getCommand(), "insert");
+        assertEquals(dnaType.getSequence(), "ACGT$");
+        assertEquals(dnaType.hasSeparator(), true);
+        assertEquals(dnaType.getPercentA(), 25.00);
+        assertEquals(dnaType.getPercentC(), 25.00);
+        assertEquals(dnaType.getPercentG(), 25.00);
+        assertEquals(dnaType.getPercentT(), 25.00);
+        
+        // Test the setType method
+        dnaType.setType(Types.EMPTY);
+        assertEquals(dnaType.isEmpty(), true);
 
-
-
+        // Test the final constructor which takes another dnaType in as an arg
+        dnaType2 = new DNAType(dnaType);
+        assertEquals(dnaType.isEmpty(), true);
+        assertEquals(dnaType.getCommand(), "insert");
+        assertEquals(dnaType.getSequence(), "ACGT$");
+        assertEquals(dnaType.hasSeparator(), true);
+        assertEquals(dnaType.getPercentA(), 25.00);
+        assertEquals(dnaType.getPercentC(), 25.00);
+        assertEquals(dnaType.getPercentG(), 25.00);
+        assertEquals(dnaType.getPercentT(), 25.00);
     }
     
     // Use this to test the Dna.java class containing the tree methods

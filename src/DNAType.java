@@ -223,6 +223,16 @@ class DNAType
 	}
 	
 	/**
+	 * Accessor method to inform user if a separator exists in the 
+	 * given sequence.
+	 * @return
+	 */
+	public boolean hasSeparator()
+	{
+		return containsSeparator;
+	}
+	
+	/**
 	 * Accessor method to return the percentage of As with respect to its
 	 * containing sequence
 	 * @return percentA (Double)
