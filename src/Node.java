@@ -47,5 +47,12 @@ public class Node
 			break;
 		}
 	}
+	
+	public void setLeaf()
+	{
+		this.isLeaf = true;
+		this.isFlyWeight = false;
+		this.isInternal = false;
+	}
 
 }

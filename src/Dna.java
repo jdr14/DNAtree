@@ -15,13 +15,13 @@ public class Dna{
 	 * The root node for the initial DNA tree is
 	 * of type empty
 	 */
-	private Node<DNAType> root;
+	private Node root;
 	
 	/**
 	 * 
 	 * @return the root of the DNA tree
 	 */
-	public Node<DNAType> getRoot()
+	public Node getRoot()
 	{
 		return root;
 	}
@@ -45,7 +45,7 @@ public class Dna{
 	 */
 	public Dna()
 	{
-		root = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
+		root = new Node(0, Types.INTERNAL);
 		setChildrenEmpty(root);
 	}
 	
@@ -53,59 +53,105 @@ public class Dna{
 	 * 
 	 * @param node of type Node<DNAType>
 	 */
-	public void insert(Node<DNAType> node)
+	public void insert(String newSeq)
 	{
-		insertHelp(node);
+		insertHelp(createInsertNode(newSeq));
 		count++;
+	}
+	
+	private LeafNode createInsertNode(String newSeq)
+	{
+		return new LeafNode(newSeq);
 	}
 	
 	/**
 	 * 
 	 * @param node of type Node<DNAType>
 	 */
-	private void insertHelp(Node<DNAType> node)
+	private void insertHelp(LeafNode node)
 	{
-		if(node.getValue().isDNA())
+		if (count == 0)    // case where tree is empty
 		{
-			if(count == 0)    // case where tree is empty
+			root = node;
+			root.setLeaf();
+			node.depth = 0;
+		}
+		else    // case where tree is not empty
+		{
+			if(root.isLeaf)    // case where second node is inserted
 			{
-				node.setDepth(0);
-				root = node;
+				String compareResult = compareSeq(root, node);
+				Node rootTemp = root;
+				root = new Node(0, Types.INTERNAL);
+				setChildrenEmpty(root);
+				if (compareResult.equals(""))    // sequences have nothing in common
+				{
+					addChildren(root, rootTemp);
+					addChildren(root, node);
+					rootTemp.setDepth(2);
+					node.setDepth(2);
+				}
+				else if(compareResult.length() > 0)
+				{
+					extendTree(root, rootTemp, node, compareResult);
+				}
 			}
 			else
 			{
-				if(root.getValue().isDNA())    // case where second node is inserted
-				{
-					String compareResult = compareSeq(root, node);
-					Node<DNAType> rootTemp = root;
-					root = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
-					setChildrenEmpty(root);
-					if (compareResult.equals(""))    // sequences have nothing in common
-					{
-						addChildren(root, rootTemp);
-						addChildren(root, node);
-						rootTemp.setDepth(2);
-						node.setDepth(2);
-					}
-					else if(compareResult.length() > 0)
-					{
-						extendTree(root, rootTemp, node, compareResult);
-					}
-				}
-				else
-				{
-					/*Node<DNAType> tNode =*/ findInternal(root, node);
-					
-				}
+				/*Node<DNAType> tNode =*/ findInternal(root, node);
+				
 			}
 		}
 	}
 	
 	/**
 	 * 
+	 * @param nodeOne of type DNAType
+	 * @param nodeTwo of type DNAType
+	 * @return string that contains the comparison results
+	 */
+	private String compareSeq(Node nodeOne, LeafNode nodeTwo)
+	{
+		String result = "";
+		char[] listOne = nodeOne.getSequence().toCharArray();
+		char[] listTwo = nodeTwo.getSequence().toCharArray();
+		if(listOne.length >= listTwo.length)
+		{
+			for(int i = 0; i < listOne.length; i++)
+			{
+				if (listOne[i] == listTwo[i])
+				{
+					result+= listOne[i];
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		else if (listOne.length < listTwo.length)
+		{
+			for(int i = 0; i < listTwo.length; i++)
+			{
+				if (listTwo[i] == listOne[i])
+				{
+					result+= listTwo[i];
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 
 	 * @param node of type DNAType
 	 */
-	public void remove(Node<DNAType> node)
+	public void remove(Node node)
 	{
 		removeHelp(root, node);
 		count--;
@@ -115,7 +161,7 @@ public class Dna{
 	 * 
 	 * @param node
 	 */
-	private void removeHelp(Node<DNAType> rt, Node<DNAType> node)
+	private void removeHelp(Node rt, Node node)
 	{
 		int passThis= 0;
 		if(node.getValue().isDNA())
@@ -193,7 +239,7 @@ public class Dna{
 	 * @param node
 	 * @return
 	 */
-	private void hasChildren(Node<DNAType> node, int count, String comPair)
+	private void hasChildren(Node node, int count, String comPair)
 	{
 		for (int i = 0; i < count; i++)
 		{
@@ -254,7 +300,7 @@ public class Dna{
 		}
 	}
 	
-	private void setChildrenNull(Node<DNAType> node)
+	private void setChildrenNull(Node node)
 	{
 		node.setAChild(null);
 		node.setCChild(null);
@@ -268,7 +314,7 @@ public class Dna{
 	 * @param node
 	 * @return
 	 */
-	private int hasChildrenHelper(Node<DNAType> node)
+	private int hasChildrenHelper(Node node)
 	{
 		int result = 0;
 		if (!node.aChild().getValue().isEmpty())
@@ -294,7 +340,7 @@ public class Dna{
 		return result;
 	}
 	
-	private boolean onlyOneChild(Node<DNAType> node)
+	private boolean onlyOneChild(Node node)
 	{
 		int result = 0;
 		if (!node.aChild().getValue().isEmpty())
@@ -321,10 +367,10 @@ public class Dna{
      * @param node of type DNAType
      * @return
      */
-	public ArrayList<Pair<Integer, Node<DNAType>>> search (Node<DNAType> node)
+	public ArrayList<Pair<Integer, Node>> search (Node node)
 	{
-		ArrayList<Pair<Integer, Node<DNAType>>> result = 
-				new ArrayList<Pair<Integer, Node<DNAType>>>();
+		ArrayList<Pair<Integer, Node>> result = 
+				new ArrayList<Pair<Integer, Node>>();
 		int nodeCount = 0;
 		if(node.getValue().getSequence().contains("$"))
 		{
@@ -336,13 +382,12 @@ public class Dna{
 		{
 			// call search help 2
 			nodeCount = searchCounter(root, node);
-			ArrayList<Node<DNAType>> list = searchHelpList(node, nodeCount);
 			
 		}
 		return result;
 	}
 	
-	private void searchPrint(Pair<Integer, Node<DNAType>> printThis)
+	private void searchPrint(Pair<Integer, Node> printThis)
 	{
 		System.out.println("# of nodes visited: " + printThis.getKey());
 		if(printThis.getValue().getValue().getSequence() == null)
@@ -364,11 +409,11 @@ public class Dna{
 	 * @param node
 	 * @return
 	 */
-	private Pair<Integer, Node<DNAType>> searchHelp(Node<DNAType> rt, Node<DNAType> node)
+	private Pair<Integer, Node> searchHelp(Node rt, Node node)
 	{
-		Node<DNAType> stopNow = new Node<DNAType>(new DNAType(Types.EMPTY, null, "no sequence found"));
+		Node stopNow = new Node(new DNAType(Types.EMPTY, null, "no sequence found"));
 		
-		Pair<Integer, Node<DNAType>> result = new Pair<Integer, Node<DNAType>>();
+		Pair<Integer, Node> result = new Pair<Integer, Node>();
 		int count = 1;
 		String comPair = node.getValue().getSequence();
 		if(node.getValue().isDNA())
@@ -452,7 +497,7 @@ public class Dna{
 	 * @param node
 	 * @return
 	 */
-	private int searchCounter(Node<DNAType> rt, Node<DNAType> node)
+	private int searchCounter(Node rt, Node node)
 	{
 		int count = 0;
 		String seQ = node.getValue().getSequence();
@@ -499,61 +544,12 @@ public class Dna{
 		return count;
 	}
 	
-	private ArrayList<Node<DNAType>> searchHelpList(Node<DNAType> node, int nodeCount)
-	{
-		
-		return new ArrayList<Node<DNAType>>(nodeCount);
-	}
-	
-	/**
-	 * 
-	 * @param nodeOne of type DNAType
-	 * @param nodeTwo of type DNAType
-	 * @return string that contains the comparison results
-	 */
-	private String compareSeq(Node<DNAType> nodeOne, Node<DNAType> nodeTwo)
-	{
-		String result = "";
-		char[] listOne = nodeOne.getValue().getSequence().toCharArray();
-		char[] listTwo = nodeTwo.getValue().getSequence().toCharArray();
-		if(listOne.length >= listTwo.length)
-		{
-			for(int i = 0; i < listOne.length; i++)
-			{
-				if (listOne[i] == listTwo[i])
-				{
-					result+= listOne[i];
-				}
-				else
-				{
-					break;
-				}
-			}
-		}
-		else if (listOne.length < listTwo.length)
-		{
-			for(int i = 0; i < listTwo.length; i++)
-			{
-				if (listTwo[i] == listOne[i])
-				{
-					result+= listTwo[i];
-				}
-				else
-				{
-					break;
-				}
-			}
-		}
-		
-		return result;
-	}
-	
 	/**
 	 * 
 	 * @param rt
 	 * @param nodeInsert
 	 */
-	private void addChildren(Node<DNAType> rt, Node<DNAType> nodeInsert)
+	private void addChildren(Node rt, Node nodeInsert)
 	{
 		if(nodeInsert.getValue().getSequence().length() == 1)    // edit
 		{
@@ -586,12 +582,12 @@ public class Dna{
 	 * @param nodeInsert2
 	 * @param compared
 	 */
-	private void extendTree(Node<DNAType> rt, Node<DNAType> nodeInsert, Node<DNAType> nodeInsert2, String compared)
+	private void extendTree(Node rt, Node nodeInsert, Node nodeInsert2, String compared)
 	{
 		if(compared.length() > 0)
 		{
 			Character temp = compared.charAt(0);
-			Node<DNAType> newInternal = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
+			Node newInternal = new Node<DNAType>(new DNAType(Types.INTERNAL, null, null));
 			if(temp.equals('A'))
 			{
 				rt.setAChild(newInternal);
@@ -633,7 +629,7 @@ public class Dna{
 	 * @param node
 	 * @return
 	 */
-	private void findInternal(Node<DNAType> rt, Node<DNAType> node)
+	private void findInternal(Node rt, Node node)
 	{
 		
 		String comPair = node.getValue().getSequence();
@@ -696,7 +692,7 @@ public class Dna{
 				rt.getValue().setSequence("");
 				String comTemp = rt.getValue().getCommand();
 				rt.getValue().setCommand("");
-				Node<DNAType> exTend = new Node<DNAType>(new DNAType(Types.DNATYPE, comTemp, seqTemp));
+				Node exTend = new Node(new DNAType(Types.DNATYPE, comTemp, seqTemp));
 				setChildrenEmpty(rt);
 				exTend.getValue().setCommand(comTemp);
 				exTend.getValue().setSequence(seqTemp);
@@ -727,7 +723,7 @@ public class Dna{
 			rt.getValue().setSequence("");
 			String comTemp = rt.getValue().getCommand();
 			rt.getValue().setCommand("");
-			Node<DNAType> exTend = new Node<DNAType>(new DNAType(Types.DNATYPE, comTemp, seqTemp));
+			Node exTend = new Node(new DNAType(Types.DNATYPE, comTemp, seqTemp));
 			setChildrenEmpty(rt);
 			rt.set$Child(node);
 			node.setDepth(rt.getDepth()+1);
@@ -743,7 +739,7 @@ public class Dna{
 	 * @param node
 	 * @param childLetter
 	 */
-	private void setChildSelect(Node<DNAType> rt, Node<DNAType> node, Character childLetter)
+	private void setChildSelect(Node rt, Node node, Character childLetter)
 	{
 		if(childLetter.equals('A'))
 		{
@@ -768,10 +764,10 @@ public class Dna{
 	 * 
 	 * @param node
 	 */
-	private void setChildrenEmpty(Node<DNAType> node)
+	private void setChildrenEmpty(Node node)
 	{	// have checks if node is null
 		DNAType innerEmplaceThis = new DNAType(Types.EMPTY, null, null);
-		Node<DNAType> emplaceThis = new Node<DNAType>(innerEmplaceThis);
+		Node emplaceThis = new Node<DNAType>(innerEmplaceThis);
 		node.setAChild(emplaceThis);
 		node.aChild().setDepth(node.getDepth()+1);
 		node.setCChild(emplaceThis);
@@ -790,162 +786,162 @@ public class Dna{
 	 * @param sequence
 	 * @return
 	 */
-	public Pair<Integer, List<DNAType>> searchByPrefix(String sequence)
-	{
-		Node<DNAType> tempRoot = new Node<DNAType>();
-		tempRoot = root;
-		
-		int nodesVisited = 0;
-		
-		for (int i = 0; i < sequence.length(); i++)
-		{
-		    if (tempRoot == null)
-		    {
-		    	break;
-		    }
-		    
-		    Character c = sequence.charAt(i);
-		    
-		    if (c.equals('A'))
-		    {
-		    	tempRoot = tempRoot.aChild();
-		    	nodesVisited += 1;
-		    }
-		    else if (c.equals('C'))
-		    {
-		    	tempRoot = tempRoot.cChild();
-		    	nodesVisited += 1;
-		    }
-		    else if (c.equals('G'))
-		    {
-		    	tempRoot = tempRoot.gChild();
-		    	nodesVisited += 1;
-		    }
-		    else if (c.equals('T'))
-		    {
-		    	tempRoot = tempRoot.tChild();
-		    	nodesVisited += 1;
-		    }
-		}
-		
-		// Find all of the DNA info in the subtree of the tempRoot
-        List<Pair<Integer, DNAType>> preorderList = 
-        		new ArrayList<Pair<Integer, DNAType>>();
-        preorderHelp(tempRoot, preorderList);
-		
-        // Update the number of nodes visited
-        nodesVisited += preorderList.size();
-        
-        // Populate the subtree nodes
-		List<DNAType> nodesInSubtree = new ArrayList<DNAType>();
-		for (int i = 0; i < preorderList.size(); i++)
-		{
-			nodesInSubtree.add(preorderList.get(i).getValue());
-		}
-		
-		// Create the return pair
-		return new Pair<Integer, List<DNAType>>(nodesVisited, nodesInSubtree);
-	}
-	
-	/**
-	 * Return a list of all the DNATypes in a preorder fashion
-	 * @return preorderList (tree nodes)
-	 */
-	private List<Pair<Integer, DNAType>> preorder()
-	{
-		List<Pair<Integer, DNAType>> preorderList = new 
-				ArrayList<Pair<Integer, DNAType>>();
-		preorderHelp(root, preorderList);
-		return preorderList;
-	}
-	
-	/**
-	 * Return a list of the DNATypes in the DNATree in a preorder order.
-	 * preorder = root, childA, childC, childG, childT, child$
-	 * @param rt
-	 * @param retList
-	 * @return
-	 */
-	private void preorderHelp(Node<DNAType> rt, 
-			List<Pair<Integer, DNAType>> retList)
-	{
-		if (rt == null)
-		{
-			return;
-		}
-		
-		/*
-		if (rt.aChild().getValue().isEmpty() && 
-				rt.cChild().getValue().isEmpty() &&
-				rt.gChild().getValue().isEmpty() &&
-				rt.tChild().getValue().isEmpty() &&
-				rt.$Child().getValue().isEmpty())
-		{
-			return;
-		}
-		*/
-		
-		Pair<Integer, DNAType> p = new 
-				Pair<Integer, DNAType>(rt.getDepth(), rt.getValue());
-		
-		retList.add(p);
-		preorderHelp(rt.aChild(), retList);
-		preorderHelp(rt.cChild(), retList);
-		preorderHelp(rt.gChild(), retList);
-		preorderHelp(rt.tChild(), retList);
-		preorderHelp(rt.$Child(), retList);
-	}
-	
-	/**
-	 * Method print called with no arguments which will then print out
-	 * the tree in a preorder order
-	 */
-	public void print(PrintOptions option)
-	{
-		List<Pair<Integer, DNAType>> nodeInfo = preorder();
-		
-		for (int i = 0; i < nodeInfo.size(); i++)
-		{
-			Integer depth = nodeInfo.get(i).getKey();
-			DNAType dna = nodeInfo.get(i).getValue();
-			
-			String spaces = new String(new char[depth]).replace("\0", "  ");
-			String out = "";
-			
-			if (dna.isDNA())
-			{
-				out = spaces + dna.getSequence();
-				
-			    switch (option)
-				{
-				case DEFAULT:
-					break;
-				case LENGTHS:
-					out += (": length: " + dna.getSequence().length());
-					break;
-				case STATS:
-					String pa = String.format("%.2f", dna.getPercentA());
-					String pc = String.format("%.2f", dna.getPercentC());
-					String pg = String.format("%.2f", dna.getPercentG());
-					String pt = String.format("%.2f", dna.getPercentT());
-					out += (": A(" + pa + "),");
-					out += (" C(" + pc + "),");
-					out += (" G(" + pg + "),");
-					out += (" T(" + pt + ")");
-					break;
-				}
-			}
-			else if (dna.isEmpty())
-			{
-				out = spaces + "E";
-			}
-			else if (dna.isInternal())
-			{
-				out = spaces + "I";
-			}
-			
-			// Finally, print the output to console
-			System.out.println(out);
-		}
-	}
-}
+//	public Pair<Integer, List<DNAType>> searchByPrefix(String sequence)
+//	{
+//		Node<DNAType> tempRoot = new Node<DNAType>();
+//		tempRoot = root;
+//		
+//		int nodesVisited = 0;
+//		
+//		for (int i = 0; i < sequence.length(); i++)
+//		{
+//		    if (tempRoot == null)
+//		    {
+//		    	break;
+//		    }
+//		    
+//		    Character c = sequence.charAt(i);
+//		    
+//		    if (c.equals('A'))
+//		    {
+//		    	tempRoot = tempRoot.aChild();
+//		    	nodesVisited += 1;
+//		    }
+//		    else if (c.equals('C'))
+//		    {
+//		    	tempRoot = tempRoot.cChild();
+//		    	nodesVisited += 1;
+//		    }
+//		    else if (c.equals('G'))
+//		    {
+//		    	tempRoot = tempRoot.gChild();
+//		    	nodesVisited += 1;
+//		    }
+//		    else if (c.equals('T'))
+//		    {
+//		    	tempRoot = tempRoot.tChild();
+//		    	nodesVisited += 1;
+//		    }
+//		}
+//		
+//		// Find all of the DNA info in the subtree of the tempRoot
+//        List<Pair<Integer, DNAType>> preorderList = 
+//        		new ArrayList<Pair<Integer, DNAType>>();
+//        preorderHelp(tempRoot, preorderList);
+//		
+//        // Update the number of nodes visited
+//        nodesVisited += preorderList.size();
+//        
+//        // Populate the subtree nodes
+//		List<DNAType> nodesInSubtree = new ArrayList<DNAType>();
+//		for (int i = 0; i < preorderList.size(); i++)
+//		{
+//			nodesInSubtree.add(preorderList.get(i).getValue());
+//		}
+//		
+//		// Create the return pair
+//		return new Pair<Integer, List<DNAType>>(nodesVisited, nodesInSubtree);
+//	}
+//	
+//	/**
+//	 * Return a list of all the DNATypes in a preorder fashion
+//	 * @return preorderList (tree nodes)
+//	 */
+//	private List<Pair<Integer, DNAType>> preorder()
+//	{
+//		List<Pair<Integer, DNAType>> preorderList = new 
+//				ArrayList<Pair<Integer, DNAType>>();
+//		preorderHelp(root, preorderList);
+//		return preorderList;
+//	}
+//	
+//	/**
+//	 * Return a list of the DNATypes in the DNATree in a preorder order.
+//	 * preorder = root, childA, childC, childG, childT, child$
+//	 * @param rt
+//	 * @param retList
+//	 * @return
+//	 */
+//	private void preorderHelp(Node<DNAType> rt, 
+//			List<Pair<Integer, DNAType>> retList)
+//	{
+//		if (rt == null)
+//		{
+//			return;
+//		}
+//		
+//		/*
+//		if (rt.aChild().getValue().isEmpty() && 
+//				rt.cChild().getValue().isEmpty() &&
+//				rt.gChild().getValue().isEmpty() &&
+//				rt.tChild().getValue().isEmpty() &&
+//				rt.$Child().getValue().isEmpty())
+//		{
+//			return;
+//		}
+//		*/
+//		
+//		Pair<Integer, DNAType> p = new 
+//				Pair<Integer, DNAType>(rt.getDepth(), rt.getValue());
+//		
+//		retList.add(p);
+//		preorderHelp(rt.aChild(), retList);
+//		preorderHelp(rt.cChild(), retList);
+//		preorderHelp(rt.gChild(), retList);
+//		preorderHelp(rt.tChild(), retList);
+//		preorderHelp(rt.$Child(), retList);
+//	}
+//	
+//	/**
+//	 * Method print called with no arguments which will then print out
+//	 * the tree in a preorder order
+//	 */
+//	public void print(PrintOptions option)
+//	{
+//		List<Pair<Integer, DNAType>> nodeInfo = preorder();
+//		
+//		for (int i = 0; i < nodeInfo.size(); i++)
+//		{
+//			Integer depth = nodeInfo.get(i).getKey();
+//			DNAType dna = nodeInfo.get(i).getValue();
+//			
+//			String spaces = new String(new char[depth]).replace("\0", "  ");
+//			String out = "";
+//			
+//			if (dna.isDNA())
+//			{
+//				out = spaces + dna.getSequence();
+//				
+//			    switch (option)
+//				{
+//				case DEFAULT:
+//					break;
+//				case LENGTHS:
+//					out += (": length: " + dna.getSequence().length());
+//					break;
+//				case STATS:
+//					String pa = String.format("%.2f", dna.getPercentA());
+//					String pc = String.format("%.2f", dna.getPercentC());
+//					String pg = String.format("%.2f", dna.getPercentG());
+//					String pt = String.format("%.2f", dna.getPercentT());
+//					out += (": A(" + pa + "),");
+//					out += (" C(" + pc + "),");
+//					out += (" G(" + pg + "),");
+//					out += (" T(" + pt + ")");
+//					break;
+//				}
+//			}
+//			else if (dna.isEmpty())
+//			{
+//				out = spaces + "E";
+//			}
+//			else if (dna.isInternal())
+//			{
+//				out = spaces + "I";
+//			}
+//			
+//			// Finally, print the output to console
+//			System.out.println(out);
+//		}
+//	}
+//}
