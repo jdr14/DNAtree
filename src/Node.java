@@ -27,9 +27,10 @@ public class Node
     /**
      * Provides a default constructor that sets everything to null
      */
-	public Node(int d, Types t)
+	public Node(int d, String seq, Types t)
 	{
 		depth = d;
+		sequence = seq;
 		switch(t)
 		{
 		case INTERNAL:

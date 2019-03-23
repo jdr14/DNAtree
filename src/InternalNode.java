@@ -19,7 +19,7 @@ public class InternalNode extends Node
     
 	public InternalNode() 
 	{
-		super(0, Types.INTERNAL);
+		super(0, "", Types.INTERNAL);
 		aChild = new FlyWeightNode(1);
 		cChild = new FlyWeightNode(1);
 		gChild = new FlyWeightNode(1);
@@ -29,7 +29,7 @@ public class InternalNode extends Node
 	
 	public InternalNode(int d)
 	{
-		super(d, Types.INTERNAL);
+		super(d, "", Types.INTERNAL);
 		aChild = new FlyWeightNode(d+1);
 		cChild = new FlyWeightNode(d+1);
 		gChild = new FlyWeightNode(d+1);
@@ -40,7 +40,7 @@ public class InternalNode extends Node
 	public InternalNode(int d, Node a, 
 			Node c, Node g, Node t, Node $) 
 	{
-		super(d, Types.INTERNAL);
+		super(d, "", Types.INTERNAL);
 		aChild = a;
 		cChild = c;
 		gChild = g;
@@ -50,7 +50,7 @@ public class InternalNode extends Node
 	
 	public InternalNode(Node n)
 	{
-		super(n.depth, Types.INTERNAL);
+		super(n.depth, n.sequence, Types.INTERNAL);
 		
 		aChild = new FlyWeightNode(n.depth+1);
 		cChild = new FlyWeightNode(n.depth+1);
@@ -84,27 +84,27 @@ public class InternalNode extends Node
 		$Child = $;
 	}
 	
-	public Node getAChild()
+	public Node aChild()
 	{
 		return aChild;
 	}
 	
-	public Node getCChild()
+	public Node cChild()
 	{
 		return cChild;
 	}
 	
-	public Node getGChild()
+	public Node gChild()
 	{
 		return gChild;
 	}
 	
-	public Node getTChild()
+	public Node tChild()
 	{
 		return tChild;
 	}
 	
-	public Node get$Child()
+	public Node $Child()
 	{
 		return $Child;
 	}

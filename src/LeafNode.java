@@ -6,43 +6,13 @@
  *
  */
 public class LeafNode extends Node
-{
-	/**
-	 * To store the sequence of the node
-	 */
-    private String sequence;
-    
-	/**
-	 * This will be the percentage (up to 2 decimal places) of the amount of
-	 * As in the sequence
-	 */
-	private Double percentA = 0.0;
-	
-	/**
-	 * This will be the percentage (up to 2 decimal places) of the amount of
-	 * Cs in the sequence
-	 */
-	private Double percentC = 0.0;
-	
-	/**
-	 * This will be the percentage (up to 2 decimal places) of the amount of
-	 * Gs in the sequence
-	 */
-	private Double percentG = 0.0;
-	
-	/**
-	 * This will be the percentage (up to 2 decimal places) of the amount of
-	 * Ts in the sequence
-	 */
-	private Double percentT = 0.0;
-	
+{	
     /**
      * Default constructor
      */
 	public LeafNode() 
 	{
-		super(0, Types.LEAF);
-		sequence = "";
+		super(0, "", Types.LEAF);
 	}
 	
 	/**
@@ -51,8 +21,7 @@ public class LeafNode extends Node
 	 */
 	public LeafNode(int d)
 	{
-		super(d, Types.LEAF);
-		sequence = "";
+		super(d, "", Types.LEAF);
 	}
 	
 	/**
@@ -61,9 +30,7 @@ public class LeafNode extends Node
 	 */
 	public LeafNode(String seq)
 	{
-		super(0, Types.LEAF);
-		sequence = seq;
-		calculatePercentages(seq);
+		super(0, seq,  Types.LEAF);
 	}
 	
 	/**
@@ -73,9 +40,7 @@ public class LeafNode extends Node
 	 */
 	public LeafNode(int d, String seq)
 	{
-		super(d, Types.LEAF);
-		sequence = seq;
-		calculatePercentages(seq);
+		super(d, seq, Types.LEAF);
 	}
 	
 	/**
@@ -83,110 +48,10 @@ public class LeafNode extends Node
 	 * @param n
 	 * @param seq
 	 */
-	public LeafNode(Node n, String seq)
+	public LeafNode(Node n)
 	{
-		super(n.depth, Types.LEAF);
-		sequence = seq;
-		calculatePercentages(seq);
+		super(n.depth, n.sequence, Types.LEAF);
 	}
-    
-	/**
-	 * 
-	 * @return
-	 */
-	public String getSequence()
-	{
-		return sequence;
-	}
-	
-	/**
-	 * 
-	 * @param seq
-	 */
-	public void setSequence(String seq)
-	{
-		sequence = seq;
-		calculatePercentages(seq);
-	}
-	
-	/**
-	 * Accessor method to return the percentage of As with respect to its
-	 * containing sequence
-	 * @return percentA (Double)
-	 */
-	public Double getPercentA()
-	{
-		return percentA;
-	}
-	
-	/**
-	 * Accessor method to return the percentage of Cs with respect to its
-	 * containing sequence
-	 * @return percentC (Double)
-	 */
-	public Double getPercentC()
-	{
-		return percentC;
-	}
-	
-	/**
-	 * Accessor method to return the percentage of Gs with respect to its
-	 * containing sequence
-	 * @return percentG (Double)
-	 */
-	public Double getPercentG()
-	{
-		return percentG;
-	}
-	
-	/**
-	 * Accessor method to return the percentage of Ts with respect to its
-	 * containing sequence
-	 * @return percentT (Double)
-	 */
-	public Double getPercentT()
-	{
-		return percentT;
-	}
-	
-	/**
-	 * Private helper method to handle the calculation of percentages of
-	 * each character in relation to its containing sequence
-	 * @param seq (String)
-	 */
-	private void calculatePercentages(String seq)
-	{
-		// Temp variables to keep track of the character count in the sequence
-		Double countA = 0.0;
-		Double countC = 0.0;
-		Double countG = 0.0;
-		Double countT = 0.0;
-		
-		// Iterate through the sequence and obtain counts for each character
-		for (int i = 0; i < seq.length(); i++)
-		{
-			if (seq.charAt(i) == 'A')
-			{
-				countA++;
-			}
-			else if (seq.charAt(i) == 'C')
-			{
-				countC++;
-			}
-			else if (seq.charAt(i) == 'G')
-			{
-				countG++;
-			}
-			else if (seq.charAt(i) == 'T')
-			{
-				countT++;
-			}
-		}  // End for
-		
-		// Calculate the final percentages
-		percentA = (countA / seq.length()) * 100.00;
-		percentC = (countC / seq.length()) * 100.00;
-		percentG = (countG / seq.length()) * 100.00;
-		percentT = (countT / seq.length()) * 100.00;
-	}
+   
+
 }
