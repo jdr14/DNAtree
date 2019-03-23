@@ -77,6 +77,18 @@ public class LeafNode extends Node
 		sequence = seq;
 		calculatePercentages(seq);
 	}
+	
+	/**
+	 * 
+	 * @param n
+	 * @param seq
+	 */
+	public LeafNode(Node n, String seq)
+	{
+		super(n.depth, Types.LEAF);
+		sequence = seq;
+		calculatePercentages(seq);
+	}
     
 	/**
 	 * 

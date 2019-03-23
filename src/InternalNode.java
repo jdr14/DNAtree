@@ -47,6 +47,17 @@ public class InternalNode extends Node
 		tChild = t;
 		$Child = $;
 	}
+	
+	public InternalNode(Node n)
+	{
+		super(n.depth, Types.INTERNAL);
+		
+		aChild = new FlyWeightNode(n.depth+1);
+		cChild = new FlyWeightNode(n.depth+1);
+		gChild = new FlyWeightNode(n.depth+1);
+		tChild = new FlyWeightNode(n.depth+1);
+		$Child = new FlyWeightNode(n.depth+1);
+	}
     
 	public void setAChild(Node a)
 	{
