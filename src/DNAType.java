@@ -65,7 +65,7 @@ class DNAType
 	 */
 	public DNAType()
 	{
-		this.type = Types.NONETYPE;
+		this.type = Types.FLYWEIGHT;
 		this.command = null;
 		this.sequence = null;
 	}
@@ -76,7 +76,7 @@ class DNAType
 	 */
 	public DNAType(String cmd)
 	{
-		this.type = Types.DNATYPE;
+		this.type = Types.LEAF;
 		this.command = cmd;
 		this.sequence = null;
 	}
@@ -88,7 +88,7 @@ class DNAType
 	 */
 	public DNAType(String cmd, String seq)
 	{
-		this.type = Types.DNATYPE;
+		this.type = Types.LEAF;
 		this.command = cmd;
 		this.sequence = seq;
 		
@@ -146,7 +146,7 @@ class DNAType
 	 */
 	public boolean isEmpty()
 	{
-		return (this.type == Types.EMPTY);
+		return (this.type == Types.FLYWEIGHT);
 	}
 	
 	/**
@@ -164,7 +164,7 @@ class DNAType
 	 */
 	public boolean isDNA()
 	{
-		return (this.type == Types.DNATYPE);
+		return (this.type == Types.LEAF);
 	}
 	
 	/**
@@ -173,7 +173,7 @@ class DNAType
 	 */
 	public boolean isNone()
 	{
-		return (this.type == Types.NONETYPE);
+		return (this.type == Types.FLYWEIGHT);
 	}
 	
 	/**

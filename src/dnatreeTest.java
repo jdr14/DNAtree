@@ -10,7 +10,7 @@ public class dnatreeTest extends TestCase
     
     private DNAType dnaType, dnaType2;
     
-    private Node<DNAType> testNode;
+    private Node testNode;
 
 	/**
      * 
@@ -39,7 +39,7 @@ public class dnatreeTest extends TestCase
         dnaType = new DNAType();
         dnaType2 = new DNAType();
         
-        testNode = new Node<DNAType>();
+        testNode = new Node(0, Types.INTERNAL);
     }
     
     public void testDNAType()
@@ -85,7 +85,7 @@ public class dnatreeTest extends TestCase
         assertEquals(dnaType.getPercentT(), 25.00, 0.00);
         
         // Test the setType method
-        dnaType.setType(Types.EMPTY);
+        dnaType.setType(Types.FLYWEIGHT);
         assertEquals(dnaType.isEmpty(), true);
 
         // Test the final constructor which takes another dnaType in as an arg
@@ -104,7 +104,7 @@ public class dnatreeTest extends TestCase
     public void testDna()
     {
     	ArrayList<String> sequenceList = new ArrayList<String>();
-    	DNAType test1 = new DNAType(Types.DNATYPE, "insert", "ACGT");
+    	DNAType test1 = new DNAType(Types.LEAF, "insert", "ACGT");
     	
 //    	testTree1.insert(node);
     }
