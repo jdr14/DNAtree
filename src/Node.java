@@ -22,6 +22,8 @@ public class Node
 	
 	public boolean isInternal;
 	
+	public String sequence;
+	
     /**
      * Provides a default constructor that sets everything to null
      */
@@ -53,6 +55,20 @@ public class Node
 		this.isLeaf = true;
 		this.isFlyWeight = false;
 		this.isInternal = false;
+	}
+	
+	public void setInternal()
+	{
+		this.isLeaf = false;
+		this.isInternal = true;
+		this.isFlyWeight = false;
+	}
+	
+	public void setFlyWeight()
+	{
+		this.isLeaf = false;
+		this.isInternal = false;
+		this.isFlyWeight = true;
 	}
 
 }
