@@ -16,59 +16,35 @@ public class Node
 	 */
 	public int depth;
 	
-	public boolean isFlyWeight;
-	
-	public boolean isLeaf;
-	
-	public boolean isInternal;
-	
-	public String sequence;
+	public Node()
+	{
+		
+	}
 	
     /**
      * Provides a default constructor that sets everything to null
      */
-	public Node(int d, Types t)
+	public Node(int d)
 	{
 		depth = d;
-		switch(t)
-		{
-		case INTERNAL:
-			isInternal = true;
-			isLeaf = false;
-			isFlyWeight = false;
-			break;
-		case FLYWEIGHT:
-			isFlyWeight = true;
-			isLeaf = false;
-			isFlyWeight = false;
-			break;
-		case LEAF:
-			isLeaf = true;
-			isFlyWeight = false;
-			isFlyWeight = false;
-			break;
-		}
 	}
 	
-	public void setLeaf()
+	/**
+	 * @param newSeq as sequence to insert
+	 */
+	public Node insert (String newSeq) 
 	{
-		this.isLeaf = true;
-		this.isFlyWeight = false;
-		this.isInternal = false;
-	}
+		return null;
+	};
 	
-	public void setInternal()
-	{
-		this.isLeaf = false;
-		this.isInternal = true;
-		this.isFlyWeight = false;
-	}
+	/**
+	 * @param oldSeq as sequence to remove
+	 */
+	public void remove (String oldSeq) {};
 	
-	public void setFlyWeight()
-	{
-		this.isLeaf = false;
-		this.isInternal = false;
-		this.isFlyWeight = true;
-	}
+	/**
+	 * @param newSeq as sequence to search for
+	 */
+	public void search (String newSeq) {};
 
 }

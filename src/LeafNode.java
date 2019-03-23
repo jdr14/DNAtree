@@ -41,7 +41,7 @@ public class LeafNode extends Node
      */
 	public LeafNode() 
 	{
-		super(0, Types.LEAF);
+		super(0);
 		sequence = "";
 	}
 	
@@ -51,7 +51,7 @@ public class LeafNode extends Node
 	 */
 	public LeafNode(int d)
 	{
-		super(d, Types.LEAF);
+		super(d);
 		sequence = "";
 	}
 	
@@ -61,7 +61,7 @@ public class LeafNode extends Node
 	 */
 	public LeafNode(String seq)
 	{
-		super(0, Types.LEAF);
+		super(0);
 		sequence = seq;
 		calculatePercentages(seq);
 	}
@@ -73,7 +73,7 @@ public class LeafNode extends Node
 	 */
 	public LeafNode(int d, String seq)
 	{
-		super(d, Types.LEAF);
+		super(d);
 		sequence = seq;
 		calculatePercentages(seq);
 	}
@@ -85,7 +85,7 @@ public class LeafNode extends Node
 	 */
 	public LeafNode(Node n, String seq)
 	{
-		super(n.depth, Types.LEAF);
+		super(n.depth);
 		sequence = seq;
 		calculatePercentages(seq);
 	}
@@ -188,5 +188,31 @@ public class LeafNode extends Node
 		percentC = (countC / seq.length()) * 100.00;
 		percentG = (countG / seq.length()) * 100.00;
 		percentT = (countT / seq.length()) * 100.00;
+	}
+	
+	/**
+	 * @param newSeq as sequence to insert
+	 */
+	public Node insert (String newSeq)
+	{
+		this.sequence = newSeq;
+		this.depth++;
+		return this;
+	}
+	
+	/**
+	 * @param oldSeq as sequence to remove
+	 */
+	public void remove (String oldSeq)
+	{
+		
+	}
+	
+	/**
+	 * @param newSeq as sequence to search for
+	 */
+	public void search (String newSeq)
+	{
+		
 	}
 }

@@ -43,73 +43,73 @@ public class DNAtree {
     		{
     			tree.insert(sequence);    // call insert method
     		}
-    		else if (command.equalsIgnoreCase("remove"))
-    		{
-    			if(tree.getCount() > 0)
-    			{
-    				tree.remove(sequence);    // call remove function
-    			}
-    		}
-    		else if (command.equalsIgnoreCase("print"))
-    		{
-    			// Case: singular print command passed in
-    			if (sequence.isEmpty())
-    			{
-    				tree.print(PrintOptions.DEFAULT);
-    			}
-    			else if (sequence.equalsIgnoreCase("lengths"))
-    			{
-    				tree.print(PrintOptions.LENGTHS);
-    			}
-    			else if (sequence.equalsIgnoreCase("stats"))
-    			{
-    				tree.print(PrintOptions.STATS);
-    			}
-    		}
-    		else if (command.equalsIgnoreCase("search"))
-    		{
-    			if (tree.getCount() > 0)
-    			{ 
-    				if (sequence.endsWith("$"))
-    				{
-            			//Node<DNAType> result = new Node<DNAType>();
-            			tree.search(sequence);  // call search function
-            			//setChildrenEmpty(result);
-    				}
-    				else
-    				{
-    				    Pair<Integer, List<LeafNode>> prefixResults = 
-    				    		tree.searchByPrefix(sequence);
-    				    
-    				    // Finally, print the results
-    				    System.out.println("# of nodes visited: " + 
-    				    		prefixResults.getKey());
-    				    
-    				    List<LeafNode> listN = prefixResults.getValue();
-    				    
-    				    if (listN.isEmpty())
-    				    {
-    				    	System.out.println("no sequence found");
-    				    }
-    				    else
-    				    {
-    				    	for (int j = 0; j < listN.size(); j++)
-    				    	{
-    				    		if (listN.get(j).getSequence() != null &&
-    				    				!listN.get(j).getSequence().isEmpty())
-    				    		{
-        				    		System.out.println("sequence: " + 
-            				    	        listN.get(j).getSequence());
-    				    		}
-    				    	}
-    				    }
-    				}
-    			}
-    			else
-    			{
-    				System.out.println("Tree is empty");
-    			}
-    		}
+//    		else if (command.equalsIgnoreCase("remove"))
+//    		{
+//    			if(tree.getCount() > 0)
+//    			{
+//    				tree.remove(sequence);    // call remove function
+//    			}
+//    		}
+//    		else if (command.equalsIgnoreCase("print"))
+//    		{
+//    			// Case: singular print command passed in
+//    			if (sequence.isEmpty())
+//    			{
+//    				tree.print(PrintOptions.DEFAULT);
+//    			}
+//    			else if (sequence.equalsIgnoreCase("lengths"))
+//    			{
+//    				tree.print(PrintOptions.LENGTHS);
+//    			}
+//    			else if (sequence.equalsIgnoreCase("stats"))
+//    			{
+//    				tree.print(PrintOptions.STATS);
+//    			}
+//    		}
+//    		else if (command.equalsIgnoreCase("search"))
+//    		{
+//    			if (tree.getCount() > 0)
+//    			{ 
+//    				if (sequence.endsWith("$"))
+//    				{
+//            			//Node<DNAType> result = new Node<DNAType>();
+//            			tree.search(sequence);  // call search function
+//            			//setChildrenEmpty(result);
+//    				}
+//    				else
+//    				{
+//    				    Pair<Integer, List<LeafNode>> prefixResults = 
+//    				    		tree.searchByPrefix(sequence);
+//    				    
+//    				    // Finally, print the results
+//    				    System.out.println("# of nodes visited: " + 
+//    				    		prefixResults.getKey());
+//    				    
+//    				    List<LeafNode> listN = prefixResults.getValue();
+//    				    
+//    				    if (listN.isEmpty())
+//    				    {
+//    				    	System.out.println("no sequence found");
+//    				    }
+//    				    else
+//    				    {
+//    				    	for (int j = 0; j < listN.size(); j++)
+//    				    	{
+//    				    		if (listN.get(j).getSequence() != null &&
+//    				    				!listN.get(j).getSequence().isEmpty())
+//    				    		{
+//        				    		System.out.println("sequence: " + 
+//            				    	        listN.get(j).getSequence());
+//    				    		}
+//    				    	}
+//    				    }
+//    				}
+//    			}
+//    			else
+//    			{
+//    				System.out.println("Tree is empty");
+//    			}
+//    		}
     		
     	}
     	
