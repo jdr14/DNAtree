@@ -195,8 +195,16 @@ public class LeafNode extends Node
 	 */
 	public Node insert (String newSeq)
 	{
-		this.sequence = newSeq;
-		this.depth++;
+		// case where
+		if (this.sequence == "")
+		{
+			this.sequence = newSeq;
+			this.depth++;
+		}
+		else 
+		{
+			
+		}
 		return this;
 	}
 	
