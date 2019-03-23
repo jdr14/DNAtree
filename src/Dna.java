@@ -84,8 +84,8 @@ public class Dna{
 					{
 						addChildren(root, rootTemp);
 						addChildren(root, node);
-						rootTemp.setDepth(1);
-						node.setDepth(1);
+						rootTemp.setDepth(2);
+						node.setDepth(2);
 					}
 					else if(compareResult.length() > 0)
 					{
@@ -166,12 +166,18 @@ public class Dna{
 					rt.getValue().setSequence("");
 					passThis = i-1;
 					hasChildren(root, passThis, comPair);
-					break;
+					return;
 				}
 				else
 				{
-					break;
+					return;
 				}
+			}
+			if(rt.getValue().isInternal())
+			{
+				rt.$Child().getValue().setType(Types.EMPTY);
+				rt.$Child().getValue().setCommand("");
+				rt.$Child().getValue().setSequence("");
 			}
 		}
 	}
@@ -237,7 +243,7 @@ public class Dna{
 			node.getValue().setType(Types.DNATYPE);
 			node.getValue().setSequence(seqTemp);
 			node.getValue().setCommand(comTemp);
-			node.setDepth(node.getDepth()-1);
+			node.setDepth(node.getDepth());
 			setChildrenNull(node);
 		}
 	}
@@ -333,7 +339,12 @@ public class Dna{
 	private void searchPrint(Pair<Integer, Node<DNAType>> printThis)
 	{
 		System.out.println("# of nodes visited: " + printThis.getKey());
+		String comPair = printThis.getValue().getValue().getSequence();
 		if(printThis.getValue().getValue().getSequence() == null)
+		{
+			System.out.println("no sequence found");
+		}
+		else if (printThis.getValue().getValue().getSequence() == "")
 		{
 			System.out.println("no sequence found");
 		}
