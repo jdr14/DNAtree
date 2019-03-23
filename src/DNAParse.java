@@ -13,17 +13,16 @@ import java.util.Scanner;
  */
 public class DNAParse extends Parse 
 {
-	/**
-	 * Constructor which calls parent (Parse) constructor internally
-	 * @param fileName (file name of a file that exists passed in as a string)
-	 */
-	public DNAParse(String fileName)
+    /**
+     * Constructor which calls parent (Parse) constructor internally
+     * @param fileName (file name of a file that exists passed in as a string)
+     */
+    public DNAParse(String fileName)
 	{
 		super(fileName);
 	}
 	
     /**
-     * @param fileName string for file name (File for reading)
      * @return a list of rectangles main function in the parsing class
      */
 	public List<DNAType> parseMain()
@@ -50,7 +49,7 @@ public class DNAParse extends Parse
 					DNAType dnaContainer = setDNA(listedLine);
 					
 					// Ensure new DNA type actually contains DNA information
-					if(dnaContainer.containsInstruction())
+					if (dnaContainer.containsInstruction())
 					{
 						parsedList.add(dnaContainer);
 					}
@@ -119,7 +118,9 @@ public class DNAParse extends Parse
 	 */
 	private boolean commandValid(String cmd)
 	{
-		return (cmd.equalsIgnoreCase("search") || cmd.equalsIgnoreCase("insert") || 
-				cmd.equalsIgnoreCase("remove") || cmd.equalsIgnoreCase("print"));
+		return (cmd.equalsIgnoreCase("search") || 
+				cmd.equalsIgnoreCase("insert") ||
+				cmd.equalsIgnoreCase("remove") || 
+				cmd.equalsIgnoreCase("print"));
 	}
 }

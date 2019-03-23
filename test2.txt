@@ -1,0 +1,7 @@
+insert ACGT
+print
+print lengths
+print stats
+search ACGT
+remove ACGT
+invalid command

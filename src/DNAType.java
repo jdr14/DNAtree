@@ -92,7 +92,7 @@ class DNAType
 		this.command = cmd;
 		this.sequence = seq;
 		
-		if (cmd != "print") 
+		if (cmd != null && !cmd.equalsIgnoreCase("print")) 
 		{
 		    calculatePercentages(seq);	
 		}
@@ -112,12 +112,18 @@ class DNAType
 		this.command = cmd;
 		this.sequence = seq;
 		
-		if ((cmd != "print") && (seq != null))
+		
+		if (cmd != null && !cmd.equalsIgnoreCase("print") && (seq != null))
 		{
 			calculatePercentages(seq);
 		}
 	}
 	
+	/**
+	 * Another constructor to take in a type of itself
+	 * Useful when creating more nodes
+	 * @param dna
+	 */
 	public DNAType(DNAType dna)
 	{
 		this.type = dna.type;
@@ -169,7 +175,7 @@ class DNAType
 	
 	/**
 	 * Method to inform user if node is of None type 
-	 * @return
+	 * @return boolean value based on if DNA type is none or not
 	 */
 	public boolean isNone()
 	{
@@ -178,6 +184,8 @@ class DNAType
 	
 	/**
 	 * Determine if an instruction has been set or not for parsing purposes
+	 * @return boolean value based on whether the DNA node contains
+	 * an instruction or not
 	 */
 	public boolean containsInstruction()
 	{
@@ -204,7 +212,7 @@ class DNAType
 	
 	/**
 	 * Accessor method to return the sequence as a string
-	 * @return
+	 * @return sequence 
 	 */
 	public String getSequence()
 	{
@@ -218,14 +226,13 @@ class DNAType
 	public void setSequence(String seq)
 	{
 		this.sequence = seq;
-		
         calculatePercentages(seq);
 	}
 	
 	/**
 	 * Accessor method to inform user if a separator exists in the 
 	 * given sequence.
-	 * @return
+	 * @return containsSeparator
 	 */
 	public boolean hasSeparator()
 	{
@@ -284,6 +291,7 @@ class DNAType
 		Double countC = 0.0;
 		Double countG = 0.0;
 		Double countT = 0.0;
+		Integer count$ = 0;
 		
 		// Iterate through the sequence and obtain counts for each character
 		for (int i = 0; i < seq.length(); i++)
@@ -307,14 +315,15 @@ class DNAType
 			else if (seq.charAt(i) == '$')
 			{
 				containsSeparator = true;
+				count$++;
 			}
 		}  // End for
 		
 		// Calculate the final percentages
-		percentA = (countA / seq.length()) * 100.00;
-		percentC = (countC / seq.length()) * 100.00;
-		percentG = (countG / seq.length()) * 100.00;
-		percentT = (countT / seq.length()) * 100.00;
+		percentA = (countA / (seq.length() - count$)) * 100.00;
+		percentC = (countC / (seq.length() - count$)) * 100.00;
+		percentG = (countG / (seq.length() - count$)) * 100.00;
+		percentT = (countT / (seq.length() - count$)) * 100.00;
 	}
 
 }  // End DNAType
