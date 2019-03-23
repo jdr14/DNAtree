@@ -179,6 +179,12 @@ public class Dna{
 				rt.$Child().getValue().setCommand("");
 				rt.$Child().getValue().setSequence("");
 			}
+			if(rt.getValue().isDNA())
+			{
+				rt.getValue().setType(Types.EMPTY);
+				rt.getValue().setCommand("");
+				rt.getValue().setSequence("");
+			}
 		}
 	}
 	
@@ -339,7 +345,6 @@ public class Dna{
 	private void searchPrint(Pair<Integer, Node<DNAType>> printThis)
 	{
 		System.out.println("# of nodes visited: " + printThis.getKey());
-		String comPair = printThis.getValue().getValue().getSequence();
 		if(printThis.getValue().getValue().getSequence() == null)
 		{
 			System.out.println("no sequence found");
@@ -695,9 +700,17 @@ public class Dna{
 				setChildrenEmpty(rt);
 				exTend.getValue().setCommand(comTemp);
 				exTend.getValue().setSequence(seqTemp);
-				Character pass1 = exTend.getValue().getSequence().charAt(i);
+				if(exTend.getValue().getSequence().length() > i)
+				{    // check case where sequence inserted is longer
+					Character pass1 = exTend.getValue().getSequence().charAt(i);
+					setChildSelect(rt, exTend, pass1);
+				}
+				else
+				{
+					rt.set$Child(exTend);
+					exTend.setDepth(rt.getDepth()+1);
+				}
 				Character pass2 = node.getValue().getSequence().charAt(i);
-				setChildSelect(rt, exTend, pass1);
 				setChildSelect(rt, node, pass2);
 				return;
 			}
@@ -718,7 +731,7 @@ public class Dna{
 			setChildrenEmpty(rt);
 			rt.set$Child(node);
 			node.setDepth(rt.getDepth()+1);
-			setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(comPair.length()+1));
+			setChildSelect(rt, exTend, exTend.getValue().getSequence().charAt(comPair.length()));
 			
 		}
 		return;
@@ -756,7 +769,7 @@ public class Dna{
 	 * @param node
 	 */
 	private void setChildrenEmpty(Node<DNAType> node)
-	{
+	{	// have checks if node is null
 		DNAType innerEmplaceThis = new DNAType(Types.EMPTY, null, null);
 		Node<DNAType> emplaceThis = new Node<DNAType>(innerEmplaceThis);
 		node.setAChild(emplaceThis);
