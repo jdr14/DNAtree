@@ -103,7 +103,10 @@ public class dnatreeTest extends TestCase
     // Use this to test the Dna.java class containing the tree methods
     public void testDna()
     {
-
+    	ArrayList<String> sequenceList = new ArrayList<String>();
+    	DNAType test1 = new DNAType(Types.DNATYPE, "insert", "ACGT");
+    	
+//    	testTree1.insert(node);
     }
 }
 
