@@ -26,11 +26,11 @@ public class DNAParse extends Parse
      * @param fileName string for file name (File for reading)
      * @return a list of rectangles main function in the parsing class
      */
-	public List<DNAType> parseMain()
+	public List<Pair<String, String>> parseMain()
 	{
 		File testFile = new File(this.getFileName());
 		
-		List<DNAType> parsedList = new ArrayList<>();
+		List<Pair<String, String>> parsedList = new ArrayList<>();
 		
 		// Try/Catch block to account for case if file is not found
 		try
@@ -46,17 +46,17 @@ public class DNAParse extends Parse
 				{
 					List<String> listedLine = lineAsList(currentLine);
 					
-					// Create a container variable to store the data read in
-					DNAType dnaContainer = setDNA(listedLine);
-					
-					// Ensure new DNA type actually contains DNA information
-					if(dnaContainer.containsInstruction())
+					if (listedLine.size() == 2)
 					{
-						parsedList.add(dnaContainer);
+						parsedList.add(new Pair(listedLine.get(0), 
+								listedLine.get(1)));
+					}
+					else if (listedLine.size() == 1)
+					{
+						parsedList.add(new Pair(listedLine.get(0), ""));
 					}
 				}
 			}
-			
 			return parsedList;
 		}
 		catch (FileNotFoundException err)
@@ -65,7 +65,6 @@ public class DNAParse extends Parse
 			System.out.println("ERR" + this.getFileName() + " not found");
 		    err.printStackTrace();
 		}
-		
 		return parsedList;
 	}
 	
@@ -76,18 +75,10 @@ public class DNAParse extends Parse
 	 * possible sequence)
 	 * @return a new DNAType with the internal data fields populated
 	 */
-	private DNAType setDNA(List<String> lineAsList)
+	/*private DNAType setDNA(List<String> lineAsList)
 	{
 		// Initially, create an empty DNA
 		DNAType newDNA;
-		
-		/*
-		for (int i = 0; i < lineAsList.size(); i++)
-		{
-			System.out.print(lineAsList.get(i) + "  " + i);
-		}
-		System.out.println("");
-		*/
 		
 		if (lineAsList.size() == 1 && lineAsList.get(0).equals("print"))
 		{
@@ -109,7 +100,7 @@ public class DNAParse extends Parse
 		}
 		
 		return newDNA;
-	}
+	}*/
 	
 	/**
 	 * Determine if the command specified as parameter is valid or not
