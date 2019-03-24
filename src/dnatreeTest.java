@@ -145,7 +145,7 @@ public class dnatreeTest extends TestCase
     	// Test the setSequence method
     	pt1.setSequence(s1);
     	assertEquals(pt1.getSequence().isEmpty(), false);
-    	assertEquals(pt1.getSequence(), "AACCT");
+    	assertEquals(pt1.getSequence(), "ACGT$");
     	assertEquals(pt1.getPercentA(), 25.0, 0.00);
     	assertEquals(pt1.getPercentC(), 25.0, 0.00);
     	assertEquals(pt1.getPercentG(), 25.0, 0.00);

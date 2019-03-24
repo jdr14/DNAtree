@@ -9,8 +9,8 @@ import java.util.*;
  *
  */
 
-public class Dna{
-	
+public class Dna
+{	
 	/**
 	 * The root node for the initial DNA tree is
 	 * of type empty
@@ -77,10 +77,12 @@ public class Dna{
 			root = root.insert(newSeq);
 		}
 		String compareThis = outContent.toString();
-		if (!compareThis.equalsIgnoreCase("Error: Cannot insert duplicate Sequence.\n"))
+		if (!compareThis.equalsIgnoreCase("Error: "
+				+ "Cannot insert duplicate Sequence.\n"))
 		{
 			System.out.print("Sequence " + newSeq + 
-					" successfully inserted at depth: " + compareThis.substring( 0 , 2 ));
+					" successfully inserted at depth: " + 
+					compareThis.substring(0 , 2));
 			count++;
 		}
 		else
@@ -334,10 +336,10 @@ public class Dna{
 					String percentC = String.format("%.2f", pt.getPercentC());
 					String percentG = String.format("%.2f", pt.getPercentG());
 					String percentT = String.format("%.2f", pt.getPercentT());
-					out += (": A(" + percentA + "),");
-					out += (" C(" + percentC + "),");
-					out += (" G(" + percentG + "),");
-					out += (" T(" + percentT + ")");
+					out += (": A:" + percentA);
+					out += (" C:" + percentC);
+					out += (" G:" + percentG);
+					out += (" T:" + percentT);
 					break;
 				}
 			    // Finally, print out

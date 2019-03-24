@@ -49,6 +49,7 @@ public class DNAtree {
     		}
     		else if (command.equalsIgnoreCase("print"))
     		{
+    			System.out.println("tree dump:");
     			// Case: singular print command passed in
     			if (sequence.isEmpty())
     			{
