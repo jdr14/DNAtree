@@ -28,9 +28,12 @@ public class Node
 	 */
 	public boolean isInternal;
 	
+	/**
+	 * Default node constructor
+	 */
 	public Node()
 	{
-		
+
 	}
 	
     /**

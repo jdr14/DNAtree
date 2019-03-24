@@ -96,197 +96,217 @@ public class Dna{
 		root.search(currSeq);
 	}
 	
-//	private void searchPrint(Pair<Integer, Node> printThis)
-//	{
-//		System.out.println("# of nodes visited: " + printThis.getKey());
-//		if(printThis.getValue().getValue().getSequence() == null)
-//		{
-//			System.out.println("no sequence found");
-//		}
-//		else if (printThis.getValue().getValue().getSequence() == "")
-//		{
-//			System.out.println("no sequence found");
-//		}
-//		else
-//		{
-//			System.out.println("sequence: " + printThis.getValue().getValue().getSequence());
-//		}
-//	}
+	/**
+	 * Returns all the Nodes beginning with the prefix specified along with
+	 * the number of nodes visited
+	 * @param sequence as a prefix string
+	 * @return Pair of number of nodes visited and a list of sequences.
+	 */
+	public Pair<Integer, List<String>> searchByPrefix(String sequence)
+	{
+		List<String> retList = new ArrayList<String>();
+		
+		// Case: Tree contains no nodes
+		if (count == 0)
+		{
+			return new Pair<Integer, List<String>>(count, retList);
+		}
+		
+		// Case: Tree contains 1 node
+		else if (count == 1)
+		{
+			LeafNode ln = (LeafNode) root;
+			if (sequence.length() >= 1 && 
+					sequence.charAt(0) == ln.getSequence().charAt(0))
+			{
+				retList.add(ln.getSequence());
+				return new Pair<Integer, List<String>>(count, retList);
+			}
+			return new Pair<Integer, List<String>>(count, retList);
+		}
+		
+		// Case: Tree contains more than one node 
+		// This means we know that root node is an internal
+		Node tempRoot = root;
+        InternalNode in;
+        int nodesVisited = 0;
+		
+		for (int i = 0; i < sequence.length(); i++)
+		{
+			Character c = sequence.charAt(i);
+			
+		    if (c.equals('A'))
+		    {
+		    	in = (InternalNode) tempRoot;
+		    	tempRoot = in.getAChild();
+		    	nodesVisited += 1;
+		    }
+		    else if (c.equals('C'))
+		    {
+		    	in = (InternalNode) tempRoot;
+		    	tempRoot = in.getCChild();
+		    	nodesVisited += 1;
+		    }
+		    else if (c.equals('G'))
+		    {
+		    	in = (InternalNode) tempRoot;
+		    	tempRoot = in.getGChild();
+		    	nodesVisited += 1;
+		    }
+		    else if (c.equals('T'))
+		    {
+		    	in = (InternalNode) tempRoot;
+		    	tempRoot = in.getTChild();
+		    	nodesVisited += 1;
+		    }
+		    
+		    // If a Leaf node has been reached before end of the sequence
+		    if (!tempRoot.isInternal && tempRoot.hasInfo)
+		    {
+		    	LeafNode ln = (LeafNode) tempRoot;
+		    	if (ln.getSequence().startsWith(sequence))
+		    	{
+		    		retList.add(ln.getSequence());
+		    		return new Pair<Integer, List<String>>(nodesVisited, 
+		    				retList);
+		    	}
+		    	else
+		    	{
+		    		return new Pair<Integer, List<String>>(nodesVisited, 
+		    				retList);
+		    	}
+		    }
+		    // If a FlyWeight node has been reached before end of sequence
+		    else if (!tempRoot.isInternal && !tempRoot.hasInfo)
+		    {
+		    	return new Pair<Integer, List<String>>(nodesVisited, retList);
+		    }
+		}  // End for loop
+		
+		List<Pair<Integer, String>> preorderList = new 
+				ArrayList<Pair<Integer, String>>();
+		
+		// Add nodes contained in subtree in a preorder fashion
+		preorderHelp(tempRoot, preorderList);
+		
+		// Update the nodeVisited count
+		nodesVisited += preorderList.size();
+		
+		// Build the final returnList
+		for (int i = 0; i < preorderList.size(); i++)
+		{
+			String strVal = preorderList.get(i).getValue();
+			if (!strVal.equals("I") && !strVal.equals("E"))
+			{
+				retList.add(strVal);
+			}
+		}
+		
+		// Finally return...
+		return new Pair<Integer, List<String>>(nodesVisited, retList);
+	}
 
-//	/**
-//	 * Returns all the Nodes beginning with the prefix specified along with
-//	 * the number of nodes visited
-//	 * @param sequence
-//	 * @return
-//	 */
-//public Pair<Integer, List<String>> searchByPrefix(String sequence)
-//{
-//	Node tempRoot;
-//	if (root.isInternal)
-//	{
-//		tempRoot = new InternalNode(root.depth);
-//	}
-//	else if (root.isFlyWeight)
-//	{
-//		tempRoot = new FlyWeightNode(root.depth);
-//	}
-//	else if (root.isLeaf)
-//	{
-//		tempRoot = new LeafNode(root.depth);
-//	}
-//	//tempRoot = root;
-//	
-//	int nodesVisited = 0;
-//	
-//	for (int i = 0; i < sequence.length(); i++)
-//	{
-//	    if (tempRoot.isLeaf)
-//	    {
-//	    	break;
-//	    }
-//	    
-//	    Character c = sequence.charAt(i);
-//	    
-//	    if (c.equals('A'))
-//	    {
-//	    	tempRoot = tempRoot.aChild();
-//	    	nodesVisited += 1;
-//	    }
-//	    else if (c.equals('C'))
-//	    {
-//	    	tempRoot = tempRoot.cChild();
-//	    	nodesVisited += 1;
-//	    }
-//	    else if (c.equals('G'))
-//	    {
-//	    	tempRoot = tempRoot.gChild();
-//	    	nodesVisited += 1;
-//	    }
-//	    else if (c.equals('T'))
-//	    {
-//	    	tempRoot = tempRoot.tChild();
-//	    	nodesVisited += 1;
-//	    }
-//	}
-//	
-//	// Find all of the DNA info in the subtree of the tempRoot
-//      List<Pair<Integer, DNAType>> preorderList = 
-//      		new ArrayList<Pair<Integer, DNAType>>();
-//      preorderHelp(tempRoot, preorderList);
-//	
-//      // Update the number of nodes visited
-//      nodesVisited += preorderList.size();
-//      
-//      // Populate the subtree nodes
-//	List<DNAType> nodesInSubtree = new ArrayList<DNAType>();
-//	for (int i = 0; i < preorderList.size(); i++)
-//	{
-//		nodesInSubtree.add(preorderList.get(i).getValue());
-//	}
-//	
-//	// Create the return pair
-//	return new Pair<Integer, List<DNAType>>(nodesVisited, nodesInSubtree);
-//}
-//
-//	/**
-//	 * Return a list of all the DNATypes in a preorder fashion
-//	 * @return preorderList (tree nodes)
-//	 */
-//	private List<Pair<Integer, DNAType>> preorder()
-//	{
-//		List<Pair<Integer, DNAType>> preorderList = new 
-//				ArrayList<Pair<Integer, DNAType>>();
-//		preorderHelp(root, preorderList);
-//		return preorderList;
-//	}
-//	
-//	/**
-//	 * Return a list of the DNATypes in the DNATree in a preorder order.
-//	 * preorder = root, childA, childC, childG, childT, child$
-//	 * @param rt
-//	 * @param retList
-//	 * @return
-//	 */
-//	private void preorderHelp(Node<DNAType> rt, 
-//			List<Pair<Integer, DNAType>> retList)
-//	{
-//		if (rt == null)
-//		{
-//			return;
-//		}
-//		
-//		/*
-//		if (rt.aChild().getValue().isEmpty() && 
-//				rt.cChild().getValue().isEmpty() &&
-//				rt.gChild().getValue().isEmpty() &&
-//				rt.tChild().getValue().isEmpty() &&
-//				rt.$Child().getValue().isEmpty())
-//		{
-//			return;
-//		}
-//		*/
-//		
-//		Pair<Integer, DNAType> p = new 
-//				Pair<Integer, DNAType>(rt.getDepth(), rt.getValue());
-//		
-//		retList.add(p);
-//		preorderHelp(rt.aChild(), retList);
-//		preorderHelp(rt.cChild(), retList);
-//		preorderHelp(rt.gChild(), retList);
-//		preorderHelp(rt.tChild(), retList);
-//		preorderHelp(rt.$Child(), retList);
-//	}
-//	
-//	/**
-//	 * Method print called with no arguments which will then print out
-//	 * the tree in a preorder order
-//	 */
-//	public void print(PrintOptions option)
-//	{
-//		List<Pair<Integer, DNAType>> nodeInfo = preorder();
-//		
-//		for (int i = 0; i < nodeInfo.size(); i++)
-//		{
-//			Integer depth = nodeInfo.get(i).getKey();
-//			DNAType dna = nodeInfo.get(i).getValue();
-//			
-//			String spaces = new String(new char[depth]).replace("\0", "  ");
-//			String out = "";
-//			
-//			if (dna.isDNA())
-//			{
-//				out = spaces + dna.getSequence();
-//				
-//			    switch (option)
-//				{
-//				case DEFAULT:
-//					break;
-//				case LENGTHS:
-//					out += (": length: " + dna.getSequence().length());
-//					break;
-//				case STATS:
-//					String pa = String.format("%.2f", dna.getPercentA());
-//					String pc = String.format("%.2f", dna.getPercentC());
-//					String pg = String.format("%.2f", dna.getPercentG());
-//					String pt = String.format("%.2f", dna.getPercentT());
-//					out += (": A(" + pa + "),");
-//					out += (" C(" + pc + "),");
-//					out += (" G(" + pg + "),");
-//					out += (" T(" + pt + ")");
-//					break;
-//				}
-//			}
-//			else if (dna.isEmpty())
-//			{
-//				out = spaces + "E";
-//			}
-//			else if (dna.isInternal())
-//			{
-//				out = spaces + "I";
-//			}
-//			
-//			// Finally, print the output to console
-//			System.out.println(out);
-//		}
-//	}
+	/**
+	 * Return a list of all the DNATypes in a preorder fashion
+	 * @return preorderList (tree nodes)
+	 */
+	private List<Pair<Integer, String>> preorder()
+	{
+		List<Pair<Integer, String>> preorderList = new 
+				ArrayList<Pair<Integer, String>>();
+		preorderHelp(root, preorderList);
+		return preorderList;
+	}
+	
+	/**
+	 * Return a list of the DNATypes in the DNATree in a preorder order.
+	 * preorder = root, childA, childC, childG, childT, child$
+	 * @param rt
+	 * @param retList
+	 * @return
+	 */
+	private void preorderHelp(Node rt, 
+			List<Pair<Integer, String>> retList)
+	{
+		// If node is a Leaf 
+		if (rt.hasInfo)
+		{
+			LeafNode n = (LeafNode) rt;
+			retList.add(new Pair<Integer, String>(rt.depth, n.getSequence()));
+			return;
+		}
+		
+		// If node is a FlyWeight
+		if (!rt.hasInfo && !rt.isInternal)
+		{
+			retList.add(new Pair<Integer, String>(rt.depth, "E"));
+			return;
+		}
+		
+		// Node is internal
+		InternalNode in = (InternalNode) rt; 
+		retList.add(new Pair<Integer, String>(rt.depth, "I"));
+		
+		preorderHelp(in.getAChild(), retList);
+		preorderHelp(in.getCChild(), retList);
+		preorderHelp(in.getGChild(), retList);
+		preorderHelp(in.getTChild(), retList);
+		preorderHelp(in.get$Child(), retList);
+	}
+	
+	/**
+	 * Method print called with no arguments which will then print out
+	 * the tree in a preorder order
+	 */
+	public void print(PrintOptions option)
+	{
+		List<Pair<Integer, String>> nodeInfo = preorder();
+		
+		for (int i = 0; i < nodeInfo.size(); i++)
+		{
+			// Temp variables for node sequence and corresponding depth
+			Integer depth = nodeInfo.get(i).getKey();
+			String nodeSeq = nodeInfo.get(i).getValue();
+			
+			// Create spacing based on the depth of the node
+			String spaces = new String(new char[depth]).replace("\0", "  ");
+			String out = "";
+			
+			out = spaces + nodeSeq;
+			
+			// If the node sequence is an internal or empty node
+			if (nodeSeq.matches("I") || nodeSeq.matches("E"))
+			{
+			    System.out.println(out);
+			}
+			
+			else
+			{
+				// Handle all three print types using switch statement & enum
+			    switch (option)
+				{
+				case DEFAULT:
+					break;
+				case LENGTHS:
+					out += (": length: " + nodeSeq.length());
+					break;
+				case STATS:
+					PercentageType pt = new PercentageType(nodeSeq);
+					String percentA = String.format("%.2f", pt.getPercentA());
+					String percentC = String.format("%.2f", pt.getPercentC());
+					String percentG = String.format("%.2f", pt.getPercentG());
+					String percentT = String.format("%.2f", pt.getPercentT());
+					out += (": A(" + percentA + "),");
+					out += (" C(" + percentC + "),");
+					out += (" G(" + percentG + "),");
+					out += (" T(" + percentT + ")");
+					break;
+				}
+			    // Finally, print out
+				System.out.println(out);
+			}
+		}
+	}  // End print
+	
+
 }

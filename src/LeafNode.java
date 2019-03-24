@@ -236,7 +236,7 @@ public class LeafNode extends Node
 	 */
 	public void search (String newSeq)
 	{
-		System.out.println("# of nodes visited: " + (this.depth+1));
+		System.out.println("# of nodes visited: " + (this.depth + 1));
 		System.out.println("sequence: " + this.sequence);
 	}
 }
