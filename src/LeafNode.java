@@ -206,8 +206,7 @@ public class LeafNode extends Node
 			if (this.sequence.isEmpty())
 			{
 				this.sequence = newSeq;
-				System.out.println("Sequence " + this.sequence + 
-						" successfully inserted at depth " + this.depth);
+				System.err.println(this.depth);
 				return this;
 			}
 			else 

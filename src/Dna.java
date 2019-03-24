@@ -79,6 +79,8 @@ public class Dna{
 		String compareThis = outContent.toString();
 		if (!compareThis.equalsIgnoreCase("Error: Cannot insert duplicate Sequence.\n"))
 		{
+			System.out.print("Sequence " + newSeq + 
+					" successfully inserted at depth " + compareThis.substring( 0 , 2 ));
 			count++;
 		}
 		else
