@@ -4,13 +4,11 @@ import java.io.*;
  * 
  * @author Jovany Cabrera
  * @author Joey Rodgers
- * @param <V> is the value of the node
- * @verion 2
+ * @version 2.0
  *
  */
 public class Node 
 {
-	
 	/**
 	 * Depth of node
 	 */
@@ -33,11 +31,12 @@ public class Node
 	 */
 	public Node()
 	{
-
+        // Default constructor shouldn't set anything
 	}
 	
     /**
      * Provides a default constructor that sets everything to null
+     * @param d depth as integer
      */
 	public Node(int d)
 	{
@@ -48,16 +47,18 @@ public class Node
 	
 	/**
 	 * @param newSeq as sequence to insert
+	 * @return Node null
 	 */
-	public Node insert (String newSeq) 
+    public Node insert (String newSeq) 
 	{
 		return null;
 	};
 	
 	/**
 	 * @param oldSeq as sequence to remove
+	 * @return Node null
 	 */
-	public Node remove (String oldSeq) 
+    public Node remove (String oldSeq) 
 	{
 		return null;
 	};
@@ -65,6 +66,8 @@ public class Node
 	/**
 	 * @param newSeq as sequence to search for
 	 */
-	public void search (String newSeq) {};
-
+    public void search (String newSeq) 
+    {
+    	// Method for the subclasses
+    };
 }

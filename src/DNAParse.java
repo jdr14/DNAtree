@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class DNAParse extends Parse 
 {
-	/**
+    /**
 	 * Constructor which calls parent (Parse) constructor internally
 	 * @param fileName (file name of a file that exists passed in as a string)
 	 */
@@ -23,7 +23,6 @@ public class DNAParse extends Parse
 	}
 	
     /**
-     * @param fileName string for file name (File for reading)
      * @return a list of rectangles main function in the parsing class
      */
 	public List<Pair<String, String>> parseMain()
@@ -107,16 +106,4 @@ public class DNAParse extends Parse
 		
 		return newDNA;
 	}*/
-	
-	/**
-	 * Determine if the command specified as parameter is valid or not
-	 * @param cmd
-	 * @return boolean value based on if the command is valid or not within
-	 * the confines of the project description
-	 */
-//	private boolean commandValid(String cmd)
-//	{
-//		return (cmd.equalsIgnoreCase("search") || cmd.equalsIgnoreCase("insert") || 
-//				cmd.equalsIgnoreCase("remove") || cmd.equalsIgnoreCase("print"));
-//	}
 }
