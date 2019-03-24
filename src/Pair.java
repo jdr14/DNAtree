@@ -1,4 +1,11 @@
-
+/**
+ * Generic class that outlines a new type called pair that 
+ * pairs a key to a value (of custom types)
+ * @author Joey Rodgers jdr14
+ * @author Jovany Cabrera jovanyc4
+ * @param <K> Custom type k
+ * @param <V> Custom type v
+ */
 public class Pair<K, V> 
 {
 	/**
@@ -22,8 +29,8 @@ public class Pair<K, V>
     
     /**
      * Parameterized constructor
-     * @param k
-     * @param val
+     * @param k key to be set
+     * @param val value to be set
      */
     public Pair(K k, V val)
     {
@@ -33,7 +40,7 @@ public class Pair<K, V>
     
     /**
      * Method to set the key
-     * @param k
+     * @param k key to be set
      */
     public void setKey(K k)
     {
@@ -42,7 +49,7 @@ public class Pair<K, V>
     
     /**
      * Method to set the value
-     * @param v
+     * @param v value to be set
      */
     public void setValue(V v)
     {
@@ -51,7 +58,7 @@ public class Pair<K, V>
     
     /**
      * Method to get the key
-     * @return
+     * @return key K
      */
     public K getKey()
     {
@@ -60,7 +67,7 @@ public class Pair<K, V>
     
     /**
      * Method to get the value
-     * @return
+     * @return value V
      */
     public V getValue()
     {

@@ -2,6 +2,7 @@
  * InternalNode class that describes functionality of the internal nodes
  * @author Jovany Cabrera jovanyc4
  * @author Joey Rodgers jdr14
+ * @version 2.0
  */
 public class InternalNode extends Node
 {
@@ -99,7 +100,7 @@ public class InternalNode extends Node
 	
 	/**
 	 * 
-	 * @param $ of generic node
+	 * @param d of generic node
 	 */
 	public void setdChild(Node d)
 	{
@@ -155,7 +156,7 @@ public class InternalNode extends Node
 	 * @param newSeq as sequence to insert
 	 * @return Node as a reference
 	 */
-	public Node insert (String newSeq)
+	public Node insert(String newSeq)
 	{
 		// case where insert at $ branch
 		if (this.depth >= newSeq.length())
@@ -190,7 +191,7 @@ public class InternalNode extends Node
 	 * @param oldSeq as sequence to remove
 	 * @return Node as a reference
 	 */
-	public Node remove (String oldSeq)
+	public Node remove(String oldSeq)
 	{
 		// check case where need to remove $ child
 		if (this.depth >= oldSeq.length())
@@ -256,7 +257,7 @@ public class InternalNode extends Node
 	 * 
 	 * @return true if any child is a Leaf node
 	 */
-    private int hasChildren ()
+    private int hasChildren()
 	{
 		int result = 0;
 		if ((aChild.hasInfo) || (aChild.isInternal))
@@ -286,7 +287,7 @@ public class InternalNode extends Node
 	 * 
 	 * @return enum that tells which child is Leaf
 	 */
-    private int whichChild ()
+    private int whichChild()
 	{
 		int result = 0;
 		if (aChild.hasInfo)
@@ -315,7 +316,7 @@ public class InternalNode extends Node
 	/**
 	 * @param newSeq as sequence to search for
 	 */
-    public void search (String newSeq)
+    public void search(String newSeq)
 	{
 		if (this.depth >= (newSeq.length() - 1))
 		{

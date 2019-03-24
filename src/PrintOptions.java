@@ -6,7 +6,18 @@
  */
 public enum PrintOptions 
 {
+	/**
+	 * DEFAULT is the first option  for print
+	 */
     DEFAULT,
+    
+    /**
+     * LENGTHS is the second options for print
+     */
     LENGTHS,
+    
+    /**
+     * STATS is the third option for print
+     */
     STATS;
 }

@@ -1,4 +1,10 @@
-
+/**
+ * Class to outline a custom percentage type used in 
+ * the DNATree project
+ * @author Joey Rodgers jdr14
+ * @author Jovany Cabrera jovanyc4
+ *
+ */
 public class PercentageType 
 {
 	
@@ -27,7 +33,10 @@ public class PercentageType
 	private Double percentT;
 	
 	private String sequence;
-
+    
+	/**
+	 * Default constructor
+	 */
 	public PercentageType() 
 	{
 		this.sequence = "";
@@ -37,6 +46,10 @@ public class PercentageType
         this.percentT = 0.0;
 	}
 	
+	/**
+	 * Constructor to accept a sequence to be set internally
+	 * @param seq
+	 */
 	public PercentageType(String seq)
 	{
 		this.sequence = seq;
@@ -85,7 +98,7 @@ public class PercentageType
 	
 	/**
 	 * 
-	 * @param seq
+	 * @param seq DNA sequence as a string
 	 */
 	public void setSequence(String seq)
 	{
@@ -95,7 +108,7 @@ public class PercentageType
 	
 	/**
 	 * 
-	 * @return
+	 * @return sequence as a string
 	 */
 	public String getSequence()
 	{
@@ -115,7 +128,7 @@ public class PercentageType
 		Double countG = 0.0;
 		Double countT = 0.0;
 		
-		int count$ = 0;
+		int countd = 0;
 		
 		// Iterate through the sequence and obtain counts for each character
 		for (int i = 0; i < seq.length(); i++)
@@ -138,14 +151,14 @@ public class PercentageType
 			}
 			else if (seq.charAt(i) == '$')
 			{
-				count$++;
+				countd++;
 			}
 		}  // End for
 		
 		// Calculate the final percentages
-		percentA = (countA / (seq.length() - count$) ) * 100.00;
-		percentC = (countC / (seq.length() - count$) ) * 100.00;
-		percentG = (countG / (seq.length() - count$) ) * 100.00;
-		percentT = (countT / (seq.length() - count$) ) * 100.00;
+		percentA = (countA / (seq.length() - countd) ) * 100.00;
+		percentC = (countC / (seq.length() - countd) ) * 100.00;
+		percentG = (countG / (seq.length() - countd) ) * 100.00;
+		percentT = (countT / (seq.length() - countd) ) * 100.00;
 	}
 }
