@@ -11,12 +11,24 @@ public class InternalNode extends Node
 	 */
     private Node cChild;
     
+    /**
+     * 
+     */
     private Node gChild;
     
+    /**
+     * 
+     */
     private Node tChild;
     
+    /**
+     * 
+     */
     private Node $Child;
     
+    /**
+     *  default constructor
+     */
 	public InternalNode() 
 	{
 		super(0);
@@ -29,6 +41,10 @@ public class InternalNode extends Node
 		isInternal = true;
 	}
 	
+	/**
+	 * constructor to set depth
+	 * @param d
+	 */
 	public InternalNode(int d)
 	{
 		super(d);
@@ -40,78 +56,92 @@ public class InternalNode extends Node
 		hasInfo = false;
 		isInternal = true;
 	}
-	
-	public InternalNode(int d, Node a, 
-			Node c, Node g, Node t, Node $) 
-	{
-		super(d);
-		aChild = a;
-		cChild = c;
-		gChild = g;
-		tChild = t;
-		$Child = $;
-		hasInfo = false;
-		isInternal = true;
-	}
-	
-	public InternalNode(Node n)
-	{
-		super(n.depth);
-		
-		aChild = new FlyWeightNode(n.depth+1);
-		cChild = new FlyWeightNode(n.depth+1);
-		gChild = new FlyWeightNode(n.depth+1);
-		tChild = new FlyWeightNode(n.depth+1);
-		$Child = new FlyWeightNode(n.depth+1);
-		hasInfo = false;
-		isInternal = true;
-	}
     
+	/**
+	 * 
+	 * @param a of generic node
+	 */
 	public void setAChild(Node a)
 	{
 		aChild = a;
 	}
 	
+	/**
+	 * 
+	 * @param c of generic node
+	 */
 	public void setCChild(Node c)
 	{
 		cChild = c;
 	}
 	
+	/**
+	 * 
+	 * @param g of generic node
+	 */
 	public void setGChild(Node g)
 	{
 		gChild = g;
 	}
 	
+	/**
+	 * 
+	 * @param t of generic node
+	 */
 	public void setTChild(Node t)
 	{
 		tChild = t;
 	}
 	
+	/**
+	 * 
+	 * @param $ of generic node
+	 */
 	public void set$Child(Node $)
 	{
 		$Child = $;
 	}
 	
+	/**
+	 * 
+	 * @return the a child node
+	 */
 	public Node getAChild()
 	{
 		return aChild;
 	}
 	
+	/**
+	 * 
+	 * @return the c child node
+	 */
 	public Node getCChild()
 	{
 		return cChild;
 	}
 	
+	/**
+	 * 
+	 * @return the g child node
+	 */
 	public Node getGChild()
 	{
 		return gChild;
 	}
 	
+	/**
+	 * 
+	 * @return the t child node
+	 */
 	public Node getTChild()
 	{
 		return tChild;
 	}
 	
+	/**
+	 * 
+	 * @return the $ child node
+	 */
 	public Node get$Child()
 	{
 		return $Child;

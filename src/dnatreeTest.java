@@ -351,6 +351,21 @@ public class dnatreeTest extends TestCase
     	assertEquals(testTree1.getRoot().hasInfo, false);
     	assertEquals(testTree1.getRoot().isInternal, true);
     	
+    	// Test search for $ child
+    	testTree1.insert("C");
+    	assertEquals(testTree1.getCount(), 13);
+    	assertEquals(testTree1.getRoot().hasInfo, false);
+    	assertEquals(testTree1.getRoot().isInternal, true);
+    	
+    	// Test to remove T branch
+    	testTree1.insert("TAA");
+    	testTree1.remove("TAA");
+    	assertEquals(testTree1.getCount(), 13);
+    	assertEquals(testTree1.getRoot().hasInfo, false);
+    	assertEquals(testTree1.getRoot().isInternal, true);
+    	
+    	//Test 
+    	
     }
 }
 
