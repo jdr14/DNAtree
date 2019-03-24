@@ -105,8 +105,8 @@ public class Dna{
 			if (compareThis.equalsIgnoreCase("Error: "
 					+ "Sequence not found and not removed.\n"))
 			{
-				System.out.println("Error: "
-						+ "Sequence not found and not removed.");
+				System.out.println("sequence " + oldSeq
+						+ " does not exist");
 			}
 			else
 			{
