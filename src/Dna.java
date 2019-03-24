@@ -68,7 +68,6 @@ public class Dna{
 			root = new InternalNode();
 			root = root.insert(newSeq);
 			root = root.insert(oldRoot.getSequence());
-			count++;
 		}
 		// all other cases
 		else

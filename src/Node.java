@@ -17,9 +17,16 @@ public class Node
 	public int depth;
 	
 	/**
-	 * 
+	 * checks to see if node has information
+	 * needed for remove case
 	 */
 	public boolean hasInfo;
+	
+	/**
+	 * check to see if node is internal
+	 * needed for remove case
+	 */
+	public boolean isInternal;
 	
 	public Node()
 	{
@@ -33,6 +40,7 @@ public class Node
 	{
 		depth = d;
 		hasInfo = false;
+		isInternal = false;
 	}
 	
 	/**

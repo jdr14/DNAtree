@@ -26,6 +26,7 @@ public class InternalNode extends Node
 		tChild = new FlyWeightNode(1);
 		$Child = new FlyWeightNode(1);
 		hasInfo = false;
+		isInternal = true;
 	}
 	
 	public InternalNode(int d)
@@ -37,6 +38,7 @@ public class InternalNode extends Node
 		tChild = new FlyWeightNode(d+1);
 		$Child = new FlyWeightNode(d+1);
 		hasInfo = false;
+		isInternal = true;
 	}
 	
 	public InternalNode(int d, Node a, 
@@ -49,6 +51,7 @@ public class InternalNode extends Node
 		tChild = t;
 		$Child = $;
 		hasInfo = false;
+		isInternal = true;
 	}
 	
 	public InternalNode(Node n)
@@ -61,6 +64,7 @@ public class InternalNode extends Node
 		tChild = new FlyWeightNode(n.depth+1);
 		$Child = new FlyWeightNode(n.depth+1);
 		hasInfo = false;
+		isInternal = true;
 	}
     
 	public void setAChild(Node a)
@@ -185,22 +189,27 @@ public class InternalNode extends Node
 			int checkThis = this.whichChild();
 			if (checkThis == 1)
 			{
+				this.aChild.depth--;
 				return this.aChild;
 			}
 			else if (checkThis == 2)
 			{
+				this.cChild.depth--;
 				return this.cChild;
 			}
 			else if (checkThis == 3)
 			{
+				this.gChild.depth--;
 				return this.gChild;
 			}
 			else if (checkThis == 4)
 			{
+				this.tChild.depth--;
 				return this.tChild;
 			}
 			else if (checkThis == 5)
 			{
+				this.$Child.depth--;
 				return this.$Child;
 			}
 		}
@@ -214,23 +223,23 @@ public class InternalNode extends Node
 	private int hasChildren ()
 	{
 		int result = 0;
-		if (aChild.hasInfo)
+		if ((aChild.hasInfo) || (aChild.isInternal))
 		{
 			result++;
 		}
-		if (cChild.hasInfo)
+		if ((cChild.hasInfo) || (cChild.isInternal))
 		{
 			result++;
 		}
-		if (gChild.hasInfo)
+		if ((gChild.hasInfo) || (gChild.isInternal))
 		{
 			result++;
 		}
-		if (tChild.hasInfo)
+		if ((tChild.hasInfo) || (tChild.isInternal))
 		{
 			result++;
 		}
-		if ($Child.hasInfo)
+		if (($Child.hasInfo) || ($Child.isInternal))
 		{
 			result++;
 		}
@@ -250,19 +259,19 @@ public class InternalNode extends Node
 		}
 		else if (cChild.hasInfo)
 		{
-			result++;
+			result = 2;
 		}
 		else if (gChild.hasInfo)
 		{
-			result++;
+			result = 3;
 		}
 		else if (tChild.hasInfo)
 		{
-			result++;
+			result = 4;
 		}
 		else if ($Child.hasInfo)
 		{
-			result++;
+			result = 5;
 		}
 		return result;
 	}
