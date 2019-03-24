@@ -54,7 +54,10 @@ public class Dna{
 	 */
 	public void insert(String newSeq)
 	{
-//		insertHelp(newSeq);
+		// ADD BOOL
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setErr(new PrintStream(outContent));
+		
 		// case where tree is empty
 		if (count == 0)
 		{
@@ -73,7 +76,15 @@ public class Dna{
 		{
 			root = root.insert(newSeq);
 		}
-		count++;
+		String compareThis = outContent.toString();
+		if (!compareThis.equalsIgnoreCase("Error: Cannot insert duplicate Sequence.\n"))
+		{
+			count++;
+		}
+		else
+		{
+			System.out.println("Error: Cannot insert duplicate Sequence.");
+		}
 	}
 	
 	/**
@@ -82,8 +93,25 @@ public class Dna{
 	 */
 	public void remove(String oldSeq)
 	{
-		root = root.remove(oldSeq);
-		count--;
+		if (this.count > 0)
+		{
+			ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+			System.setErr(new PrintStream(outContent));
+			root = root.remove(oldSeq);
+			String compareThis = outContent.toString();
+			if (compareThis.equalsIgnoreCase("Error: Sequence not found and not removed.\n"))
+			{
+				System.out.println("Error: Sequence not found and not removed.");
+			}
+			else
+			{
+				count--;
+			}
+		}
+		else
+		{
+			System.out.println("Error: Cannot call remove on an empty tree");
+		}
 	}
 	
     /**
@@ -93,7 +121,14 @@ public class Dna{
      */
 	public void search (String currSeq)
 	{
-		root.search(currSeq);
+		if (this.count > 0)
+		{
+			root.search(currSeq);
+		}
+		else
+		{
+			System.out.println("Error: Cannot search on an empty tree.");
+		}
 	}
 	
 //	private void searchPrint(Pair<Integer, Node> printThis)

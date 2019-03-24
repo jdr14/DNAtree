@@ -45,17 +45,11 @@ public class DNAtree {
     		}
     		else if (command.equalsIgnoreCase("remove"))
     		{
-    			if(tree.getCount() > 0)
-    			{
-    				tree.remove(sequence);    // call remove function
-    			}
+				tree.remove(sequence);    // call remove function
     		}
     		else if (command.equalsIgnoreCase("search"))
     		{
-    			if(tree.getCount() > 0)
-    			{
-    				tree.search(sequence);    // call remove function
-    			}
+				tree.search(sequence);    // call search function
     		}
 //    		else if (command.equalsIgnoreCase("print"))
 //    		{
