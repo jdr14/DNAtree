@@ -93,7 +93,7 @@ public class Dna
 	
 	/**
 	 * 
-	 * @param node of type DNAType
+	 * @param oldSeq
 	 */
 	public void remove(String oldSeq)
 	{
@@ -103,9 +103,11 @@ public class Dna
 			System.setErr(new PrintStream(outContent));
 			root = root.remove(oldSeq);
 			String compareThis = outContent.toString();
-			if (compareThis.equalsIgnoreCase("Error: Sequence not found and not removed.\n"))
+			if (compareThis.equalsIgnoreCase("Error: "
+					+ "Sequence not found and not removed.\n"))
 			{
-				System.out.println("Error: Sequence not found and not removed.");
+				System.out.println("Error: "
+						+ "Sequence not found and not removed.");
 			}
 			else
 			{
@@ -120,7 +122,7 @@ public class Dna
 	
     /**
      * 
-     * @param node of type DNAType
+     * @param currSeq
      * @return
      */
 	public void search (String currSeq)
