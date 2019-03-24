@@ -4,6 +4,7 @@
  * FlyWeight nodes
  * @author Joey Rodgers jdr14
  * @author Jovany Cabrera jovanyc4
+ * @version 2.0
  */
 public class FlyWeightNode extends Node
 {
@@ -31,7 +32,7 @@ public class FlyWeightNode extends Node
 	 * @param newSeq as sequence to insert
 	 * @return Node (return the new Child (ref to root) as Node
 	 */
-	public Node insert (String newSeq)
+	public Node insert(String newSeq)
 	{
 		LeafNode newChild = new LeafNode(this.depth);
 		newChild.insert(newSeq);
@@ -41,7 +42,7 @@ public class FlyWeightNode extends Node
 	/**
 	 * @param oldSeq as sequence to remove
 	 */
-	public Node remove (String oldSeq)
+	public Node remove(String oldSeq)
 	{
 		System.err.println("Error: Sequence not found and not removed.");
 		return this;
@@ -50,7 +51,7 @@ public class FlyWeightNode extends Node
 	/**
 	 * @param newSeq as sequence to search for
 	 */
-    public void search (String newSeq)
+    public void search(String newSeq)
 	{
 		System.out.println("# of nodes visited: " + (this.depth + 1));
 		System.out.println("no sequence found");

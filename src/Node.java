@@ -49,7 +49,7 @@ public class Node
 	 * @param newSeq as sequence to insert
 	 * @return Node null
 	 */
-    public Node insert (String newSeq) 
+    public Node insert(String newSeq) 
 	{
 		return null;
 	};
@@ -58,7 +58,7 @@ public class Node
 	 * @param oldSeq as sequence to remove
 	 * @return Node null
 	 */
-    public Node remove (String oldSeq) 
+    public Node remove(String oldSeq) 
 	{
 		return null;
 	};
@@ -66,7 +66,7 @@ public class Node
 	/**
 	 * @param newSeq as sequence to search for
 	 */
-    public void search (String newSeq) 
+    public void search(String newSeq) 
     {
     	// Method for the subclasses
     };

@@ -1,10 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Class created to handle the parsing of input files and writing output
@@ -15,7 +12,7 @@ import java.util.Scanner;
  */
 public abstract class Parse
 {
-	private String fileName;
+    private String fileName;
 	
 	/**
 	 * Constructor which sets the fileName private field

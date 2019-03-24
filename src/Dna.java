@@ -11,7 +11,7 @@ import java.util.*;
 
 public class Dna
 {
-	/**
+    /**
 	 * The root node for the initial DNA tree is
 	 * of type empty
 	 */
@@ -126,7 +126,7 @@ public class Dna
      * @param currSeq sequence to be searched
      * @return
      */
-    public void search (String currSeq)
+    public void search(String currSeq)
 	{
 		if (this.count > 0)
 		{
@@ -337,10 +337,14 @@ public class Dna
 				    	break;
 				    case STATS:
 				    	PercentageType pt = new PercentageType(nodeSeq);
-				    	String percentA = String.format("%.2f", pt.getPercentA());
-				    	String percentC = String.format("%.2f", pt.getPercentC());
-				    	String percentG = String.format("%.2f", pt.getPercentG());
-				    	String percentT = String.format("%.2f", pt.getPercentT());
+				    	String percentA = String.format("%.2f", 
+				    			pt.getPercentA());
+				    	String percentC = String.format("%.2f", 
+				    			pt.getPercentC());
+				    	String percentG = String.format("%.2f", 
+				    			pt.getPercentG());
+				    	String percentT = String.format("%.2f", 
+				    			pt.getPercentT());
 				    	out += (" A:" + percentA);
 				    	out += (" C:" + percentC);
 				    	out += (" G:" + percentG);
