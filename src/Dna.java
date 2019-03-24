@@ -9,8 +9,8 @@ import java.util.*;
  *
  */
 
-public class Dna
-{	
+public class Dna{
+	
 	/**
 	 * The root node for the initial DNA tree is
 	 * of type empty
@@ -77,8 +77,7 @@ public class Dna
 			root = root.insert(newSeq);
 		}
 		String compareThis = outContent.toString();
-		if (!compareThis.equalsIgnoreCase("Error: "
-				+ "Cannot insert duplicate Sequence.\n"))
+		if (!compareThis.equalsIgnoreCase("Error: Cannot insert duplicate Sequence.\n"))
 		{
 			System.out.print("sequence " + newSeq + 
 					" inserted at level " + compareThis.substring( 0 , 2 ));
@@ -92,7 +91,7 @@ public class Dna
 	
 	/**
 	 * 
-	 * @param oldSeq
+	 * @param node of type DNAType
 	 */
 	public void remove(String oldSeq)
 	{
@@ -102,11 +101,9 @@ public class Dna
 			System.setErr(new PrintStream(outContent));
 			root = root.remove(oldSeq);
 			String compareThis = outContent.toString();
-			if (compareThis.equalsIgnoreCase("Error: "
-					+ "Sequence not found and not removed.\n"))
+			if (compareThis.equalsIgnoreCase("Error: Sequence not found and not removed.\n"))
 			{
-				System.out.println("Error: "
-						+ "Sequence not found and not removed.");
+				System.out.println("Error: Sequence not found and not removed.");
 			}
 			else
 			{
@@ -122,7 +119,7 @@ public class Dna
 	
     /**
      * 
-     * @param currSeq
+     * @param node of type DNAType
      * @return
      */
 	public void search (String currSeq)
@@ -338,10 +335,10 @@ public class Dna
 					String percentC = String.format("%.2f", pt.getPercentC());
 					String percentG = String.format("%.2f", pt.getPercentG());
 					String percentT = String.format("%.2f", pt.getPercentT());
-					out += (": A:" + percentA);
-					out += (" C:" + percentC);
-					out += (" G:" + percentG);
-					out += (" T:" + percentT);
+					out += (": A(" + percentA + "),");
+					out += (" C(" + percentC + "),");
+					out += (" G(" + percentG + "),");
+					out += (" T(" + percentT + ")");
 					break;
 				}
 			    // Finally, print out
