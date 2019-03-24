@@ -80,8 +80,8 @@ public class Dna{
 		if (!compareThis.equalsIgnoreCase("Error: "
 				+ "Cannot insert duplicate Sequence.\n"))
 		{
-			System.out.print("sequence " + newSeq + 
-					" inserted at level " + compareThis.substring( 0 , 2 ));
+			System.out.println("sequence " + newSeq + 
+					" inserted at level " + compareThis.charAt(compareThis.length()-2));
 			count++;
 		}
 		else
