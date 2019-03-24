@@ -330,7 +330,7 @@ public class Dna
 				case DEFAULT:
 					break;
 				case LENGTHS:
-					out += (": length: " + nodeSeq.length());
+					out += (" " + nodeSeq.length());
 					break;
 				case STATS:
 					PercentageType pt = new PercentageType(nodeSeq);
@@ -338,7 +338,7 @@ public class Dna
 					String percentC = String.format("%.2f", pt.getPercentC());
 					String percentG = String.format("%.2f", pt.getPercentG());
 					String percentT = String.format("%.2f", pt.getPercentT());
-					out += (": A:" + percentA);
+					out += (" A:" + percentA);
 					out += (" C:" + percentC);
 					out += (" G:" + percentG);
 					out += (" T:" + percentT);
