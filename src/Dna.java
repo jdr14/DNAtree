@@ -60,21 +60,22 @@ public class Dna{
 		if (count == 0)
 		{
 			root = root.insert(newSeq);
-			count++;
 		}
 		// case where root node is a Leaf
 		else if (count == 1)
 		{
-			LeafNode oldRoot = (LeafNode) root;
+			LeafNode oldRoot =  (LeafNode) root;
 			root = new InternalNode();
 			root = root.insert(newSeq);
 			root = root.insert(oldRoot.getSequence());
+			count++;
 		}
 		// all other cases
 		else
 		{
 			root = root.insert(newSeq);
 		}
+		count++;
 	}
 	
 	/**

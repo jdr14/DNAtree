@@ -115,7 +115,7 @@ public class InternalNode extends Node
 	public Node insert (String newSeq)
 	{
 		// case where insert at $ branch
-		if (depth > newSeq.length())
+		if (this.depth >= newSeq.length())
 		{
 			$Child = $Child.insert(newSeq);
 		}

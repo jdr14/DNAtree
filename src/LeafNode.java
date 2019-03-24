@@ -195,20 +195,26 @@ public class LeafNode extends Node
 	 */
 	public Node insert (String newSeq)
 	{
-		// case where
-		if (this.sequence == "")
-		{
-			this.sequence = newSeq;
-			this.depth++;
-			return this;
+		// check to see if duplicate is being inserted
+		if (!this.sequence.equalsIgnoreCase(newSeq))
+		{    // if new leaf node (no previous sequence)
+			if (this.sequence == "")
+			{
+				this.sequence = newSeq;
+				return this;
+			}
+			else 
+			{    // previous node had a sequence
+				InternalNode newNode = new InternalNode(depth);
+				newNode.insert(this.sequence);
+				newNode.insert(newSeq);
+				return newNode;
+				
+			}
 		}
-		else 
-		{
-			InternalNode newNode = new InternalNode(depth);
-			newNode.insert(this.sequence);
-			newNode.insert(newSeq);
-			return newNode;
-			
+		else
+		{    // if duplicate, return original
+			return this;
 		}
 	}
 	

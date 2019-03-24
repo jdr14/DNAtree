@@ -17,8 +17,12 @@ public class FlyWeightNode extends Node
 	 */
 	public Node insert (String newSeq)
 	{
-		LeafNode newChild = new LeafNode();
+		LeafNode newChild = new LeafNode(this.depth);
 		newChild.insert(newSeq);
+		if (depth != 0)
+		{
+//			newChild.depth++;
+		}
 		return newChild;
 	}
 	
