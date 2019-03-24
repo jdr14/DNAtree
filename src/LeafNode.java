@@ -78,7 +78,22 @@ public class LeafNode extends Node
 	 */
 	public Node remove(String oldSeq)
 	{
-		return new FlyWeightNode(this.depth);
+		if ((this.depth == 0))
+		{  // case of root
+			if (this.sequence.equalsIgnoreCase(oldSeq))
+			{
+				return new FlyWeightNode(this.depth);
+			}
+			else
+			{
+				System.err.println("Error: Sequence not found and not removed.");
+				return this;
+			}
+		}
+		else
+		{
+			return new FlyWeightNode(this.depth);
+		}
 	}
 	
 	/**
