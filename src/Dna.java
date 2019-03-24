@@ -79,8 +79,8 @@ public class Dna{
 		String compareThis = outContent.toString();
 		if (!compareThis.equalsIgnoreCase("Error: Cannot insert duplicate Sequence.\n"))
 		{
-			System.out.print("Sequence " + newSeq + 
-					" successfully inserted at depth: " + compareThis.substring( 0 , 2 ));
+			System.out.print("sequence " + newSeq + 
+					" inserted at level " + compareThis.substring( 0 , 2 ));
 			count++;
 		}
 		else
@@ -107,6 +107,7 @@ public class Dna{
 			}
 			else
 			{
+				System.out.println("sequence " + oldSeq + " removed");
 				count--;
 			}
 		}
