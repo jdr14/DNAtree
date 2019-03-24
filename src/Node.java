@@ -16,6 +16,11 @@ public class Node
 	 */
 	public int depth;
 	
+	/**
+	 * 
+	 */
+	public boolean hasInfo;
+	
 	public Node()
 	{
 		
@@ -27,6 +32,7 @@ public class Node
 	public Node(int d)
 	{
 		depth = d;
+		hasInfo = false;
 	}
 	
 	/**
@@ -40,7 +46,10 @@ public class Node
 	/**
 	 * @param oldSeq as sequence to remove
 	 */
-	public void remove (String oldSeq) {};
+	public Node remove (String oldSeq) 
+	{
+		return null;
+	};
 	
 	/**
 	 * @param newSeq as sequence to search for

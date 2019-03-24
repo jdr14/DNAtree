@@ -43,6 +43,7 @@ public class LeafNode extends Node
 	{
 		super(0);
 		sequence = "";
+		hasInfo = true;
 	}
 	
 	/**
@@ -53,6 +54,7 @@ public class LeafNode extends Node
 	{
 		super(d);
 		sequence = "";
+		hasInfo = true;
 	}
 	
 	/**
@@ -64,6 +66,7 @@ public class LeafNode extends Node
 		super(0);
 		sequence = seq;
 		calculatePercentages(seq);
+		hasInfo = true;
 	}
 	
 	/**
@@ -76,6 +79,7 @@ public class LeafNode extends Node
 		super(d);
 		sequence = seq;
 		calculatePercentages(seq);
+		hasInfo = true;
 	}
 	
 	/**
@@ -88,6 +92,7 @@ public class LeafNode extends Node
 		super(n.depth);
 		sequence = seq;
 		calculatePercentages(seq);
+		hasInfo = true;
 	}
     
 	/**
@@ -221,9 +226,9 @@ public class LeafNode extends Node
 	/**
 	 * @param oldSeq as sequence to remove
 	 */
-	public void remove (String oldSeq)
+	public Node remove (String oldSeq)
 	{
-		
+		return new FlyWeightNode(this.depth);
 	}
 	
 	/**

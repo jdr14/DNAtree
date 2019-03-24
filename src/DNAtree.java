@@ -43,13 +43,13 @@ public class DNAtree {
     		{
     			tree.insert(sequence);    // call insert method
     		}
-//    		else if (command.equalsIgnoreCase("remove"))
-//    		{
-//    			if(tree.getCount() > 0)
-//    			{
-//    				tree.remove(sequence);    // call remove function
-//    			}
-//    		}
+    		else if (command.equalsIgnoreCase("remove"))
+    		{
+    			if(tree.getCount() > 0)
+    			{
+    				tree.remove(sequence);    // call remove function
+    			}
+    		}
 //    		else if (command.equalsIgnoreCase("print"))
 //    		{
 //    			// Case: singular print command passed in

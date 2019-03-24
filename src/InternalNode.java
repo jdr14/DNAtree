@@ -25,6 +25,7 @@ public class InternalNode extends Node
 		gChild = new FlyWeightNode(1);
 		tChild = new FlyWeightNode(1);
 		$Child = new FlyWeightNode(1);
+		hasInfo = false;
 	}
 	
 	public InternalNode(int d)
@@ -35,6 +36,7 @@ public class InternalNode extends Node
 		gChild = new FlyWeightNode(d+1);
 		tChild = new FlyWeightNode(d+1);
 		$Child = new FlyWeightNode(d+1);
+		hasInfo = false;
 	}
 	
 	public InternalNode(int d, Node a, 
@@ -46,6 +48,7 @@ public class InternalNode extends Node
 		gChild = g;
 		tChild = t;
 		$Child = $;
+		hasInfo = false;
 	}
 	
 	public InternalNode(Node n)
@@ -57,6 +60,7 @@ public class InternalNode extends Node
 		gChild = new FlyWeightNode(n.depth+1);
 		tChild = new FlyWeightNode(n.depth+1);
 		$Child = new FlyWeightNode(n.depth+1);
+		hasInfo = false;
 	}
     
 	public void setAChild(Node a)
@@ -119,6 +123,7 @@ public class InternalNode extends Node
 		{
 			$Child = $Child.insert(newSeq);
 		}
+		// case where more traversal is needed
 		else
 		{
 			Character currentChar = newSeq.charAt(depth);
@@ -145,9 +150,121 @@ public class InternalNode extends Node
 	/**
 	 * @param oldSeq as sequence to remove
 	 */
-	public void remove (String oldSeq)
+	public Node remove (String oldSeq)
 	{
-		
+		// check case where need to remove $ child
+		if (this.depth >= oldSeq.length())
+		{
+			$Child = $Child.remove(oldSeq);
+		}
+		// case where more traversal is needed
+		else
+		{
+			Character currentChar = oldSeq.charAt(depth);
+			if (currentChar.equals('A'))
+			{    // go down the A branch
+				aChild = this.aChild.remove(oldSeq);
+			}
+			else if (currentChar.equals('C'))
+			{    // go down the C branch
+				cChild = this.cChild.remove(oldSeq);
+			}
+			else if (currentChar.equals('G'))
+			{    // go down the G branch
+				gChild = this.gChild.remove(oldSeq);
+			}
+			else if (currentChar.equals('T'))
+			{    // go down the T branch
+				tChild = this.tChild.remove(oldSeq);
+			}
+		}
+		// MUST HAVE CHECK TO SEE IF THIS CHECK IS NECESSARY
+		// check if node has any more children
+		if (this.hasChildren() == 1)
+		{
+			int checkThis = this.whichChild();
+			if (checkThis == 1)
+			{
+				return this.aChild;
+			}
+			else if (checkThis == 2)
+			{
+				return this.cChild;
+			}
+			else if (checkThis == 3)
+			{
+				return this.gChild;
+			}
+			else if (checkThis == 4)
+			{
+				return this.tChild;
+			}
+			else if (checkThis == 5)
+			{
+				return this.$Child;
+			}
+		}
+		return this;
+	}
+	
+	/**
+	 * 
+	 * @return true if any child is a Leaf node
+	 */
+	private int hasChildren ()
+	{
+		int result = 0;
+		if (aChild.hasInfo)
+		{
+			result++;
+		}
+		if (cChild.hasInfo)
+		{
+			result++;
+		}
+		if (gChild.hasInfo)
+		{
+			result++;
+		}
+		if (tChild.hasInfo)
+		{
+			result++;
+		}
+		if ($Child.hasInfo)
+		{
+			result++;
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @return enum that tells which child is Leaf
+	 */
+	private int whichChild ()
+	{
+		int result = 0;
+		if (aChild.hasInfo)
+		{
+			result++;
+		}
+		else if (cChild.hasInfo)
+		{
+			result++;
+		}
+		else if (gChild.hasInfo)
+		{
+			result++;
+		}
+		else if (tChild.hasInfo)
+		{
+			result++;
+		}
+		else if ($Child.hasInfo)
+		{
+			result++;
+		}
+		return result;
 	}
 	
 	/**

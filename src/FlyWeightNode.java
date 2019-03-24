@@ -5,11 +5,13 @@ public class FlyWeightNode extends Node
 	public FlyWeightNode()
 	{
 		super();
+		hasInfo = false;
 	}
 	
 	public FlyWeightNode(int d) 
 	{
 		super(d);
+		hasInfo = false;
 	}
 	
 	/**
@@ -19,19 +21,15 @@ public class FlyWeightNode extends Node
 	{
 		LeafNode newChild = new LeafNode(this.depth);
 		newChild.insert(newSeq);
-		if (depth != 0)
-		{
-//			newChild.depth++;
-		}
 		return newChild;
 	}
 	
 	/**
 	 * @param oldSeq as sequence to remove
 	 */
-	public void remove (String oldSeq)
+	public Node remove (String oldSeq)
 	{
-		
+		return this;
 	}
 	
 	/**

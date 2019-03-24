@@ -51,7 +51,7 @@ public class Dna{
 	
 	/**
 	 * 
-	 * @param node of type Node<DNAType>
+	 * @param newSeq is sequence being inserted
 	 */
 	public void insert(String newSeq)
 	{
@@ -76,6 +76,16 @@ public class Dna{
 			root = root.insert(newSeq);
 		}
 		count++;
+	}
+	
+	/**
+	 * 
+	 * @param node of type DNAType
+	 */
+	public void remove(String oldSeq)
+	{
+		root = root.remove(oldSeq);
+		count--;
 	}
 	
 	/**
@@ -379,15 +389,7 @@ public class Dna{
 //		return result;
 //	}
 //	
-//	/**
-//	 * 
-//	 * @param node of type DNAType
-//	 */
-//	public void remove(String oldSeq)
-//	{
-//		removeHelp((InternalNode) root, oldSeq);
-//		count--;
-//	}
+
 //	
 //	/**
 //	 * 
