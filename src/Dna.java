@@ -80,7 +80,7 @@ public class Dna{
 		if (!compareThis.equalsIgnoreCase("Error: Cannot insert duplicate Sequence.\n"))
 		{
 			System.out.print("Sequence " + newSeq + 
-					" successfully inserted at depth " + compareThis.substring( 0 , 2 ));
+					" successfully inserted at depth: " + compareThis.substring( 0 , 2 ));
 			count++;
 		}
 		else
@@ -129,7 +129,8 @@ public class Dna{
 		}
 		else
 		{
-			System.out.println("Error: Cannot search on an empty tree.");
+			System.out.println("# of nodes visited: 0");
+			System.out.println("no sequence found");
 		}
 	}
 	
