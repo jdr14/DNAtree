@@ -203,7 +203,7 @@ public class LeafNode extends Node
 		// check to see if duplicate is being inserted
 		if (!this.sequence.equalsIgnoreCase(newSeq))
 		{    // if new leaf node (no previous sequence)
-			if (this.sequence == "")
+			if (this.sequence.isEmpty())
 			{
 				this.sequence = newSeq;
 				return this;
@@ -236,6 +236,7 @@ public class LeafNode extends Node
 	 */
 	public void search (String newSeq)
 	{
-		
+		System.out.println("# of nodes visited: " + (this.depth+1));
+		System.out.println("sequence: " + this.sequence);
 	}
 }

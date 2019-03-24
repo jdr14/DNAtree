@@ -281,6 +281,29 @@ public class InternalNode extends Node
 	 */
 	public void search (String newSeq)
 	{
-		
+		if (this.depth >= newSeq.length())
+		{
+			this.$Child.search(newSeq);
+		}
+		else
+		{
+			Character currentChar = newSeq.charAt(depth);
+			if (currentChar.equals('A'))
+			{    // go down the A branch
+				this.aChild.search(newSeq);
+			}
+			else if (currentChar.equals('C'))
+			{    // go down the C branch
+				this.cChild.search(newSeq);
+			}
+			else if (currentChar.equals('G'))
+			{    // go down the G branch
+				this.gChild.search(newSeq);
+			}
+			else if (currentChar.equals('T'))
+			{    // go down the T branch
+				this.tChild.search(newSeq);
+			}
+		}
 	}
 }

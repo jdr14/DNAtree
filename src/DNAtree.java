@@ -50,6 +50,13 @@ public class DNAtree {
     				tree.remove(sequence);    // call remove function
     			}
     		}
+    		else if (command.equalsIgnoreCase("search"))
+    		{
+    			if(tree.getCount() > 0)
+    			{
+    				tree.search(sequence);    // call remove function
+    			}
+    		}
 //    		else if (command.equalsIgnoreCase("print"))
 //    		{
 //    			// Case: singular print command passed in
@@ -116,26 +123,6 @@ public class DNAtree {
     	return new ArrayList<String>();
     }
     
-    /**
-	 * 
-	 * @param node
-	 */
-	/*private static void setChildrenEmpty(Node<DNAType> node)
-	{
-		DNAType innerEmplaceThis = new DNAType(Types.EMPTY, null, null);
-		Node<DNAType> emplaceThis = new Node<DNAType>(innerEmplaceThis);
-		node.setAChild(emplaceThis);
-		node.aChild().setDepth(node.getDepth()+1);
-		node.setCChild(emplaceThis);
-		node.cChild().setDepth(node.getDepth()+1);
-		node.setGChild(emplaceThis);
-		node.gChild().setDepth(node.getDepth()+1);
-		node.setTChild(emplaceThis);
-		node.tChild().setDepth(node.getDepth()+1);
-		node.set$Child(emplaceThis);
-		node.$Child().setDepth(node.getDepth()+1);
-	}*/
-	
     /**
      * Main loop for the DNA Node Tree project (i.e. project 2)
      * Ties the project functionality together

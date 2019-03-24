@@ -37,7 +37,8 @@ public class FlyWeightNode extends Node
 	 */
 	public void search (String newSeq)
 	{
-		
+		System.out.println("# of nodes visited: " + (this.depth+1));
+		System.out.println("no sequence found");
 	}
 
 }
