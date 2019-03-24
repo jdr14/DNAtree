@@ -206,6 +206,8 @@ public class LeafNode extends Node
 			if (this.sequence.isEmpty())
 			{
 				this.sequence = newSeq;
+				System.out.println("Sequence " + this.sequence + 
+						" successfully inserted at depth " + this.depth);
 				return this;
 			}
 			else 
@@ -219,6 +221,8 @@ public class LeafNode extends Node
 		}
 		else
 		{    // if duplicate, return original
+			// MUST THROW ERROR HERE
+			System.err.println("Error: Cannot insert duplicate Sequence.");
 			return this;
 		}
 	}

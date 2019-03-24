@@ -30,6 +30,7 @@ public class FlyWeightNode extends Node
 	 */
 	public Node remove (String oldSeq)
 	{
+		System.err.println("Error: Sequence not found and not removed.");
 		return this;
 	}
 	

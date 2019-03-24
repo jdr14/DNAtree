@@ -281,7 +281,7 @@ public class InternalNode extends Node
 	 */
 	public void search (String newSeq)
 	{
-		if (this.depth >= newSeq.length())
+		if (this.depth >= (newSeq.length() - 1))
 		{
 			this.$Child.search(newSeq);
 		}
