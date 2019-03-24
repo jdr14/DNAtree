@@ -48,15 +48,21 @@ public class DNAParse extends Parse
 					
 					if (listedLine.size() == 2)
 					{
-						parsedList.add(new Pair(listedLine.get(0), 
+						parsedList.add(new 
+								Pair<String, String>(listedLine.get(0), 
 								listedLine.get(1)));
 					}
 					else if (listedLine.size() == 1)
 					{
-						parsedList.add(new Pair(listedLine.get(0), ""));
+						parsedList.add(new 
+								Pair<String, String>(listedLine.get(0), ""));
 					}
 				}
 			}
+			
+			// Close the file stream
+			inFileStream.close();
+			
 			return parsedList;
 		}
 		catch (FileNotFoundException err)

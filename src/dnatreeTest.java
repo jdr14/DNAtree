@@ -95,6 +95,7 @@ public class dnatreeTest extends TestCase
 //        assertEquals(dnaType.getPercentT(), 25.00, 0.00);
 //    }
 //    
+    
     // Use this to test the Dna.java class containing the tree methods
     public void testDna()
     {	
