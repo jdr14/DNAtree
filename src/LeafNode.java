@@ -200,12 +200,16 @@ public class LeafNode extends Node
 		{
 			this.sequence = newSeq;
 			this.depth++;
+			return this;
 		}
 		else 
 		{
+			InternalNode newNode = new InternalNode(depth);
+			newNode.insert(this.sequence);
+			newNode.insert(newSeq);
+			return newNode;
 			
 		}
-		return this;
 	}
 	
 	/**
