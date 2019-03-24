@@ -10,7 +10,7 @@ import java.util.*;
 @SuppressWarnings("unused")
 public class DNAtree 
 {
-	/**
+    /**
 	 * Switch variable for the local print function
 	 */
 	private static boolean isQuiet = true;
@@ -111,13 +111,10 @@ public class DNAtree
      * @author: Joey Rogders jdr14
      * @author: Jovany Cabrera jovanyc4
      * @version 1.0.0
-     * @param args
+     * @param args should contain an appropriate file name for testing
      */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-//		boolean isQuiet = false;
-		
+	public static void main(String[] args) 
+	{	
 		if (args.length != 1)
 		{
 			System.out.println("Failed because of an incorrect "

@@ -8,14 +8,14 @@
  */
 public class LeafNode extends Node
 {
-	/**
+    /**
 	 * To store the sequence of the node
 	 */
     private String sequence;
 	
 	/**
 	 * Constructor that will set the depth
-	 * @param d
+	 * @param d depth as integer
 	 */
 	public LeafNode(int d)
 	{
@@ -35,7 +35,7 @@ public class LeafNode extends Node
 	
 	/**
 	 * 
-	 * @param seq
+	 * @param seq sequence as a string
 	 */
 	public void setSequence(String seq)
 	{
@@ -44,6 +44,7 @@ public class LeafNode extends Node
 	
 	/**
 	 * @param newSeq as sequence to insert
+	 * @return Node as a reference
 	 */
 	public Node insert(String newSeq)
 	{
@@ -75,6 +76,7 @@ public class LeafNode extends Node
 	
 	/**
 	 * @param oldSeq as sequence to remove
+	 * @return Node as a reference
 	 */
 	public Node remove(String oldSeq)
 	{

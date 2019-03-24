@@ -1,4 +1,8 @@
-
+/**
+ * InternalNode class that describes functionality of the internal nodes
+ * @author Jovany Cabrera jovanyc4
+ * @author Joey Rodgers jdr14
+ */
 public class InternalNode extends Node
 {
 	/**
@@ -24,7 +28,7 @@ public class InternalNode extends Node
     /**
      * 
      */
-    private Node $Child;
+    private Node dChild;
     
     /**
      *  default constructor
@@ -36,23 +40,23 @@ public class InternalNode extends Node
 		cChild = new FlyWeightNode(1);
 		gChild = new FlyWeightNode(1);
 		tChild = new FlyWeightNode(1);
-		$Child = new FlyWeightNode(1);
+		dChild = new FlyWeightNode(1);
 		hasInfo = false;
 		isInternal = true;
 	}
 	
 	/**
 	 * constructor to set depth
-	 * @param d
+	 * @param d depth as an integer
 	 */
 	public InternalNode(int d)
 	{
 		super(d);
-		aChild = new FlyWeightNode(d+1);
-		cChild = new FlyWeightNode(d+1);
-		gChild = new FlyWeightNode(d+1);
-		tChild = new FlyWeightNode(d+1);
-		$Child = new FlyWeightNode(d+1);
+		aChild = new FlyWeightNode(d + 1);
+		cChild = new FlyWeightNode(d + 1);
+		gChild = new FlyWeightNode(d + 1);
+		tChild = new FlyWeightNode(d + 1);
+		dChild = new FlyWeightNode(d + 1);
 		hasInfo = false;
 		isInternal = true;
 	}
@@ -97,9 +101,9 @@ public class InternalNode extends Node
 	 * 
 	 * @param $ of generic node
 	 */
-	public void set$Child(Node $)
+	public void setdChild(Node d)
 	{
-		$Child = $;
+		dChild = d;
 	}
 	
 	/**
@@ -142,20 +146,21 @@ public class InternalNode extends Node
 	 * 
 	 * @return the $ child node
 	 */
-	public Node get$Child()
+	public Node getdChild()
 	{
-		return $Child;
+		return dChild;
 	}
 	
 	/**
 	 * @param newSeq as sequence to insert
+	 * @return Node as a reference
 	 */
 	public Node insert (String newSeq)
 	{
 		// case where insert at $ branch
 		if (this.depth >= newSeq.length())
 		{
-			$Child = $Child.insert(newSeq);
+			dChild = dChild.insert(newSeq);
 		}
 		// case where more traversal is needed
 		else
@@ -183,13 +188,14 @@ public class InternalNode extends Node
 	
 	/**
 	 * @param oldSeq as sequence to remove
+	 * @return Node as a reference
 	 */
 	public Node remove (String oldSeq)
 	{
 		// check case where need to remove $ child
 		if (this.depth >= oldSeq.length())
 		{
-			$Child = $Child.remove(oldSeq);
+			dChild = dChild.remove(oldSeq);
 		}
 		// case where more traversal is needed
 		else
@@ -239,8 +245,8 @@ public class InternalNode extends Node
 			}
 			else if (checkThis == 5)
 			{
-				this.$Child.depth--;
-				return this.$Child;
+				this.dChild.depth--;
+				return this.dChild;
 			}
 		}
 		return this;
@@ -250,7 +256,7 @@ public class InternalNode extends Node
 	 * 
 	 * @return true if any child is a Leaf node
 	 */
-	private int hasChildren ()
+    private int hasChildren ()
 	{
 		int result = 0;
 		if ((aChild.hasInfo) || (aChild.isInternal))
@@ -269,7 +275,7 @@ public class InternalNode extends Node
 		{
 			result++;
 		}
-		if (($Child.hasInfo) || ($Child.isInternal))
+		if ((dChild.hasInfo) || (dChild.isInternal))
 		{
 			result++;
 		}
@@ -280,7 +286,7 @@ public class InternalNode extends Node
 	 * 
 	 * @return enum that tells which child is Leaf
 	 */
-	private int whichChild ()
+    private int whichChild ()
 	{
 		int result = 0;
 		if (aChild.hasInfo)
@@ -299,7 +305,7 @@ public class InternalNode extends Node
 		{
 			result = 4;
 		}
-		else if ($Child.hasInfo)
+		else if (dChild.hasInfo)
 		{
 			result = 5;
 		}
@@ -309,11 +315,11 @@ public class InternalNode extends Node
 	/**
 	 * @param newSeq as sequence to search for
 	 */
-	public void search (String newSeq)
+    public void search (String newSeq)
 	{
 		if (this.depth >= (newSeq.length() - 1))
 		{
-			this.$Child.search(newSeq);
+			this.dChild.search(newSeq);
 		}
 		else
 		{

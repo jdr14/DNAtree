@@ -9,8 +9,8 @@ import java.util.*;
  *
  */
 
-public class Dna{
-	
+public class Dna
+{
 	/**
 	 * The root node for the initial DNA tree is
 	 * of type empty
@@ -81,7 +81,8 @@ public class Dna{
 				+ "Cannot insert duplicate Sequence.\n"))
 		{
 			System.out.println("sequence " + newSeq + 
-					" inserted at level " + compareThis.charAt(compareThis.length()-2));
+					" inserted at level " + 
+					compareThis.charAt(compareThis.length() - 2));
 			count++;
 		}
 		else
@@ -92,7 +93,7 @@ public class Dna{
 	
 	/**
 	 * 
-	 * @param oldSeq
+	 * @param oldSeq the sequence to be removed
 	 */
 	public void remove(String oldSeq)
 	{
@@ -122,10 +123,10 @@ public class Dna{
 	
     /**
      * 
-     * @param currSeq
+     * @param currSeq sequence to be searched
      * @return
      */
-	public void search (String currSeq)
+    public void search (String currSeq)
 	{
 		if (this.count > 0)
 		{
@@ -293,12 +294,14 @@ public class Dna{
 		preorderHelp(in.getCChild(), retList);
 		preorderHelp(in.getGChild(), retList);
 		preorderHelp(in.getTChild(), retList);
-		preorderHelp(in.get$Child(), retList);
+		preorderHelp(in.getdChild(), retList);
 	}
 	
 	/**
 	 * Method print called with no arguments which will then print out
 	 * the tree in a preorder order
+	 * @param option enumerated list of options to determine which print will
+	 * execute...
 	 */
 	public void print(PrintOptions option)
 	{
@@ -327,22 +330,25 @@ public class Dna{
 				// Handle all three print types using switch statement & enum
 			    switch (option)
 				{
-				case DEFAULT:
-					break;
-				case LENGTHS:
-					out += (" " + nodeSeq.length());
-					break;
-				case STATS:
-					PercentageType pt = new PercentageType(nodeSeq);
-					String percentA = String.format("%.2f", pt.getPercentA());
-					String percentC = String.format("%.2f", pt.getPercentC());
-					String percentG = String.format("%.2f", pt.getPercentG());
-					String percentT = String.format("%.2f", pt.getPercentT());
-					out += (" A:" + percentA);
-					out += (" C:" + percentC);
-					out += (" G:" + percentG);
-					out += (" T:" + percentT);
-					break;
+				    case DEFAULT:
+					    break;
+				    case LENGTHS:
+				    	out += (" " + nodeSeq.length());
+				    	break;
+				    case STATS:
+				    	PercentageType pt = new PercentageType(nodeSeq);
+				    	String percentA = String.format("%.2f", pt.getPercentA());
+				    	String percentC = String.format("%.2f", pt.getPercentC());
+				    	String percentG = String.format("%.2f", pt.getPercentG());
+				    	String percentT = String.format("%.2f", pt.getPercentT());
+				    	out += (" A:" + percentA);
+				    	out += (" C:" + percentC);
+				    	out += (" G:" + percentG);
+				    	out += (" T:" + percentT);
+				    	break;
+				    default:
+				    	// do nothing
+				    	break;
 				}
 			    // Finally, print out
 				System.out.println(out);
