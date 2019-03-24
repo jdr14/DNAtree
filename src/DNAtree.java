@@ -8,18 +8,22 @@ import java.util.*;
  * @version 1.0.0
  */
 @SuppressWarnings("unused")
-public class DNAtree {
-	
+public class DNAtree 
+{
+	/**
+	 * Switch variable for the local print function
+	 */
 	private static boolean isQuiet = true;
     
 	/**
 	 * 
-	 * @param msg
-	 * @param quiet
+	 * @param msg the message as a string to be printed
+	 * @param quiet the variable that will determine if the message gets
+	 * printed or not
 	 */
 	public static void print(String msg, boolean quiet)
 	{
-		if(!quiet)
+		if (!quiet)
 		{
 			System.out.println(msg);
 		}
@@ -31,7 +35,7 @@ public class DNAtree {
 	 * @return
 	 */
     private static List<String> 
-    runInstructions(List<Pair<String, String>> dnaList)
+        runInstructions(List<Pair<String, String>> dnaList)
     {	
     	Dna tree = new Dna();
     	for (int i = 0; i < dnaList.size(); i++)
@@ -39,7 +43,7 @@ public class DNAtree {
     		String command = dnaList.get(i).getKey();
     		String sequence = dnaList.get(i).getValue();
     		
-    		if(command.equalsIgnoreCase("insert"))
+    		if (command.equalsIgnoreCase("insert"))
     		{
     			tree.insert(sequence);    // call insert method
     		}
