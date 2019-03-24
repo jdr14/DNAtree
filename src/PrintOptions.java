@@ -6,9 +6,9 @@
  */
 public enum PrintOptions 
 {
-	/**
-	 * DEFAULT is the first option  for print
-	 */
+    /**
+     * DEFAULT is the first option  for print
+     */
     DEFAULT,
     
     /**

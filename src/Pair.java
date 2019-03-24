@@ -5,12 +5,13 @@
  * @author Jovany Cabrera jovanyc4
  * @param <K> Custom type k
  * @param <V> Custom type v
+ * @version 1.1.0
  */
 public class Pair<K, V> 
 {
-	/**
-	 * key to be paired with the value
-	 */
+    /**
+     * key to be paired with the value
+     */
     private K key;
     
     /**
@@ -23,8 +24,8 @@ public class Pair<K, V>
      */
     public Pair()
     {
-    	key = null;
-    	value = null;
+        key = null;
+        value = null;
     }
     
     /**
@@ -34,8 +35,8 @@ public class Pair<K, V>
      */
     public Pair(K k, V val)
     {
-    	key = k;
-    	value = val;
+        key = k;
+        value = val;
     }
     
     /**
@@ -44,7 +45,7 @@ public class Pair<K, V>
      */
     public void setKey(K k)
     {
-    	key = k;
+        key = k;
     }
     
     /**
@@ -53,7 +54,7 @@ public class Pair<K, V>
      */
     public void setValue(V v)
     {
-    	value = v;
+        value = v;
     }
     
     /**
@@ -62,7 +63,7 @@ public class Pair<K, V>
      */
     public K getKey()
     {
-    	return key;
+        return key;
     }
     
     /**
@@ -71,6 +72,6 @@ public class Pair<K, V>
      */
     public V getValue()
     {
-    	return value;
+        return value;
     }
 }
