@@ -332,6 +332,25 @@ public class dnatreeTest extends TestCase
     	// Test remove of node that does not exist
     	testTree1.remove("GAA");
     	assertEquals(testTree1.getCount(), 13);
+    	
+    	// Test search for list of nodes
+    	testTree1.search("AA");
+    	assertEquals(testTree1.getCount(), 13);
+    	assertEquals(testTree1.getRoot().hasInfo, false);
+    	assertEquals(testTree1.getRoot().isInternal, true);
+    	
+    	// Test search for exact node
+    	testTree1.search("AAAA$");
+    	assertEquals(testTree1.getCount(), 13);
+    	assertEquals(testTree1.getRoot().hasInfo, false);
+    	assertEquals(testTree1.getRoot().isInternal, true);
+    	
+    	// Test search for non existing node
+    	testTree1.search("GAGA");
+    	assertEquals(testTree1.getCount(), 13);
+    	assertEquals(testTree1.getRoot().hasInfo, false);
+    	assertEquals(testTree1.getRoot().isInternal, true);
+    	
     }
 }
 
