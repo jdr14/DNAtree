@@ -115,6 +115,8 @@ public class PercentageType
 		Double countG = 0.0;
 		Double countT = 0.0;
 		
+		int count$ = 0;
+		
 		// Iterate through the sequence and obtain counts for each character
 		for (int i = 0; i < seq.length(); i++)
 		{
@@ -134,12 +136,16 @@ public class PercentageType
 			{
 				countT++;
 			}
+			else if (seq.charAt(i) == '$')
+			{
+				count$++;
+			}
 		}  // End for
 		
 		// Calculate the final percentages
-		percentA = (countA / seq.length()) * 100.00;
-		percentC = (countC / seq.length()) * 100.00;
-		percentG = (countG / seq.length()) * 100.00;
-		percentT = (countT / seq.length()) * 100.00;
+		percentA = (countA / (seq.length() - count$) ) * 100.00;
+		percentC = (countC / (seq.length() - count$) ) * 100.00;
+		percentG = (countG / (seq.length() - count$) ) * 100.00;
+		percentT = (countT / (seq.length() - count$) ) * 100.00;
 	}
 }

@@ -114,9 +114,9 @@ public class DNAParse extends Parse
 	 * @return boolean value based on if the command is valid or not within
 	 * the confines of the project description
 	 */
-	private boolean commandValid(String cmd)
-	{
-		return (cmd.equalsIgnoreCase("search") || cmd.equalsIgnoreCase("insert") || 
-				cmd.equalsIgnoreCase("remove") || cmd.equalsIgnoreCase("print"));
-	}
+//	private boolean commandValid(String cmd)
+//	{
+//		return (cmd.equalsIgnoreCase("search") || cmd.equalsIgnoreCase("insert") || 
+//				cmd.equalsIgnoreCase("remove") || cmd.equalsIgnoreCase("print"));
+//	}
 }

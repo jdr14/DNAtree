@@ -96,6 +96,90 @@ public class dnatreeTest extends TestCase
 //    }
 //    
     
+    public void testDNAParse()
+    {
+    	DNAParse p = new DNAParse("test2.txt");
+    	List<Pair<String, String>> listedIn = p.parseMain();
+    	
+    	assertEquals(listedIn.get(0).getKey(), "insert");
+    	assertEquals(listedIn.get(0).getValue(), "ACGT");
+    	assertEquals(listedIn.get(1).getKey(), "print");
+    	assertEquals(listedIn.get(1).getValue().isEmpty(), true);
+    	assertEquals(listedIn.get(2).getKey(), "print");
+    	assertEquals(listedIn.get(2).getValue(), "lengths");
+    	assertEquals(listedIn.get(3).getKey(), "print");
+    	assertEquals(listedIn.get(3).getValue(), "stats");
+    	assertEquals(listedIn.get(4).getKey(), "search");
+    	assertEquals(listedIn.get(4).getValue(), "ACGT");
+    	assertEquals(listedIn.get(5).getKey(), "remove");
+    	assertEquals(listedIn.get(5).getValue(), "ACGT");
+    	assertEquals(listedIn.get(6).getKey(), "invalid");
+    	assertEquals(listedIn.get(6).getValue(), "command");
+    }
+    
+    public void testPrintOptions()
+    {
+    	PrintOptions p;
+    	p = PrintOptions.DEFAULT;
+    	assertEquals(p, PrintOptions.DEFAULT);
+    	p = PrintOptions.LENGTHS;
+    	assertEquals(p, PrintOptions.LENGTHS);
+    	p = PrintOptions.STATS;
+    	assertEquals(p, PrintOptions.STATS);
+    }
+    
+    public void testPercentageType()
+    {
+    	String s1 = "ACGT$";
+    	String s2 = "AACCT";
+    	PercentageType pt1 = new PercentageType();
+    	PercentageType pt2 = new PercentageType(s2);
+    	
+    	// Test Default constructor first
+    	assertEquals(pt1.getSequence().isEmpty(), true);
+    	assertEquals(pt1.getPercentA(), 0.0, 0.0);
+    	assertEquals(pt1.getPercentC(), 0.0, 0.0);
+    	assertEquals(pt1.getPercentG(), 0.0, 0.0);
+    	assertEquals(pt1.getPercentT(), 0.0, 0.0);
+    	
+    	// Test the setSequence method
+    	pt1.setSequence(s1);
+    	assertEquals(pt1.getSequence().isEmpty(), false);
+    	assertEquals(pt1.getSequence(), "AACCT");
+    	assertEquals(pt1.getPercentA(), 25.0, 0.00);
+    	assertEquals(pt1.getPercentC(), 25.0, 0.00);
+    	assertEquals(pt1.getPercentG(), 25.0, 0.00);
+    	assertEquals(pt1.getPercentT(), 25.0, 0.00);
+    	
+    	// Test the 2nd constructor
+    	assertEquals(pt2.getSequence().isEmpty(), false);
+    	assertEquals(pt2.getSequence(), "AACCT");
+    	assertEquals(pt2.getPercentA(), 40.0, 0.00);
+    	assertEquals(pt2.getPercentC(), 40.0, 0.00);
+    	assertEquals(pt2.getPercentG(), 0.00, 0.00);
+    	assertEquals(pt2.getPercentT(), 20.0, 0.00);
+    }
+    
+    public void testPair()
+    {
+        Pair<Integer, String> p = new Pair<Integer, String>();
+        Pair<Integer, String> p2 = new Pair<Integer, String>(2, "test");
+        
+        p.setKey(1);
+        p.setValue("testing");
+        
+        int i = p.getKey();
+        String j = p.getValue();
+        
+        assertEquals(i, 1);
+        assertEquals(j, "testing");
+        
+        i = p2.getKey();
+        j = p2.getValue();
+        assertEquals(i, 2);
+        assertEquals(j, "test");
+    }
+    
     // Use this to test the Dna.java class containing the tree methods
     public void testDna()
     {	
