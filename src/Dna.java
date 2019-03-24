@@ -80,14 +80,13 @@ public class Dna
 		if (!compareThis.equalsIgnoreCase("Error: "
 				+ "Cannot insert duplicate Sequence.\n"))
 		{
-			System.out.print("Sequence " + newSeq + 
-					" successfully inserted at depth: " + 
-					compareThis.substring(0 , 2));
+			System.out.print("sequence " + newSeq + 
+					" inserted at level " + compareThis.substring( 0 , 2 ));
 			count++;
 		}
 		else
 		{
-			System.out.println("Error: Cannot insert duplicate Sequence.");
+			System.out.println("sequence " + newSeq + " already exists");
 		}
 	}
 	
@@ -111,12 +110,13 @@ public class Dna
 			}
 			else
 			{
+				System.out.println("sequence " + oldSeq + " removed");
 				count--;
 			}
 		}
 		else
 		{
-			System.out.println("Error: Cannot call remove on an empty tree");
+			System.out.println("sequence " + oldSeq + " does not exist");
 		}
 	}
 	
