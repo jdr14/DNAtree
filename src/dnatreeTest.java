@@ -1,6 +1,5 @@
-//import java.io.ByteArrayOutputStream;
-//import java.io.PrintStream;
-import java.io.*;
+// import java.io.ByteArrayOutputStream;
+// import java.io.PrintStream;
 import java.util.*;
 
 import student.TestCase;
@@ -12,7 +11,7 @@ import student.TestCase;
  * @version 2.1.3
  *
  */
-public class dnatreeTest extends TestCase
+public class DnaTreeTest extends TestCase
 {
     private Dna testTree1;
     
@@ -328,45 +327,45 @@ public class dnatreeTest extends TestCase
      */    
     public void testSearch()
     {
-    	// test for search call on  an empty tree
-    	systemOut().clearHistory();
-    	testTree1.search("ACGT$");
-    	assertEquals("# of nodes visited: 1\r\n" + 
-    			"no sequence found\n", systemOut().getHistory());
-    	
-    	// case where sequence being searched it almost exactly like other
-    	testTree1.insert("ACGT");
-    	testTree1.insert("ACGTT");
-    	systemOut().clearHistory();
-    	testTree1.search("ACGT$");
-    	testTree1.search("ACGTT$");
-    	assertEquals("# of nodes visited: 6\r\n" + 
-    			"sequence: ACGT\r\n" + 
-    			"# of nodes visited: 6\r\n" + 
-    			"sequence: ACGTT\n", systemOut().getHistory());
-    	
-    	// test where all nodes removed and search for old node
-    	// on an empty tree
-    	testTree1.remove("ACGT");
-    	testTree1.remove("ACGTT");
-    	systemOut().clearHistory();
-    	testTree1.search("ACGTT$");
-    	assertEquals("# of nodes visited: 1\r\n" + 
-    			"no sequence found\n", systemOut().getHistory());
-    	
-    	// test where sequence is similar to node but not match
-    	testTree1.insert("A");
-    	testTree1.insert("AA");
-    	systemOut().clearHistory();
-    	testTree1.search("AC$");
-    	assertEquals("# of nodes visited: 3\r\n" + 
-    			"no sequence found\n", systemOut().getHistory());
-    	
-    	// test search AAA$ does not exist but AA does
-    	systemOut().clearHistory();
-    	testTree1.search("AAA$");
-    	assertEquals("# of nodes visited: 3\r\n" + 
-    			"no sequence found\n", systemOut().getHistory());
+        // test for search call on  an empty tree
+        systemOut().clearHistory();
+        testTree1.search("ACGT$");
+        assertEquals("# of nodes visited: 1\r\n" + 
+                "no sequence found\n", systemOut().getHistory());
+        
+        // case where sequence being searched it almost exactly like other
+        testTree1.insert("ACGT");
+        testTree1.insert("ACGTT");
+        systemOut().clearHistory();
+        testTree1.search("ACGT$");
+        testTree1.search("ACGTT$");
+        assertEquals("# of nodes visited: 6\r\n" + 
+                "sequence: ACGT\r\n" + 
+                "# of nodes visited: 6\r\n" + 
+                "sequence: ACGTT\n", systemOut().getHistory());
+        
+        // test where all nodes removed and search for old node
+        // on an empty tree
+        testTree1.remove("ACGT");
+        testTree1.remove("ACGTT");
+        systemOut().clearHistory();
+        testTree1.search("ACGTT$");
+        assertEquals("# of nodes visited: 1\r\n" + 
+                "no sequence found\n", systemOut().getHistory());
+        
+        // test where sequence is similar to node but not match
+        testTree1.insert("A");
+        testTree1.insert("AA");
+        systemOut().clearHistory();
+        testTree1.search("AC$");
+        assertEquals("# of nodes visited: 3\r\n" + 
+                "no sequence found\n", systemOut().getHistory());
+        
+        // test search AAA$ does not exist but AA does
+        systemOut().clearHistory();
+        testTree1.search("AAA$");
+        assertEquals("# of nodes visited: 3\r\n" + 
+                "no sequence found\n", systemOut().getHistory());
     }
     
     /**
@@ -374,24 +373,24 @@ public class dnatreeTest extends TestCase
      */
     public void testRemove()
     {
-    	// test for try to remove on an empty tree
-    	systemOut().clearHistory();
-    	testTree1.remove("AC");
-    	assertEquals("sequence AC does not exist\n", systemOut().getHistory());
-    	
-    	// test tree size = 1 remove sequence not in tree
-    	testTree1.insert("AC");
-    	systemOut().clearHistory();
-    	testTree1.remove("AG");
-    	assertEquals("sequence AG does not exist\n", systemOut().getHistory());
-    	
-    	// test tree size = 2 remove sequence not in tree
-    	testTree1.insert("AC");
-    	testTree1.insert("ACC");
-    	systemOut().clearHistory();
-    	testTree1.remove("ACCG");
-    	assertEquals("sequence ACCG does not "
-    			+ "exist\n", systemOut().getHistory());
+        // test for try to remove on an empty tree
+        systemOut().clearHistory();
+        testTree1.remove("AC");
+        assertEquals("sequence AC does not exist\n", systemOut().getHistory());
+        
+        // test tree size = 1 remove sequence not in tree
+        testTree1.insert("AC");
+        systemOut().clearHistory();
+        testTree1.remove("AG");
+        assertEquals("sequence AG does not exist\n", systemOut().getHistory());
+        
+        // test tree size = 2 remove sequence not in tree
+        testTree1.insert("AC");
+        testTree1.insert("ACC");
+        systemOut().clearHistory();
+        testTree1.remove("ACCG");
+        assertEquals("sequence ACCG does not "
+                + "exist\n", systemOut().getHistory());
     }
     
     /**
@@ -399,11 +398,11 @@ public class dnatreeTest extends TestCase
      */
     public void testLeafNode()
     {
-    	LeafNode testNode = new LeafNode(0);
-    	
-    	// test set sequence function
-    	testNode.setSequence("ACC");
-    	assertEquals(testNode.getSequence(), "ACC");
+        LeafNode testNode = new LeafNode(0);
+        
+        // test set sequence function
+        testNode.setSequence("ACC");
+        assertEquals(testNode.getSequence(), "ACC");
     }
     
     /**
@@ -411,23 +410,23 @@ public class dnatreeTest extends TestCase
      */
     public void testInternalNode()
     {
-    	// parent node
-    	InternalNode testNode = new InternalNode();
-    	
-    	//children node
-    	testNode.setAChild(new FlyWeightNode());
-    	testNode.setCChild(new FlyWeightNode());
-    	testNode.setGChild(new FlyWeightNode());
-    	testNode.setTChild(new FlyWeightNode());
-    	testNode.setdChild(new FlyWeightNode());
-    	
-    	testNode.getAChild();
-    	testNode.getCChild();
-    	testNode.getGChild();
-    	testNode.getTChild();
-    	testNode.getdChild();
-    	
-    	assertEquals(testNode.depth, 0);
+        // parent node
+        InternalNode testNode = new InternalNode();
+        
+        //children node
+        testNode.setAChild(new FlyWeightNode());
+        testNode.setCChild(new FlyWeightNode());
+        testNode.setGChild(new FlyWeightNode());
+        testNode.setTChild(new FlyWeightNode());
+        testNode.setdChild(new FlyWeightNode());
+        
+        testNode.getAChild();
+        testNode.getCChild();
+        testNode.getGChild();
+        testNode.getTChild();
+        testNode.getdChild();
+        
+        assertEquals(testNode.depth, 0);
     }
     
     /**
@@ -435,36 +434,36 @@ public class dnatreeTest extends TestCase
      */
     public void testSearchByPrefix()
     {
-    	// Test for empty tree
-    	Pair<Integer, List<String>> result = testTree1.searchByPrefix("AA");
-    	assertEquals((int) result.getKey(), (int) 1);
-    	assertEquals(result.getValue().isEmpty(), true);
-    	
-    	// Test for 1 node in the tree
-    	testTree1.insert("A");
-    	result = testTree1.searchByPrefix("C");
-    	assertEquals(result.getValue().isEmpty(), true);
-    	result = testTree1.searchByPrefix("G");
-    	assertEquals(result.getValue().isEmpty(), true);
-    	result = testTree1.searchByPrefix("T");
-    	assertEquals(result.getValue().isEmpty(), true);
+        // Test for empty tree
+        Pair<Integer, List<String>> result = testTree1.searchByPrefix("AA");
+        assertEquals((int) result.getKey(), (int) 1);
+        assertEquals(result.getValue().isEmpty(), true);
         
-    	testTree1 = new Dna();
-    	testTree1.insert("GCC");
-    	result = testTree1.searchByPrefix("GAA");
-    	assertEquals(result.getValue().isEmpty(), true);
-    	
-    	testTree1.insert("A");
+        // Test for 1 node in the tree
+        testTree1.insert("A");
+        result = testTree1.searchByPrefix("C");
+        assertEquals(result.getValue().isEmpty(), true);
+        result = testTree1.searchByPrefix("G");
+        assertEquals(result.getValue().isEmpty(), true);
+        result = testTree1.searchByPrefix("T");
+        assertEquals(result.getValue().isEmpty(), true);
+        
+        testTree1 = new Dna();
+        testTree1.insert("GCC");
+        result = testTree1.searchByPrefix("GAA");
+        assertEquals(result.getValue().isEmpty(), true);
+        
+        testTree1.insert("A");
         result = testTree1.searchByPrefix("AA");
-    	assertEquals((int) result.getKey(), (int) 2);
-    	assertEquals(result.getValue().isEmpty(), true);
-    	result = testTree1.searchByPrefix("A");
-    	assertEquals((int) result.getKey(), (int) 2);
-    	assertEquals(result.getValue().isEmpty(), false);
-    	assertEquals(result.getValue().get(0), "A");
-    	
-    	// Create another empty tree for testing
-    	testTree1 = new Dna();
+        assertEquals((int) result.getKey(), (int) 2);
+        assertEquals(result.getValue().isEmpty(), true);
+        result = testTree1.searchByPrefix("A");
+        assertEquals((int) result.getKey(), (int) 2);
+        assertEquals(result.getValue().isEmpty(), false);
+        assertEquals(result.getValue().get(0), "A");
+        
+        // Create another empty tree for testing
+        testTree1 = new Dna();
         testTree1.insert("ACGT");     
         testTree1.insert("AAAA");
         testTree1.insert("AA");     
@@ -472,58 +471,58 @@ public class dnatreeTest extends TestCase
         testTree1.insert("ACTGGGAA");
         
         result = testTree1.searchByPrefix("A");
-    	assertEquals((int) result.getKey(), (int) 22);
-    	assertEquals(result.getValue().isEmpty(), false);
-    	assertEquals(result.getValue().get(0), "AAAA");
-    	assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
-    	assertEquals(result.getValue().get(2), "AA");
-    	assertEquals(result.getValue().get(3), "ACGT");
-    	assertEquals(result.getValue().get(4), "ACTGGGAA");
-    	
-    	result = testTree1.searchByPrefix("AA");
-    	assertEquals((int) result.getKey(), (int) 13);
-    	assertEquals(result.getValue().isEmpty(), false);
-    	assertEquals(result.getValue().get(0), "AAAA");
-    	assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
-    	assertEquals(result.getValue().get(2), "AA");
-    	
-    	result = testTree1.searchByPrefix("AC");
-    	assertEquals((int) result.getKey(), (int) 8);
-    	assertEquals(result.getValue().isEmpty(), false);
-    	assertEquals(result.getValue().get(0), "ACGT");
-    	assertEquals(result.getValue().get(1), "ACTGGGAA");
-    	
-    	result = testTree1.searchByPrefix("AAA");
-    	assertEquals((int) result.getKey(), (int) 9);
-    	assertEquals(result.getValue().isEmpty(), false);
-    	assertEquals(result.getValue().get(0), "AAAA");
-    	assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
-    	
-    	// Build a complex tree and execute search on that tree
-    	testTree1.remove("ACGT");
-    	testTree1.insert("ACCTT");
-    	testTree1.insert("ACTTA");
-    	testTree1.insert("TATA");
-    	testTree1.insert("TCG");
-    	testTree1.insert("ACCAGTTA");
-    	testTree1.insert("ACCAGGTA");
-    	testTree1.insert("ACCAGGTA");
-    	testTree1.remove("A");
-    	testTree1.remove("ACCAGGTA");
-    	testTree1.insert("TCGTCG");
-    	testTree1.insert("TCGTCG");
-    	testTree1.insert("TACAGT");
-    	testTree1.insert("TCCAGG");
-    	testTree1.insert("ACCAGTTA");
-    	testTree1.insert("ACCAGGTA");
-    	testTree1.search("ACCAGG");
-    	testTree1.insert("ACCAGGTA");
-    	testTree1.remove("A");
-    	testTree1.remove("ACCAGGTA");
-    	testTree1.insert("TCGTCG");
-    	testTree1.insert("TCGTCG");
-    	testTree1.insert("TACAGT");
-    	testTree1.insert("TCCAGG");
+        assertEquals((int) result.getKey(), (int) 22);
+        assertEquals(result.getValue().isEmpty(), false);
+        assertEquals(result.getValue().get(0), "AAAA");
+        assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
+        assertEquals(result.getValue().get(2), "AA");
+        assertEquals(result.getValue().get(3), "ACGT");
+        assertEquals(result.getValue().get(4), "ACTGGGAA");
+        
+        result = testTree1.searchByPrefix("AA");
+        assertEquals((int) result.getKey(), (int) 13);
+        assertEquals(result.getValue().isEmpty(), false);
+        assertEquals(result.getValue().get(0), "AAAA");
+        assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
+        assertEquals(result.getValue().get(2), "AA");
+        
+        result = testTree1.searchByPrefix("AC");
+        assertEquals((int) result.getKey(), (int) 8);
+        assertEquals(result.getValue().isEmpty(), false);
+        assertEquals(result.getValue().get(0), "ACGT");
+        assertEquals(result.getValue().get(1), "ACTGGGAA");
+        
+        result = testTree1.searchByPrefix("AAA");
+        assertEquals((int) result.getKey(), (int) 9);
+        assertEquals(result.getValue().isEmpty(), false);
+        assertEquals(result.getValue().get(0), "AAAA");
+        assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
+        
+        // Build a complex tree and execute search on that tree
+        testTree1.remove("ACGT");
+        testTree1.insert("ACCTT");
+        testTree1.insert("ACTTA");
+        testTree1.insert("TATA");
+        testTree1.insert("TCG");
+        testTree1.insert("ACCAGTTA");
+        testTree1.insert("ACCAGGTA");
+        testTree1.insert("ACCAGGTA");
+        testTree1.remove("A");
+        testTree1.remove("ACCAGGTA");
+        testTree1.insert("TCGTCG");
+        testTree1.insert("TCGTCG");
+        testTree1.insert("TACAGT");
+        testTree1.insert("TCCAGG");
+        testTree1.insert("ACCAGTTA");
+        testTree1.insert("ACCAGGTA");
+        testTree1.search("ACCAGG");
+        testTree1.insert("ACCAGGTA");
+        testTree1.remove("A");
+        testTree1.remove("ACCAGGTA");
+        testTree1.insert("TCGTCG");
+        testTree1.insert("TCGTCG");
+        testTree1.insert("TACAGT");
+        testTree1.insert("TCCAGG");
     }
 }
 
