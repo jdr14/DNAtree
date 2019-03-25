@@ -1,31 +1,38 @@
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+//import java.io.ByteArrayOutputStream;
+//import java.io.PrintStream;
 import java.util.*;
 
 import student.TestCase;
 
+/**
+ * 
+ * @author Jovany Cabrera jovanyc4
+ * @author Joey Destin Rodgers jdr14
+ * @version 2.1.3
+ *
+ */
 public class dnatreeTest extends TestCase
 {
     private Dna testTree1;
     
 //    private DNAType dnaType, dnaType2;
     
-    private Node testNode;
-
-	/**
-     * 
-     * @param msg is a string
-     * @param quiet is a boolean
-     */
-	private void print(String msg, Boolean quiet)
-    {
-        if (!quiet)
-        {
-            System.out.println(msg);
-        }
-    }
-    
-    private Boolean silent = false;
+//    private Node testNode;
+//
+//	/**
+//     * 
+//     * @param msg is a string
+//     * @param quiet is a boolean
+//     */
+//	private void print(String msg, Boolean quiet)
+//    {
+//        if (!quiet)
+//        {
+//            System.out.println(msg);
+//        }
+//    }
+//    
+//    private Boolean silent = false;
 
     @Override
     /**
@@ -96,6 +103,9 @@ public class dnatreeTest extends TestCase
 //    }
 //    
     
+    /**
+     * test function for DNAParse
+     */
     public void testDNAParse()
     {
     	DNAParse p = new DNAParse("test2.txt");
@@ -117,6 +127,9 @@ public class dnatreeTest extends TestCase
     	assertEquals(listedIn.get(6).getValue(), "command");
     }
     
+    /**
+     * test function for print options
+     */
     public void testPrintOptions()
     {
     	PrintOptions p;
@@ -128,6 +141,9 @@ public class dnatreeTest extends TestCase
     	assertEquals(p, PrintOptions.STATS);
     }
     
+    /**
+     * test function for percentage type
+     */
     public void testPercentageType()
     {
     	String s1 = "ACGT$";
@@ -160,6 +176,9 @@ public class dnatreeTest extends TestCase
     	assertEquals(pt2.getPercentT(), 20.0, 0.00);
     }
     
+    /**
+     * test function for pair
+     */
     public void testPair()
     {
         Pair<Integer, String> p = new Pair<Integer, String>();
@@ -181,6 +200,9 @@ public class dnatreeTest extends TestCase
     }
     
     // Use this to test the Dna.java class containing the tree methods
+    /**
+     * test function for DNA
+     */
     public void testDna()
     {	
     	// Test tree created using default constructor

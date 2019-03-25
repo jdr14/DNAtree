@@ -88,7 +88,8 @@ public class LeafNode extends Node
 			}
 			else
 			{
-				System.err.println("Error: Sequence not found and not removed.");
+				System.err.println("Error: Sequence "
+						+ "not found and not removed.");
 				return this;
 			}
 		}
@@ -100,7 +101,8 @@ public class LeafNode extends Node
 			}
 			else
 			{
-				System.err.println("Error: Sequence not found and not removed.");
+				System.err.println("Error: Sequence "
+						+ "not found and not removed.");
 				return this;
 			}
 			

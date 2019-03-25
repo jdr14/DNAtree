@@ -69,13 +69,13 @@ public class Dna
             LeafNode oldRoot =  (LeafNode) root;
             if (!oldRoot.getSequence().equalsIgnoreCase(newSeq))
             {
-            	root = new InternalNode();
+                root = new InternalNode();
                 root = root.insert(newSeq);
                 root = root.insert(oldRoot.getSequence());
             }
             else 
             {
-            	System.err.println("Error: Cannot insert duplicate Sequence.");
+                System.err.println("Error: Cannot insert duplicate Sequence.");
             }
         }
         // all other cases
