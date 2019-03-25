@@ -88,7 +88,8 @@ public class LeafNode extends Node
 			}
 			else
 			{
-				System.err.println("Error: Sequence not found and not removed.");
+				System.err.println("Error: Sequence "
+						+ "not found and not removed.");
 				return this;
 			}
 		}
@@ -100,7 +101,8 @@ public class LeafNode extends Node
 			}
 			else
 			{
-				System.err.println("Error: Sequence not found and not removed.");
+				System.err.println("Error: Sequence "
+						+ "not found and not removed.");
 				return this;
 			}
 			
@@ -112,7 +114,16 @@ public class LeafNode extends Node
 	 */
 	public void search(String newSeq)
 	{
-		System.out.println("# of nodes visited: " + (this.depth + 1));
-		System.out.println("sequence: " + this.sequence);
+		String compareName = newSeq.substring(0, newSeq.length() - 1);
+		if (this.sequence.equals(compareName))
+		{
+			System.out.println("# of nodes visited: " + (this.depth + 1));
+			System.out.println("sequence: " + this.sequence);
+		}
+		else
+		{
+			System.out.println("# of nodes visited: " + (this.depth + 1));
+			System.out.println("no sequence found");
+		}
 	}
 }

@@ -1,9 +1,16 @@
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+//import java.io.ByteArrayOutputStream;
+//import java.io.PrintStream;
 import java.util.*;
 
 import student.TestCase;
 
+/**
+ * 
+ * @author Jovany Cabrera jovanyc4
+ * @author Joey Destin Rodgers jdr14
+ * @version 2.1.3
+ *
+ */
 public class dnatreeTest extends TestCase
 {
     private Dna testTree1;
@@ -19,7 +26,7 @@ public class dnatreeTest extends TestCase
     }
     
     /**
-     * test method for DNA parsing
+     * test function for DNAParse
      */
     public void testDNAParse()
     {
@@ -43,7 +50,7 @@ public class dnatreeTest extends TestCase
     }
     
     /**
-     * testing the PrintOptions file
+     * test function for print options
      */
     public void testPrintOptions()
     {
@@ -57,7 +64,7 @@ public class dnatreeTest extends TestCase
     }
     
     /**
-     * testing the PercentageType file
+     * test function for percentage type
      */
     public void testPercentageType()
     {
@@ -92,7 +99,7 @@ public class dnatreeTest extends TestCase
     }
     
     /**
-     * testing the Pair class
+     * test function for pair
      */
     public void testPair()
     {
@@ -114,8 +121,9 @@ public class dnatreeTest extends TestCase
         assertEquals(j, "test");
     }
     
+    // Use this to test the Dna.java class containing the tree methods
     /**
-     * Use this to test the Dna.java class containing the tree methods
+     * test function for DNA
      */
     public void testDna()
     {   
