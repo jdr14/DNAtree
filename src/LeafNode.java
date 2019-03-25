@@ -94,7 +94,16 @@ public class LeafNode extends Node
 		}
 		else
 		{
-			return new FlyWeightNode(this.depth);
+			if (this.sequence.equalsIgnoreCase(oldSeq))
+			{
+				return new FlyWeightNode(this.depth);
+			}
+			else
+			{
+				System.err.println("Error: Sequence not found and not removed.");
+				return this;
+			}
+			
 		}
 	}
 	
