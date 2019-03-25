@@ -12,7 +12,7 @@ public class LeafNode extends Node
      * To store the sequence of the node
      */
     private String sequence;
-	
+    
 	/**
 	 * Constructor that will set the depth
 	 * @param d depth as integer

@@ -426,6 +426,8 @@ public class dnatreeTest extends TestCase
     	testNode.getGChild();
     	testNode.getTChild();
     	testNode.getdChild();
+    	
+    	assertEquals(testNode.depth, 0);
     }
     
     /**
