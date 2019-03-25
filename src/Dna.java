@@ -67,9 +67,16 @@ public class Dna
         else if (count == 1)
         {
             LeafNode oldRoot =  (LeafNode) root;
-            root = new InternalNode();
-            root = root.insert(newSeq);
-            root = root.insert(oldRoot.getSequence());
+            if (!oldRoot.getSequence().equalsIgnoreCase(newSeq))
+            {
+            	root = new InternalNode();
+                root = root.insert(newSeq);
+                root = root.insert(oldRoot.getSequence());
+            }
+            else 
+            {
+            	System.err.println("Error: Cannot insert duplicate Sequence.");
+            }
         }
         // all other cases
         else
@@ -134,7 +141,7 @@ public class Dna
         }
         else
         {
-            System.out.println("# of nodes visited: 0");
+            System.out.println("# of nodes visited: 1");
             System.out.println("no sequence found");
         }
     }
