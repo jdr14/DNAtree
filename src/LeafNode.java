@@ -9,8 +9,8 @@
 public class LeafNode extends Node
 {
     /**
-	 * To store the sequence of the node
-	 */
+     * To store the sequence of the node
+     */
     private String sequence;
 	
 	/**
