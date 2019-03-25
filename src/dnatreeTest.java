@@ -1,5 +1,6 @@
 //import java.io.ByteArrayOutputStream;
 //import java.io.PrintStream;
+import java.io.*;
 import java.util.*;
 
 import student.TestCase;
@@ -138,6 +139,12 @@ public class dnatreeTest extends TestCase
     public void testInsert() 
     {
         // Test insert at root node
+        testTree1.insert("ACGT");
+        assertEquals(testTree1.getCount(), 1);
+        assertEquals(testTree1.getRoot().hasInfo, true);
+        assertEquals(testTree1.getRoot().isInternal, false);
+        
+        // Test where you cannot insert same sequence as root
         testTree1.insert("ACGT");
         assertEquals(testTree1.getCount(), 1);
         assertEquals(testTree1.getRoot().hasInfo, true);
@@ -313,6 +320,7 @@ public class dnatreeTest extends TestCase
         assertEquals(testTree1.getCount(), 13);
         assertEquals(testTree1.getRoot().hasInfo, false);
         assertEquals(testTree1.getRoot().isInternal, true);
+        
     }
     
     /**
@@ -320,7 +328,104 @@ public class dnatreeTest extends TestCase
      */    
     public void testSearch()
     {
+    	// test for search call on  an empty tree
+    	systemOut().clearHistory();
+    	testTree1.search("ACGT$");
+    	assertEquals("# of nodes visited: 1\r\n" + 
+    			"no sequence found\n", systemOut().getHistory());
     	
+    	// case where sequence being searched it almost exactly like other
+    	testTree1.insert("ACGT");
+    	testTree1.insert("ACGTT");
+    	systemOut().clearHistory();
+    	testTree1.search("ACGT$");
+    	testTree1.search("ACGTT$");
+    	assertEquals("# of nodes visited: 6\r\n" + 
+    			"sequence: ACGT\r\n" + 
+    			"# of nodes visited: 6\r\n" + 
+    			"sequence: ACGTT\n", systemOut().getHistory());
+    	
+    	// test where all nodes removed and search for old node
+    	// on an empty tree
+    	testTree1.remove("ACGT");
+    	testTree1.remove("ACGTT");
+    	systemOut().clearHistory();
+    	testTree1.search("ACGTT$");
+    	assertEquals("# of nodes visited: 1\r\n" + 
+    			"no sequence found\n", systemOut().getHistory());
+    	
+    	// test where sequence is similar to node but not match
+    	testTree1.insert("A");
+    	testTree1.insert("AA");
+    	systemOut().clearHistory();
+    	testTree1.search("AC$");
+    	assertEquals("# of nodes visited: 3\r\n" + 
+    			"no sequence found\n", systemOut().getHistory());
+    	
+    	// test search AAA$ does not exist but AA does
+    	systemOut().clearHistory();
+    	testTree1.search("AAA$");
+    	assertEquals("# of nodes visited: 3\r\n" + 
+    			"no sequence found\n", systemOut().getHistory());
+    }
+    
+    /**
+     * test function for remove
+     */
+    public void testRemove()
+    {
+    	// test for try to remove on an empty tree
+    	systemOut().clearHistory();
+    	testTree1.remove("AC");
+    	assertEquals("sequence AC does not exist\n", systemOut().getHistory());
+    	
+    	// test tree size = 1 remove sequence not in tree
+    	testTree1.insert("AC");
+    	systemOut().clearHistory();
+    	testTree1.remove("AG");
+    	assertEquals("sequence AG does not exist\n", systemOut().getHistory());
+    	
+    	// test tree size = 2 remove sequence not in tree
+    	testTree1.insert("AC");
+    	testTree1.insert("ACC");
+    	systemOut().clearHistory();
+    	testTree1.remove("ACCG");
+    	assertEquals("sequence ACCG does not "
+    			+ "exist\n", systemOut().getHistory());
+    }
+    
+    /**
+     * test remaining function in leaf node class 
+     */
+    public void testLeafNode()
+    {
+    	LeafNode testNode = new LeafNode(0);
+    	
+    	// test set sequence function
+    	testNode.setSequence("ACC");
+    	assertEquals(testNode.getSequence(), "ACC");
+    }
+    
+    /**
+     * test remaining function in internal node class
+     */
+    public void testInternalNode()
+    {
+    	// parent node
+    	InternalNode testNode = new InternalNode();
+    	
+    	//children node
+    	testNode.setAChild(new FlyWeightNode());
+    	testNode.setCChild(new FlyWeightNode());
+    	testNode.setGChild(new FlyWeightNode());
+    	testNode.setTChild(new FlyWeightNode());
+    	testNode.setdChild(new FlyWeightNode());
+    	
+    	testNode.getAChild();
+    	testNode.getCChild();
+    	testNode.getGChild();
+    	testNode.getTChild();
+    	testNode.getdChild();
     }
     
     /**
