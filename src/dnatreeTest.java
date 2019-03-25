@@ -1,5 +1,5 @@
-// import java.io.ByteArrayOutputStream;
-// import java.io.PrintStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.*;
 
 import student.TestCase;
@@ -122,7 +122,13 @@ public class dnatreeTest extends TestCase
         // Test tree created using default constructor
         assertEquals(testTree1.getCount(), 0);
         assertEquals(testTree1.getRoot().isInternal, false);
-        
+    }
+    
+    /**
+     * Test the tree insert method
+     */
+    public void testInsert() 
+    {
         // Test insert at root node
         testTree1.insert("ACGT");
         assertEquals(testTree1.getCount(), 1);
@@ -299,6 +305,41 @@ public class dnatreeTest extends TestCase
         assertEquals(testTree1.getCount(), 13);
         assertEquals(testTree1.getRoot().hasInfo, false);
         assertEquals(testTree1.getRoot().isInternal, true);
+    }
+    
+    /**
+     * Test the search method
+     */    
+    public void testSearch()
+    {
+    	
+    }
+    
+    /**
+     * Test the searchByPrefix method
+     */
+    public void testSearchByPrefix()
+    {
+    	// Test for empty tree
+    	Pair<Integer, List<String>> result = testTree1.searchByPrefix("AA");
+    	assertEquals((int) result.getKey(), (int) 0);
+    	assertEquals(result.getValue().isEmpty(), true);
+    	
+    	// Test for 1 node in the tree
+    	testTree1.insert("A");
+        result = testTree1.searchByPrefix("AA");
+    	assertEquals((int) result.getKey(), (int) 1);
+    	
+    	for (int i = 0; i < result.getValue().size(); i++)
+    	{
+    		System.out.println("          " + result.getValue().get(i));
+    	}
+    	
+    	assertEquals(result.getValue().isEmpty(), true);
+    	result = testTree1.searchByPrefix("A");
+    	assertEquals((int) result.getKey(), (int) 1);
+    	assertEquals(result.getValue().isEmpty(), false);
+    	assertEquals(result.getValue().get(0), "A");
     }
 }
 
