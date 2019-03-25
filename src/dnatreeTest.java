@@ -435,24 +435,95 @@ public class dnatreeTest extends TestCase
     {
     	// Test for empty tree
     	Pair<Integer, List<String>> result = testTree1.searchByPrefix("AA");
-    	assertEquals((int) result.getKey(), (int) 0);
+    	assertEquals((int) result.getKey(), (int) 1);
     	assertEquals(result.getValue().isEmpty(), true);
     	
     	// Test for 1 node in the tree
     	testTree1.insert("A");
+    	result = testTree1.searchByPrefix("C");
+    	assertEquals(result.getValue().isEmpty(), true);
         result = testTree1.searchByPrefix("AA");
     	assertEquals((int) result.getKey(), (int) 1);
+    	assertEquals(result.getValue().isEmpty(), true);
+    	result = testTree1.searchByPrefix("A");
+    	assertEquals((int) result.getKey(), (int) 1);
+    	assertEquals(result.getValue().isEmpty(), false);
+    	assertEquals(result.getValue().get(0), "A");
     	
-    	for (int i = 0; i < result.getValue().size(); i++)
-    	{
-    		System.out.println("          " + result.getValue().get(i));
-    	}
+    	// Create another empty tree for testing
+    	testTree1 = new Dna();
+        testTree1.insert("ACGT");     
+        testTree1.insert("AAAA");
+        testTree1.insert("AA");     
+        testTree1.insert("AAACCCCGGTGAAAACGTA");
+        testTree1.insert("ACTGGGAA");
+        
+        result = testTree1.searchByPrefix("A");
+    	assertEquals((int) result.getKey(), (int) 22);
+    	assertEquals(result.getValue().isEmpty(), false);
+    	assertEquals(result.getValue().get(0), "AAAA");
+    	assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
+    	assertEquals(result.getValue().get(2), "AA");
+    	assertEquals(result.getValue().get(3), "ACGT");
+    	assertEquals(result.getValue().get(4), "ACTGGGAA");
     	
-//    	assertEquals(result.getValue().isEmpty(), true);
-//    	result = testTree1.searchByPrefix("A");
-//    	assertEquals((int) result.getKey(), (int) 1);
+    	result = testTree1.searchByPrefix("AA");
+    	assertEquals((int) result.getKey(), (int) 13);
+    	assertEquals(result.getValue().isEmpty(), false);
+    	assertEquals(result.getValue().get(0), "AAAA");
+    	assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
+    	assertEquals(result.getValue().get(2), "AA");
+    	
+    	result = testTree1.searchByPrefix("AC");
+    	assertEquals((int) result.getKey(), (int) 8);
+    	assertEquals(result.getValue().isEmpty(), false);
+    	assertEquals(result.getValue().get(0), "ACGT");
+    	assertEquals(result.getValue().get(1), "ACTGGGAA");
+    	
+    	result = testTree1.searchByPrefix("AAA");
+    	assertEquals((int) result.getKey(), (int) 9);
+    	assertEquals(result.getValue().isEmpty(), false);
+    	assertEquals(result.getValue().get(0), "AAAA");
+    	assertEquals(result.getValue().get(1), "AAACCCCGGTGAAAACGTA");
+    	
+    	// Build a complex tree and execute search on that tree
+    	testTree1.remove("ACGT");
+    	testTree1.insert("ACCTT");
+    	testTree1.insert("ACTTA");
+    	testTree1.insert("TATA");
+    	testTree1.insert("TCG");
+    	testTree1.insert("ACCAGTTA");
+    	testTree1.insert("ACCAGGTA");
+    	testTree1.insert("ACCAGGTA");
+    	testTree1.remove("A");
+    	testTree1.remove("ACCAGGTA");
+    	testTree1.insert("TCGTCG");
+    	testTree1.insert("TCGTCG");
+    	testTree1.insert("TACAGT");
+    	testTree1.insert("TCCAGG");
+    	testTree1.insert("ACCAGTTA");
+    	testTree1.insert("ACCAGGTA");
+    	testTree1.search("ACCAGG");
+    	testTree1.insert("ACCAGGTA");
+    	testTree1.remove("A");
+    	testTree1.remove("ACCAGGTA");
+    	testTree1.insert("TCGTCG");
+    	testTree1.insert("TCGTCG");
+    	testTree1.insert("TACAGT");
+    	testTree1.insert("TCCAGG");
+        
+//    	result = testTree1.searchByPrefix("G");
+//    	assertEquals((int) result.getKey(), (int) 12);
 //    	assertEquals(result.getValue().isEmpty(), false);
-//    	assertEquals(result.getValue().get(0), "A");
+//    	assertEquals(result.getValue().get(0), "GATG");
+//    	assertEquals(result.getValue().get(1), "GCC");
+//    	assertEquals(result.getValue().get(2), "GCGTAAGGCTTACG");
+//    	assertEquals(result.getValue().get(3), "GGGAACCTTAC");
+    	
+//    	result = testTree1.searchByPrefix("GCC");
+//    	assertEquals((int) result.getKey(), (int) 3);
+//    	assertEquals(result.getValue().isEmpty(), false);
+//    	assertEquals(result.getValue().get(0), "GCC");
     }
 }
 

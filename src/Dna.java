@@ -159,7 +159,7 @@ public class Dna
         // Case: Tree contains no nodes
         if (count == 0)
         {
-            return new Pair<Integer, List<String>>(count, retList);
+            return new Pair<Integer, List<String>>(1, retList);
         }
         
         // Case: Tree contains 1 node
@@ -167,7 +167,8 @@ public class Dna
         {
             LeafNode ln = (LeafNode) root;
             if (sequence.length() >= 1 && 
-                    sequence.charAt(0) == ln.getSequence().charAt(0))
+                    sequence.charAt(0) == ln.getSequence().charAt(0) &&
+                    sequence.length() <= ln.getSequence().length())
             {
                 retList.add(ln.getSequence());
                 return new Pair<Integer, List<String>>(count, retList);
@@ -179,7 +180,7 @@ public class Dna
         // This means we know that root node is an internal
         Node tempRoot = root;
         InternalNode in;
-        int nodesVisited = 0;
+        int nodesVisited = 1;
         
         for (int i = 0; i < sequence.length(); i++)
         {
@@ -240,7 +241,7 @@ public class Dna
         preorderHelp(tempRoot, preorderList);
         
         // Update the nodeVisited count
-        nodesVisited += preorderList.size();
+        nodesVisited += (preorderList.size() - 1);
         
         // Build the final returnList
         for (int i = 0; i < preorderList.size(); i++)
