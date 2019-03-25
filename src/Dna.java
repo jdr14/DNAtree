@@ -167,7 +167,7 @@ public class Dna
         {
             LeafNode ln = (LeafNode) root;
             if (sequence.length() >= 1 && 
-                    sequence.charAt(0) == ln.getSequence().charAt(0) &&
+                    ln.getSequence().startsWith(sequence) &&
                     sequence.length() <= ln.getSequence().length())
             {
                 retList.add(ln.getSequence());

@@ -342,21 +342,17 @@ public class dnatreeTest extends TestCase
     	result = testTree1.searchByPrefix("T");
     	assertEquals(result.getValue().isEmpty(), true);
         
-    	//testTree1.remove("A");
     	testTree1 = new Dna();
-    	testTree1.insert("C");
-    	result = testTree1.searchByPrefix("A");
-    	assertEquals(result.getValue().isEmpty(), true);
-    	result = testTree1.searchByPrefix("G");
-    	assertEquals(result.getValue().isEmpty(), true);
-    	result = testTree1.searchByPrefix("T");
+    	testTree1.insert("GCC");
+    	result = testTree1.searchByPrefix("GAA");
     	assertEquals(result.getValue().isEmpty(), true);
     	
+    	testTree1.insert("A");
         result = testTree1.searchByPrefix("AA");
-    	assertEquals((int) result.getKey(), (int) 1);
+    	assertEquals((int) result.getKey(), (int) 2);
     	assertEquals(result.getValue().isEmpty(), true);
     	result = testTree1.searchByPrefix("A");
-    	assertEquals((int) result.getKey(), (int) 1);
+    	assertEquals((int) result.getKey(), (int) 2);
     	assertEquals(result.getValue().isEmpty(), false);
     	assertEquals(result.getValue().get(0), "A");
     	
@@ -421,19 +417,6 @@ public class dnatreeTest extends TestCase
     	testTree1.insert("TCGTCG");
     	testTree1.insert("TACAGT");
     	testTree1.insert("TCCAGG");
-        
-//    	result = testTree1.searchByPrefix("G");
-//    	assertEquals((int) result.getKey(), (int) 12);
-//    	assertEquals(result.getValue().isEmpty(), false);
-//    	assertEquals(result.getValue().get(0), "GATG");
-//    	assertEquals(result.getValue().get(1), "GCC");
-//    	assertEquals(result.getValue().get(2), "GCGTAAGGCTTACG");
-//    	assertEquals(result.getValue().get(3), "GGGAACCTTAC");
-    	
-//    	result = testTree1.searchByPrefix("GCC");
-//    	assertEquals((int) result.getKey(), (int) 3);
-//    	assertEquals(result.getValue().isEmpty(), false);
-//    	assertEquals(result.getValue().get(0), "GCC");
     }
 }
 
