@@ -337,6 +337,21 @@ public class dnatreeTest extends TestCase
     	testTree1.insert("A");
     	result = testTree1.searchByPrefix("C");
     	assertEquals(result.getValue().isEmpty(), true);
+    	result = testTree1.searchByPrefix("G");
+    	assertEquals(result.getValue().isEmpty(), true);
+    	result = testTree1.searchByPrefix("T");
+    	assertEquals(result.getValue().isEmpty(), true);
+        
+    	//testTree1.remove("A");
+    	testTree1 = new Dna();
+    	testTree1.insert("C");
+    	result = testTree1.searchByPrefix("A");
+    	assertEquals(result.getValue().isEmpty(), true);
+    	result = testTree1.searchByPrefix("G");
+    	assertEquals(result.getValue().isEmpty(), true);
+    	result = testTree1.searchByPrefix("T");
+    	assertEquals(result.getValue().isEmpty(), true);
+    	
         result = testTree1.searchByPrefix("AA");
     	assertEquals((int) result.getKey(), (int) 1);
     	assertEquals(result.getValue().isEmpty(), true);
